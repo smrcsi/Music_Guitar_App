@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/homepageView">
+
+
+    <fragment android:id="@+id/resultDetailView"
+        android:name="com.example.guitar_music_app.results.resultDetail.ResultDetailView"
+        android:label="ResultDetailView"
+        tools:layout="@layout/result_detail_fragment"
+        >
+        <action android:id="@+id/action_resultDetailView_to_resultListView2" app:destination="@id/resultListView"/>
+        <argument android:name="resultId" app:argType="string" />
+    </fragment>
+    <fragment android:id="@+id/resultListView"
+        android:name="com.example.guitar_music_app.results.resultList.ResultListView"
+        android:label="ResultListView"
+        tools:layout="@layout/result_list_fragment"
+        >
+        <action android:id="@+id/action_resultListView_to_resultDetailView" app:destination="@id/resultDetailView"/>
+        <action
+            android:id="@+id/action_resultListView_to_loginView"
+            app:destination="@id/loginView" />
+        <action
+            android:id="@+id/action_resultListView_to_homepageView"
+            app:destination="@id/homepageView" />
+    </fragment>
+    <fragment
+        android:id="@+id/homepageView"
+        android:name="com.example.guitar_music_app.menus.HomepageView"
+        android:label="HomepageView"
+        tools:layout="@layout/homepage_fragment">
+        <action
+            android:id="@+id/action_homepageView_to_resultListView"
+            app:destination="@id/resultListView" />
+        <action
+            android:id="@+id/action_homepageView_to_lecturesView"
+            app:destination="@id/lecturesView" />
+        <action
+            android:id="@+id/action_homepageView_to_personalInformationView"
+            app:destination="@id/personalInformationView" />
+        <action
+            android:id="@+id/action_homepageView_to_loginView"
+            app:destination="@id/loginView" />
+    </fragment>
+    <fragment
+        android:id="@+id/createAccountView"
+        android:name="com.example.guitar_music_app.accountManagement.CreateAccountView"
+        android:label="CreateAccountView"
+        tools:layout="@layout/create_account_fragment">
+        <action
+            android:id="@+id/action_createAccountView_to_loginView"
+            app:destination="@id/loginView" />
+    </fragment>
+    <fragment
+        android:id="@+id/lecturesView"
+        android:name="com.example.guitar_music_app.menus.LecturesView"
+        android:label="LecturesView"
+
+        tools:layout="@layout/lectures_fragment">
+        <action
+            android:id="@+id/action_lecturesView_to_lectureView"
+            app:destination="@id/chordsView" />
+        <action
+            android:id="@+id/action_lecturesView_to_homepageView"
+            app:destination="@id/homepageView" />
+    </fragment>
+    <fragment
+        android:id="@+id/chordsView"
+        android:name="com.example.guitar_music_app.lecture.LectureView"
+        android:label="lectureView"
+        tools:layout="@layout/chords1_fragment">
+        <action
+            android:id="@+id/action_lectureView_to_lectureResultActivity"
+            app:destination="@id/lectureResult" />
+        <action
+            android:id="@+id/action_lectureView_to_lecturesView"
+            app:destination="@id/lecturesView" />
+    </fragment>
+    <fragment
+        android:id="@+id/resetPasswordView"
+        android:name="com.example.guitar_music_app.accountManagement.ResetPasswordView"
+        android:label="ResetPasswordView"
+        tools:layout="@layout/forgotten_password_fragment">
+        <action
+            android:id="@+id/action_resetPasswordView_to_loginView"
+            app:destination="@id/loginView" />
+    </fragment>
+    <fragment
+        android:id="@+id/personalInformationView"
+        android:name="com.example.guitar_music_app.accountManagement.PersonalInformationView"
+        android:label="PersonalInformationView"
+        tools:layout="@layout/personal_information_fragment">
+        <action
+            android:id="@+id/action_personalInformationView_to_homepageView"
+            app:destination="@id/homepageView" />
+    </fragment>
+    <activity
+            android:id="@+id/loginView"
+            android:name="com.example.guitar_music_app.login.LoginActivity"
+            android:label="activity_login"
+            tools:layout="@layout/login_fragment" >
+
+    </activity>
+    <fragment
+        android:id="@+id/lectureResult"
+        android:name="com.example.guitar_music_app.lecture.LectureResultView"
+        android:label="LectureResult"
+        tools:layout="@layout/result_fragment">
+        <action
+            android:id="@+id/action_lectureResult_to_homepageView"
+            app:destination="@id/homepageView" />
+    </fragment>
+</navigation>

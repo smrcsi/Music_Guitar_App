@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/homepage_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/space_loop"
+    tools:context="com.example.guitar_music_app.results.ResultActivity">
+
+    <ImageView
+        android:id="@+id/img_guitar"
+        android:layout_width="126dp"
+        android:layout_height="134dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_lectures"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/papapishu_guitar_2" />
+
+    <Button
+        android:id="@+id/btn_stats"
+        android:layout_width="148dp"
+        android:layout_height="48dp"
+        android:backgroundTint="#FFFFFF"
+        android:text="@string/statistiky"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/btn_personal_info"
+        app:layout_constraintEnd_toEndOf="@+id/btn_personal_info"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="@+id/btn_personal_info"
+        app:layout_constraintTop_toBottomOf="@+id/btn_lectures" />
+
+    <Button
+        android:id="@+id/btn_personal_info"
+        android:layout_width="152dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
+        android:text="@string/osobní_informace"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_stats" />
+
+    <Button
+        android:id="@+id/btn_lectures"
+        android:layout_width="148dp"
+        android:layout_height="48dp"
+        android:backgroundTint="#FFFFFF"
+        android:textColor="#000000"
+        android:text="@string/lekce"
+        app:layout_constraintBottom_toTopOf="@+id/btn_stats"
+        app:layout_constraintEnd_toEndOf="@+id/btn_stats"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btn_stats"
+        app:layout_constraintTop_toBottomOf="@+id/img_guitar" />
+
+    <ImageButton
+        android:id="@+id/imb_toolbar_logout"
+        style="@style/Widget.AppCompat.ActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.955"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023"
+        app:srcCompat="@drawable/ic_baseline_login_24" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/chords_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/space_loop"
+    android:orientation="horizontal"
+    tools:context="com.example.guitar_music_app.results.ResultActivity">
+
+    <ImageView
+        android:id="@+id/img_guitar"
+        android:layout_width="58dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.976"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/papapishu_guitar_2" />
+
+
+    <ListView
+        android:id="@+id/lst_results"
+        android:layout_width="148dp"
+        android:layout_height="201dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="12dp"
+        android:background="#4DB3AFAF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_guitar"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/lbl_results"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="52dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/v_sledky"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/lst_results"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btn_back"
+        style="@style/Widget.AppCompat.ActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+        app:layout_constraintHorizontal_bias="0.372"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.106"
+        app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="453dp"
+        android:layout_height="243dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/lst_results"
+        app:layout_constraintHorizontal_bias="0.911"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.938">
+
+        <LinearLayout
+            android:layout_width="122dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/btn_chord1"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:srcCompat="@android:drawable/btn_radio" />
+
+            <ImageButton
+                android:id="@+id/btn_chord2"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:srcCompat="@android:drawable/btn_radio" />
+
+            <ImageButton
+                android:id="@+id/btn_chord3"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:srcCompat="@android:drawable/btn_radio" />
+
+            <ImageButton
+                android:id="@+id/btn_chord4"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:srcCompat="@android:drawable/btn_radio" />
+
+            <ImageButton
+                android:id="@+id/btn_chord5"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:srcCompat="@android:drawable/btn_radio" />
+
+            <ImageButton
+                android:id="@+id/btn_chord6"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:srcCompat="@android:drawable/btn_radio" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="111dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/btn_chord7"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:srcCompat="@android:drawable/btn_radio" />
+
+            <ImageButton
+                android:id="@+id/btn_chord8"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:srcCompat="@android:drawable/btn_radio" />
+
+            <ImageButton
+                android:id="@+id/btn_chord9"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:srcCompat="@android:drawable/btn_radio" />
+
+            <ImageButton
+                android:id="@+id/btn_chord10"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:srcCompat="@android:drawable/btn_radio" />
+
+            <ImageButton
+                android:id="@+id/btn_chord11"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:srcCompat="@android:drawable/btn_radio" />
+
+            <ImageButton
+                android:id="@+id/btn_chord12"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:srcCompat="@android:drawable/btn_radio" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="111dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/btn_chord13"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:srcCompat="@android:drawable/btn_radio" />
+
+            <ImageButton
+                android:id="@+id/btn_chord14"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:srcCompat="@android:drawable/btn_radio" />
+
+            <ImageButton
+                android:id="@+id/btn_chord15"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:srcCompat="@android:drawable/btn_radio" />
+
+            <ImageButton
+                android:id="@+id/btn_chord16"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:srcCompat="@android:drawable/btn_radio" />
+
+            <ImageButton
+                android:id="@+id/btn_chord17"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:srcCompat="@android:drawable/btn_radio" />
+
+            <ImageButton
+                android:id="@+id/btn_chord18"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:srcCompat="@android:drawable/btn_radio" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="111dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/btn_chord19"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:srcCompat="@android:drawable/btn_radio" />
+
+            <ImageButton
+                android:id="@+id/btn_chord20"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:srcCompat="@android:drawable/btn_radio" />
+
+            <ImageButton
+                android:id="@+id/btn_chord21"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:srcCompat="@android:drawable/btn_radio" />
+
+            <ImageButton
+                android:id="@+id/btn_chord22"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:srcCompat="@android:drawable/btn_radio" />
+
+            <ImageButton
+                android:id="@+id/btn_chord23"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:srcCompat="@android:drawable/btn_radio" />
+
+            <ImageButton
+                android:id="@+id/btn_chord24"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:srcCompat="@android:drawable/btn_radio" />
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

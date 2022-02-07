@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/result_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/space_loop"
+    tools:context="com.example.guitar_music_app.results.ResultActivity">
+
+    <ImageView
+        android:id="@+id/img_guitar"
+        android:layout_width="126dp"
+        android:layout_height="134dp"
+        app:layout_constraintBottom_toTopOf="@+id/lbl_results"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/papapishu_guitar_2" />
+
+    <Button
+        android:id="@+id/btn_homepage"
+        android:layout_width="201dp"
+        android:layout_height="49dp"
+        android:backgroundTint="#FFFFFF"
+        android:text="@string/homepage"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/comparison_list" />
+
+    <TextView
+        android:id="@+id/lbl_results"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/results"
+        android:textColor="#FFFFFF"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/lbl_last_game_results"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_guitar" />
+
+    <TextView
+        android:id="@+id/lbl_last_game_results"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/last_game_results"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/result_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.069"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_results" />
+
+    <TextView
+        android:id="@+id/lbl_comparison"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/comparison"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/comparison_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/result_list" />
+
+    <ListView
+        android:id="@+id/result_list"
+        android:layout_width="318dp"
+        android:layout_height="113dp"
+        android:background="#4DB3AFAF"
+        app:layout_constraintBottom_toTopOf="@+id/lbl_comparison"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_last_game_results" />
+
+    <ListView
+        android:id="@+id/comparison_list"
+        android:layout_width="318dp"
+        android:layout_height="113dp"
+        android:background="#4DB3AFAF"
+
+        app:layout_constraintBottom_toTopOf="@+id/btn_homepage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_comparison" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Guitar_Music_App</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="osobní_informace">Osobní informace</string>
+    <string name="lekce">Lekce</string>
+    <string name="statistiky">Statistiky</string>
+    <string name="rytmus">Rytmus</string>
+    <string name="akordy">Akordy</string>
+    <string name="vyberte_lekci">Vyberte lekci</string>
+    <string name="v_sledky">Výsledky</string>
+    <string name="registrace">Registrace</string>
+    <string name="emailov_adresa">Emailová adresa</string>
+    <string name="opakujte_heslo">Opakujte heslo</string>
+    <string name="vlo_te_heslo">Vložte heslo</string>
+    <string name="zapomenut_heslo">Zapomenuté heslo</string>
+    <string name="odeslat_heslo">Odeslat heslo</string>
+    <string name="ulo_it_informace">Uložit informace</string>
+    <string name="p_ezd_vka">Přezdívka</string>
+    <string name="v_k">Věk</string>
+    <string name="pohlav">Pohlaví</string>
+    <string name="personal_info">Osobní informace</string>
+    <string name="results">Výsledky</string>
+    <string name="homepage">Úvodní strana</string>
+    <string name="comparison">Porovnání s předchozími</string>
+    <string name="last_game_results">Výsledky cvičení</string>
+    <string name="statistics">Statistiky</string>
+    <string name="recent_games">Poslední cvičení</string>
+    <string name="best_results">Nejlepší výsledky</string>
+    <string name="additional_statistics">Další statistiky</string>
+    <string name="asistent">Asistent</string>
+    <string name="turn_off_asistant">Zapnout asistent</string>
+    <string name="turn_on_asisstant">Vypnout asistent</string>
+</resources>

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "556320004575",
+    "project_id": "guitarapp-3ee70",
+    "storage_bucket": "guitarapp-3ee70.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:556320004575:android:51459dced086259d130c6a",
+        "android_client_info": {
+          "package_name": "com.example.guitar_music_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "556320004575-g2hflev201i4k3fu9k4bvq80dg4qjlvi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.guitar_music_app",
+            "certificate_hash": "7bd624feee22738229d21f631a9012c62f4765f0"
+          }
+        },
+        {
+          "client_id": "556320004575-dnoratogvdkvsm2thb7qnckpouv19kq7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBL6bWwd94ppTnK1wI1kN4e2VGpgIszg30"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "556320004575-dnoratogvdkvsm2thb7qnckpouv19kq7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
