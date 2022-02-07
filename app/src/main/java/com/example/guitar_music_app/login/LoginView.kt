@@ -61,7 +61,7 @@ class LoginView : Fragment() {
         )
          viewModel.signedIn.observe(
              viewLifecycleOwner,
-             Observer {
+             {
                  if (it) {
                      startListActivity()
                      //TODO-OnBackPressedDispatcher nahradit, neni to "onBack"

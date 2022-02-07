@@ -7,18 +7,22 @@ import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.media.MediaPlayer
 import android.os.*
-import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewGroup
+import android.text.Html
+import android.view.*
 import android.widget.Switch
 import android.widget.Toast
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.graphics.toColorInt
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.guitar_music_app.R
+import com.example.guitar_music_app.general.GeneralResult
+import com.firebase.ui.auth.AuthUI.getApplicationContext
 import kotlinx.android.synthetic.main.chords1_fragment.*
+import kotlinx.android.synthetic.main.login_fragment.*
+import kotlinx.coroutines.*
 import java.lang.Exception
 import java.util.*
 import kotlin.concurrent.timerTask
@@ -52,15 +56,13 @@ class LectureView : Fragment() {
         viewModel = ViewModelProvider(
             this,
             LectureInjector(requireActivity().application).provideLectureViewModelFactory()
-        )
-            .get(LectureViewModel::class.java)
+        )[LectureViewModel::class.java]
 
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
 
-
         setUpClickListeners()
 
-        viewModel.state.observe(this, { state ->
+        viewModel.state.observe(viewLifecycleOwner, { state ->
             views.forEach { (viewId, note) ->
                 if (state.buttonsTouched.any { it.note == note }) {
                     view?.findViewById<View>(viewId)?.setBackgroundColor(Color.YELLOW)
@@ -68,15 +70,17 @@ class LectureView : Fragment() {
                     if (state.isChordValid) {
                         view?.findViewById<View>(viewId)?.setBackgroundColor(Color.GREEN)
                         chordText.setTextColor(Color.GREEN)
-                        vibrate(millisecond = 1)
-                        //TODO-TOAST JE MOC DLOUHEJ A TRVA NEZ ZMIZI + Zmenit aby neprekazel
-                        Toast.makeText(
-                            context, "Správně",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        playSound()
-                    }
 
+                        //TODO-TOAST JE MOC DLOUHEJ A TRVA NEZ ZMIZI + Zmenit aby neprekazel + Life
+//                        Toast.makeText(
+//                            context, "Správně",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+                        lifecycleScope.launch{playSound()}
+
+                        displayToast()
+                        lifecycleScope.launch{ vibrate(millisecond = 1)}
+                    }
                 } else if (state.assistant && state.chord.notes.contains(note)) {
                     if (state.chord.notes.contains(note)) {
                         view?.findViewById<View>(viewId)?.setBackgroundColor(Color.LTGRAY)
@@ -89,7 +93,7 @@ class LectureView : Fragment() {
             }
         })
         //Na zacatku posle prvni akord
-        viewModel.chordTextChange.observe(this, {
+        viewModel.chordTextChange.observe(viewLifecycleOwner, {
             chordText.text = viewModel.chordTextChange.value
 
         })
@@ -97,8 +101,23 @@ class LectureView : Fragment() {
         viewModel.handleEvent(LectureEvent.OnStart)
     }
 
-    private fun playSound() {
-        val mediaPlayer = MediaPlayer.create(activity, R.raw.a_sharp1)
+    private fun displayToast() {
+//Toast nejde v backgroundu
+            val toast = Toast.makeText(
+                context,
+                Html.fromHtml("<font color='#FFFFFF' ><b>" + "Správně" + "</b></font>"),
+                Toast.LENGTH_SHORT
+            )
+            toast.setGravity(Gravity.TOP, 0, 0)
+
+            val toastView = toast.view
+            toastView!!.setBackgroundResource(R.drawable.toast_drawable)
+            toast.show()
+    }
+
+    private suspend fun playSound() {
+        withContext(Dispatchers.IO) {
+        val mediaPlayer = MediaPlayer.create(activity, R.raw.c_vbr)
         try {
             if (mediaPlayer.isPlaying) {
                 mediaPlayer.stop()
@@ -108,19 +127,22 @@ class LectureView : Fragment() {
             }
         } catch (e: Exception) {
             e.printStackTrace(); }
-    
+            }
+
     }
 
-    private fun vibrate(millisecond: Long) {
-        val vibrator = activity?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+    private suspend fun vibrate(millisecond: Long) {
+        withContext(Dispatchers.IO) {
+            val vibrator = activity?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
 
-        // Start without a delay (0ms)
-        // Vibrate duration (100ms)
-        // Sleep between vibrations (1000ms)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            vibrator.vibrate(VibrationEffect.createOneShot(millisecond, 255))
-        } else {
-            vibrator.vibrate(millisecond)
+            // Start without a delay (0ms)
+            // Vibrate duration (100ms)
+            // Sleep between vibrations (1000ms)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrator.vibrate(VibrationEffect.createOneShot(millisecond, 255))
+            } else {
+                vibrator.vibrate(millisecond)
+            }
         }
     }
 
@@ -136,345 +158,317 @@ class LectureView : Fragment() {
         }
 //TODO-jakmile odslidujeme, tak by se melo tlacitko prestat drzet
         viewF.setOnTouchListener { v, event ->
-            val note = views[viewF.id]
-            viewModel.buttonTouched(note!!, touched = event.action == MotionEvent.ACTION_DOWN)
-            view.playSoundEffect(android.view.SoundEffectConstants.CLICK);
-            v.performClick()
-            false
-        }
-        viewF.setOnTouchListener { v, event ->
-            val note = views[viewF.id]
-            viewModel.buttonTouched(note!!, touched = event.action != MotionEvent.ACTION_UP)
+            lifecycleScope.launch {
+                val note = views[viewF.id]
+
+                viewModel.buttonTouched(
+                    note!!,
+                    touched = event.action != MotionEvent.ACTION_UP
+                )
+            }
 
             v.performClick()
             true
         }
         viewC.setOnTouchListener { v, event ->
             val note = views[viewC.id]
-            viewModel.buttonTouched(note!!, touched = event.action == MotionEvent.ACTION_DOWN)
-            v.performClick()
-            true
-        }
-
-        viewC.setOnTouchListener { v, event ->
-            val note = views[viewC.id]
-            viewModel.buttonTouched(note!!, touched = event.action != MotionEvent.ACTION_UP)
-
-            v.performClick()
-            true
-        }
-
-        viewG_SHARP1.setOnTouchListener { v, event ->
-            val note = views[viewG_SHARP1.id]
-            viewModel.buttonTouched(note!!, touched = event.action == MotionEvent.ACTION_DOWN)
+            lifecycleScope.launch{
+                viewModel.buttonTouched(
+                    note!!,
+                    touched = event.action != MotionEvent.ACTION_UP
+                )
+            }
             v.performClick()
             true
         }
 
         viewG_SHARP1.setOnTouchListener { v, event ->
             val note = views[viewG_SHARP1.id]
-            viewModel.buttonTouched(note!!, touched = event.action != MotionEvent.ACTION_UP)
-
+            lifecycleScope.launch {
+                viewModel.buttonTouched(
+                    note!!,
+                    touched = event.action != MotionEvent.ACTION_UP
+                )
+            }
             v.performClick()
             true
         }
 
         viewD_SHARP1.setOnTouchListener { v, event ->
-            val note = views[viewD_SHARP1.id]
-            viewModel.buttonTouched(note!!, touched = event.action == MotionEvent.ACTION_DOWN)
-            v.performClick()
-            true
-        }
 
-        viewD_SHARP1.setOnTouchListener { v, event ->
             val note = views[viewD_SHARP1.id]
-            viewModel.buttonTouched(note!!, touched = event.action != MotionEvent.ACTION_UP)
-
-            v.performClick()
-            true
-        }
-        viewA_SHARP1.setOnTouchListener { v, event ->
-            val note = views[viewA_SHARP1.id]
-            viewModel.buttonTouched(note!!, touched = event.action == MotionEvent.ACTION_DOWN)
+            lifecycleScope.launch {
+                viewModel.buttonTouched(
+                    note!!,
+                    touched = event.action != MotionEvent.ACTION_UP
+                )
+            }
             v.performClick()
             true
         }
 
         viewA_SHARP1.setOnTouchListener { v, event ->
             val note = views[viewA_SHARP1.id]
-            viewModel.buttonTouched(note!!, touched = event.action != MotionEvent.ACTION_UP)
-
-            v.performClick()
-            true
-        }
-        viewF2.setOnTouchListener { v, event ->
-            val note = views[viewF2.id]
-            viewModel.buttonTouched(note!!, touched = event.action == MotionEvent.ACTION_DOWN)
+            lifecycleScope.launch {
+                viewModel.buttonTouched(
+                    note!!,
+                    touched = event.action != MotionEvent.ACTION_UP
+                )
+            }
             v.performClick()
             true
         }
 
         viewF2.setOnTouchListener { v, event ->
             val note = views[viewF2.id]
-            viewModel.buttonTouched(note!!, touched = event.action != MotionEvent.ACTION_UP)
-
-            v.performClick()
-            true
-        }
-        viewF_SHARP.setOnTouchListener { v, event ->
-            val note = views[viewF_SHARP.id]
-            viewModel.buttonTouched(note!!, touched = event.action == MotionEvent.ACTION_DOWN)
+            lifecycleScope.launch {
+                viewModel.buttonTouched(
+                    note!!,
+                    touched = event.action != MotionEvent.ACTION_UP
+                )
+            }
             v.performClick()
             true
         }
 
         viewF_SHARP.setOnTouchListener { v, event ->
             val note = views[viewF_SHARP.id]
-            viewModel.buttonTouched(note!!, touched = event.action != MotionEvent.ACTION_UP)
-
-            v.performClick()
-            true
-        }
-        viewC_SHARP.setOnTouchListener { v, event ->
-            val note = views[viewC_SHARP.id]
-            viewModel.buttonTouched(note!!, touched = event.action == MotionEvent.ACTION_DOWN)
+            lifecycleScope.launch {
+                viewModel.buttonTouched(
+                    note!!,
+                    touched = event.action != MotionEvent.ACTION_UP
+                )
+            }
             v.performClick()
             true
         }
 
         viewC_SHARP.setOnTouchListener { v, event ->
             val note = views[viewC_SHARP.id]
-            viewModel.buttonTouched(note!!, touched = event.action != MotionEvent.ACTION_UP)
-
+            lifecycleScope.launch {
+                viewModel.buttonTouched(
+                    note!!,
+                    touched = event.action != MotionEvent.ACTION_UP
+                )
+            }
             v.performClick()
             true
         }
+
+
 
         viewA.setOnTouchListener { v, event ->
             val note = views[viewA.id]
-            viewModel.buttonTouched(note!!, touched = event.action == MotionEvent.ACTION_DOWN)
+            lifecycleScope.launch {
+                viewModel.buttonTouched(
+                    note!!,
+                    touched = event.action != MotionEvent.ACTION_UP
+                )
+            }
             v.performClick()
             true
         }
 
-        viewA.setOnTouchListener { v, event ->
-            val note = views[viewA.id]
-            viewModel.buttonTouched(note!!, touched = event.action != MotionEvent.ACTION_UP)
-
-            v.performClick()
-            true
-        }
-        viewE.setOnTouchListener { v, event ->
-            val note = views[viewE.id]
-            viewModel.buttonTouched(note!!, touched = event.action == MotionEvent.ACTION_DOWN)
-            v.performClick()
-            true
-        }
 
         viewE.setOnTouchListener { v, event ->
             val note = views[viewE.id]
-            viewModel.buttonTouched(note!!, touched = event.action != MotionEvent.ACTION_UP)
-
+            lifecycleScope.launch {
+                viewModel.buttonTouched(
+                    note!!,
+                    touched = event.action != MotionEvent.ACTION_UP
+                )
+            }
             v.performClick()
             true
         }
+
+
         viewB1.setOnTouchListener { v, event ->
             val note = views[viewB1.id]
-            viewModel.buttonTouched(note!!, touched = event.action == MotionEvent.ACTION_DOWN)
+            lifecycleScope.launch {
+                viewModel.buttonTouched(
+                    note!!,
+                    touched = event.action != MotionEvent.ACTION_UP
+                )
+            }
             v.performClick()
             true
         }
 
-        viewB1.setOnTouchListener { v, event ->
-            val note = views[viewB1.id]
-            viewModel.buttonTouched(note!!, touched = event.action != MotionEvent.ACTION_UP)
-
-            v.performClick()
-            true
-        }
-        viewF_SHARP2.setOnTouchListener { v, event ->
-            val note = views[viewF_SHARP2.id]
-            viewModel.buttonTouched(note!!, touched = event.action == MotionEvent.ACTION_DOWN)
-            v.performClick()
-            true
-        }
 
         viewF_SHARP2.setOnTouchListener { v, event ->
             val note = views[viewF_SHARP2.id]
-            viewModel.buttonTouched(note!!, touched = event.action != MotionEvent.ACTION_UP)
-
-            v.performClick()
-            true
-        }
-        viewG.setOnTouchListener { v, event ->
-            val note = views[viewG.id]
-            viewModel.buttonTouched(note!!, touched = event.action == MotionEvent.ACTION_DOWN)
+            lifecycleScope.launch {
+                viewModel.buttonTouched(
+                    note!!,
+                    touched = event.action != MotionEvent.ACTION_UP
+                )
+            }
             v.performClick()
             true
         }
 
         viewG.setOnTouchListener { v, event ->
             val note = views[viewG.id]
-            viewModel.buttonTouched(note!!, touched = event.action != MotionEvent.ACTION_UP)
-
-            v.performClick()
-            true
-        }
-        viewD.setOnTouchListener { v, event ->
-            val note = views[viewD.id]
-            viewModel.buttonTouched(note!!, touched = event.action == MotionEvent.ACTION_DOWN)
+            lifecycleScope.launch {
+                viewModel.buttonTouched(
+                    note!!,
+                    touched = event.action != MotionEvent.ACTION_UP
+                )
+            }
             v.performClick()
             true
         }
 
         viewD.setOnTouchListener { v, event ->
             val note = views[viewD.id]
-            viewModel.buttonTouched(note!!, touched = event.action != MotionEvent.ACTION_UP)
-
-            v.performClick()
-            true
-        }
-        viewA_SHARP.setOnTouchListener { v, event ->
-            val note = views[viewA_SHARP.id]
-            viewModel.buttonTouched(note!!, touched = event.action == MotionEvent.ACTION_DOWN)
+            lifecycleScope.launch {
+                viewModel.buttonTouched(
+                    note!!,
+                    touched = event.action != MotionEvent.ACTION_UP
+                )
+            }
             v.performClick()
             true
         }
 
         viewA_SHARP.setOnTouchListener { v, event ->
             val note = views[viewA_SHARP.id]
-            viewModel.buttonTouched(note!!, touched = event.action != MotionEvent.ACTION_UP)
-
+            lifecycleScope.launch {
+                viewModel.buttonTouched(
+                    note!!,
+                    touched = event.action != MotionEvent.ACTION_UP
+                )
+            }
             v.performClick()
             true
         }
+
+
 
         viewF1.setOnTouchListener { v, event ->
             val note = views[viewF1.id]
-            viewModel.buttonTouched(note!!, touched = event.action == MotionEvent.ACTION_DOWN)
+            lifecycleScope.launch {
+                viewModel.buttonTouched(
+                    note!!,
+                    touched = event.action != MotionEvent.ACTION_UP
+                )
+            }
             v.performClick()
             true
         }
 
-        viewF1.setOnTouchListener { v, event ->
-            val note = views[viewF1.id]
-            viewModel.buttonTouched(note!!, touched = event.action != MotionEvent.ACTION_UP)
-
-            v.performClick()
-            true
-        }
-        viewC1.setOnTouchListener { v, event ->
-            val note = views[viewC1.id]
-            viewModel.buttonTouched(note!!, touched = event.action == MotionEvent.ACTION_DOWN)
-            v.performClick()
-            true
-        }
 
         viewC1.setOnTouchListener { v, event ->
             val note = views[viewC1.id]
-            viewModel.buttonTouched(note!!, touched = event.action != MotionEvent.ACTION_UP)
-
+            lifecycleScope.launch {
+                viewModel.buttonTouched(
+                    note!!,
+                    touched = event.action != MotionEvent.ACTION_UP
+                )
+            }
             v.performClick()
             true
         }
+
+
         viewG2.setOnTouchListener { v, event ->
             val note = views[viewG2.id]
-            viewModel.buttonTouched(note!!, touched = event.action == MotionEvent.ACTION_DOWN)
-            v.performClick()
-            true
-        }
-
-        viewG2.setOnTouchListener { v, event ->
-            val note = views[viewG2.id]
-            viewModel.buttonTouched(note!!, touched = event.action != MotionEvent.ACTION_UP)
-
-            v.performClick()
-            true
-        }
-        viewG_SHARP.setOnTouchListener { v, event ->
-            val note = views[viewG_SHARP.id]
-            viewModel.buttonTouched(note!!, touched = event.action == MotionEvent.ACTION_DOWN)
+            lifecycleScope.launch {
+                viewModel.buttonTouched(
+                    note!!,
+                    touched = event.action != MotionEvent.ACTION_UP
+                )
+            }
             v.performClick()
             true
         }
 
         viewG_SHARP.setOnTouchListener { v, event ->
             val note = views[viewG_SHARP.id]
-            viewModel.buttonTouched(note!!, touched = event.action != MotionEvent.ACTION_UP)
-
+            lifecycleScope.launch {
+                viewModel.buttonTouched(
+                    note!!,
+                    touched = event.action != MotionEvent.ACTION_UP
+                )
+            }
             v.performClick()
             true
         }
+
+
         viewD_SHARP.setOnTouchListener { v, event ->
             val note = views[viewD_SHARP.id]
-            viewModel.buttonTouched(note!!, touched = event.action == MotionEvent.ACTION_DOWN)
+            lifecycleScope.launch {
+                viewModel.buttonTouched(
+                    note!!,
+                    touched = event.action != MotionEvent.ACTION_UP
+                )
+            }
             v.performClick()
             true
         }
 
-        viewD_SHARP.setOnTouchListener { v, event ->
-            val note = views[viewD_SHARP.id]
-            viewModel.buttonTouched(note!!, touched = event.action != MotionEvent.ACTION_UP)
-
-            v.performClick()
-            true
-        }
-        viewB.setOnTouchListener { v, event ->
-            val note = views[viewB.id]
-            viewModel.buttonTouched(note!!, touched = event.action == MotionEvent.ACTION_DOWN)
-            v.performClick()
-            true
-        }
 
         viewB.setOnTouchListener { v, event ->
             val note = views[viewB.id]
-            viewModel.buttonTouched(note!!, touched = event.action != MotionEvent.ACTION_UP)
+            lifecycleScope.launch {
+                viewModel.buttonTouched(
+                    note!!,
+                    touched = event.action != MotionEvent.ACTION_UP
+                )
+            }
+            v.performClick()
+            true
+        }
 
-            v.performClick()
-            true
-        }
-        viewF_SHARP1.setOnTouchListener { v, event ->
-            val note = views[viewF_SHARP1.id]
-            viewModel.buttonTouched(note!!, touched = event.action == MotionEvent.ACTION_DOWN)
-            v.performClick()
-            true
-        }
 
         viewF_SHARP1.setOnTouchListener { v, event ->
             val note = views[viewF_SHARP1.id]
-            viewModel.buttonTouched(note!!, touched = event.action != MotionEvent.ACTION_UP)
-
+            lifecycleScope.launch {
+                viewModel.buttonTouched(
+                    note!!,
+                    touched = event.action != MotionEvent.ACTION_UP
+                )
+            }
             v.performClick()
             true
         }
+
+
         viewC_SHARP1.setOnTouchListener { v, event ->
             val note = views[viewC_SHARP1.id]
-            viewModel.buttonTouched(note!!, touched = event.action == MotionEvent.ACTION_DOWN)
+            lifecycleScope.launch {
+                viewModel.buttonTouched(
+                    note!!,
+                    touched = event.action != MotionEvent.ACTION_UP
+                )
+            }
             v.performClick()
             true
         }
 
-        viewC_SHARP1.setOnTouchListener { v, event ->
-            val note = views[viewC_SHARP1.id]
-            viewModel.buttonTouched(note!!, touched = event.action != MotionEvent.ACTION_UP)
-
-            v.performClick()
-            true
-        }
-        viewG_SHARP2.setOnTouchListener { v, event ->
-            val note = views[viewG_SHARP2.id]
-            viewModel.buttonTouched(note!!, touched = event.action == MotionEvent.ACTION_DOWN)
-            v.performClick()
-            true
-        }
 
         viewG_SHARP2.setOnTouchListener { v, event ->
             val note = views[viewG_SHARP2.id]
-            viewModel.buttonTouched(note!!, touched = event.action != MotionEvent.ACTION_UP)
-
+            lifecycleScope.launch {
+                viewModel.buttonTouched(
+                    note!!,
+                    touched = event.action == MotionEvent.ACTION_UP
+                )
+            }
             v.performClick()
             true
         }
+
+//            viewG_SHARP2.setOnTouchListener { v, event ->
+//                val note = views[viewG_SHARP2.id]
+//                lifecycleScope.launch {
+//                    viewModel.buttonTouched(note!!, touched = event.action != MotionEvent.ACTION_UP)
+//                }
+//                v.performClick()
+//                true
+//            }
     }
 
 
