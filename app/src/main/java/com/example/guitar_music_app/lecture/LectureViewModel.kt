@@ -27,7 +27,6 @@ class LectureViewModel(
 
     override fun handleEvent(event: LectureEvent) {
         when (event) {
-
             is LectureEvent.OnStart -> chordTextChange.value = randomChord().toString()
         }
     }
@@ -42,7 +41,6 @@ class LectureViewModel(
 
 
      fun buttonTouched(note: Note, touched: Boolean) {
-
             val currentState = state.value!!
             val mutableList = currentState.buttonsTouched.toMutableSet()
             val exists = mutableList.any { it.note == note }

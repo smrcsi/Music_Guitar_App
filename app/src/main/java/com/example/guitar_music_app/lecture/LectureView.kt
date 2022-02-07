@@ -2,30 +2,23 @@ package com.example.guitar_music_app.lecture
 
 
 import android.content.Context
-import android.content.Context.VIBRATOR_SERVICE
 import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.media.MediaPlayer
 import android.os.*
 import android.text.Html
 import android.view.*
-import android.widget.Switch
 import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.graphics.toColorInt
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.guitar_music_app.R
-import com.example.guitar_music_app.general.GeneralResult
-import com.firebase.ui.auth.AuthUI.getApplicationContext
-import kotlinx.android.synthetic.main.chords1_fragment.*
+import kotlinx.android.synthetic.main.chords_fragment.*
 import kotlinx.android.synthetic.main.login_fragment.*
 import kotlinx.coroutines.*
 import java.lang.Exception
 import java.util.*
-import kotlin.concurrent.timerTask
 
 
 class LectureView : Fragment() {
@@ -48,7 +41,7 @@ class LectureView : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.chords1_fragment, container, false)
+        return inflater.inflate(R.layout.chords_fragment, container, false)
     }
 
     override fun onStart() {
@@ -71,7 +64,7 @@ class LectureView : Fragment() {
                         view?.findViewById<View>(viewId)?.setBackgroundColor(Color.GREEN)
                         chordText.setTextColor(Color.GREEN)
 
-                        //TODO-TOAST JE MOC DLOUHEJ A TRVA NEZ ZMIZI + Zmenit aby neprekazel + Life
+                        //TODO- Upravit toast aby vypadal normalneji
 //                        Toast.makeText(
 //                            context, "Správně",
 //                            Toast.LENGTH_SHORT
@@ -92,6 +85,7 @@ class LectureView : Fragment() {
 
             }
         })
+
         //Na zacatku posle prvni akord
         viewModel.chordTextChange.observe(viewLifecycleOwner, {
             chordText.text = viewModel.chordTextChange.value

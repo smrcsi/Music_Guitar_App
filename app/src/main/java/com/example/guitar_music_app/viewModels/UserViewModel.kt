@@ -63,7 +63,8 @@ class UserViewModel(
         showLoadingState()
         //Switch statement
         when (event) {
-            is LoginEvent.OnStart -> getUser()
+            is LoginEvent.OnStart -> {getUser()
+            }
             is LoginEvent.OnAuthButtonClick -> onAuthButtonClick()
             is LoginEvent.OnGoogleSignInResult -> onSignInResult(event.result)
         }
@@ -85,6 +86,7 @@ class UserViewModel(
         when (result) {
             is GeneralResult.Value -> {
                 userState.value = null
+                signedIn.value = false
                 showSignedOutState()
             }
             is GeneralResult.Error -> showErrorState()

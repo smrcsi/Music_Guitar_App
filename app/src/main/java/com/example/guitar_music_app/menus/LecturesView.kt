@@ -47,5 +47,9 @@ class LecturesView : Fragment () {
         btn_chords.setOnClickListener{
             findNavController().navigate(R.id.chordsView)
         }
+
+        btn_notes.setOnClickListener{
+            findNavController().navigate(R.id.notesView)
+        }
     }
 }

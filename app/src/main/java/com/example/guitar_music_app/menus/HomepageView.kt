@@ -58,6 +58,7 @@ class HomepageView : Fragment() {
                         LoginInjector(requireActivity().application).provideUserViewModelFactory()
                     )[UserViewModel::class.java]
                     userViewModel.signOutUser()
+                    userViewModel.signedIn.value = false
                 }.setNegativeButton("No") { dialog, id ->
                     // Dismiss the dialog
                     dialog.dismiss()
@@ -66,7 +67,7 @@ class HomepageView : Fragment() {
             val alert = builder.create()
             alert.show()
         }
-        requireActivity().onBackPressedDispatcher.addCallback(this) {startLoginActivity() }
+        requireActivity().onBackPressedDispatcher.addCallback(this) {startLoginActivity()}
 
 
         btn_lectures.setOnClickListener {

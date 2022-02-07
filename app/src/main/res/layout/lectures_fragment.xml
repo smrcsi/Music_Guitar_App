@@ -1,50 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/lectures_fragment"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lectures_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-        android:background="@drawable/space_loop"
-        tools:context="com.example.guitar_music_app.results.ResultActivity">
-
-    <ImageView
-        android:id="@+id/img_guitar"
-        android:layout_width="126dp"
-        android:layout_height="134dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/lbl_lectures"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/papapishu_guitar_2" />
-
-    <Button
-        android:id="@+id/btn_chords"
-        android:layout_width="201dp"
-        android:layout_height="49dp"
-        android:backgroundTint="#FFFFFF"
-        android:text="@string/akordy"
-        android:textColor="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/btn_rythm"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lbl_lectures" />
+    android:background="@drawable/space_loop"
+    tools:context="com.example.guitar_music_app.results.ResultActivity">
 
     <Button
         android:id="@+id/btn_rythm"
         android:layout_width="201dp"
         android:layout_height="49dp"
-        android:layout_marginBottom="136dp"
+        android:layout_marginBottom="50dp"
         android:backgroundTint="#FFFFFF"
         android:text="@string/rytmus"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_chords" />
+
+    <ImageView
+        android:id="@+id/img_guitar"
+        android:layout_width="126dp"
+        android:layout_height="134dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/lbl_lectures"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/papapishu_guitar_2" />
+
+    <Button
+        android:id="@+id/btn_notes"
+        android:layout_width="201dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="#FFFFFF"
+        android:text="@string/notes"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/btn_chords"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_lectures" />
+
+    <Button
+        android:id="@+id/btn_chords"
+        android:layout_width="201dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="#FFFFFF"
+        android:text="@string/akordy"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/btn_rythm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_notes" />
+
+    <TextView
+        android:id="@+id/lbl_lectures"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lekce"
+        android:textColor="#FFFFFF"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btn_notes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_guitar" />
 
     <ImageButton
         android:id="@+id/btn_back"
@@ -57,18 +87,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
 
-    <TextView
-        android:id="@+id/lbl_lectures"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/lekce"
-        android:textColor="#FFFFFF"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/btn_chords"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_guitar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

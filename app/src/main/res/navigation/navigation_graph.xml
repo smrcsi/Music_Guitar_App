@@ -66,12 +66,15 @@
         <action
             android:id="@+id/action_lecturesView_to_homepageView"
             app:destination="@id/homepageView" />
+        <action
+            android:id="@+id/action_lecturesView_to_resultActivity"
+            app:destination="@id/notesView" />
     </fragment>
     <fragment
         android:id="@+id/chordsView"
         android:name="com.example.guitar_music_app.lecture.LectureView"
         android:label="lectureView"
-        tools:layout="@layout/chords1_fragment">
+        tools:layout="@layout/chords_fragment">
         <action
             android:id="@+id/action_lectureView_to_lectureResultActivity"
             app:destination="@id/lectureResult" />
@@ -112,5 +115,17 @@
         <action
             android:id="@+id/action_lectureResult_to_homepageView"
             app:destination="@id/homepageView" />
+    </fragment>
+    <fragment
+        android:id="@+id/notesView"
+        android:name="com.example.guitar_music_app.lecture.NotesView"
+        android:label="notes_fragment"
+        tools:layout="@layout/notes_fragment" >
+        <action
+            android:id="@+id/action_notesView_to_lectureResult"
+            app:destination="@id/lectureResult" />
+        <action
+            android:id="@+id/action_notesView_to_lecturesView"
+            app:destination="@id/lecturesView" />
     </fragment>
 </navigation>

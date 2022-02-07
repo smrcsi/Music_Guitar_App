@@ -69,8 +69,21 @@ class LoginView : Fragment() {
                          startListActivity()
                      }
                  }
+                 else if (loginStatusTextView.text  == "Signed In") {
+                     startSignInFlow()
+                 }
              }
          )
+
+         viewModel.signInStatusText.observe(
+             viewLifecycleOwner,
+             {
+                 if (loginStatusTextView.text == SIGNED_IN) {
+                     startListActivity()
+                 }
+             }
+         )
+
         viewModel.authButtonText.observe(
             viewLifecycleOwner,
             Observer {

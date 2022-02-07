@@ -19,4 +19,6 @@ class LectureInjector(application: Application): AndroidViewModel(application) {
         LectureViewModelFactory(
             getLectureRepository()
         )
+
+
 }

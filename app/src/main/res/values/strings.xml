@@ -30,4 +30,5 @@
     <string name="asistent">Asistent</string>
     <string name="turn_off_asistant">Zapnout asistent</string>
     <string name="turn_on_asisstant">Vypnout asistent</string>
+    <string name="notes">Noty</string>
 </resources>
