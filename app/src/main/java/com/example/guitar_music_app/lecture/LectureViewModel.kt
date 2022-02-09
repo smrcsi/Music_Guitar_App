@@ -1,15 +1,7 @@
 package com.example.guitar_music_app.lecture
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations.map
-import androidx.lifecycle.viewModelScope
 import com.example.guitar_music_app.general.BaseViewModel
-import com.example.guitar_music_app.login.LoginEvent
-import com.google.common.io.Files.map
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.util.*
 import kotlin.coroutines.CoroutineContext
 
@@ -24,10 +16,16 @@ class LectureViewModel(
 
     val chordTextChange = MutableLiveData<String>()
 
+    val noteState = MutableLiveData(NoteState())
+
+    val noteChange = MutableLiveData<Note>()
+
 
     override fun handleEvent(event: LectureEvent) {
         when (event) {
-            is LectureEvent.OnStart -> chordTextChange.value = randomChord().toString()
+            is LectureEvent.OnStart -> {
+                chordTextChange.value = randomChord().toString()
+            }
         }
     }
 
@@ -36,30 +34,38 @@ class LectureViewModel(
         val isChordValid: Boolean = false,
         val buttonsTouched: Set<ButtonState> = emptySet(),
         var chordPlayed: Boolean = false,
-        var assistant: Boolean = false
+        var assistant: Boolean = false,
+    )
+
+    data class NoteState(
+        var targetNote: Note = Note.G,
+        var note: Note = Note.G,
+        var isNoteValid: Boolean = false,
+        var notePlayed: Boolean = false,
+        val notesTouched: Set<ButtonState> = emptySet()
     )
 
 
-     fun buttonTouched(note: Note, touched: Boolean) {
-            val currentState = state.value!!
-            val mutableList = currentState.buttonsTouched.toMutableSet()
-            val exists = mutableList.any { it.note == note }
-            if (touched && !exists) {
-                mutableList.add(ButtonState(note))
-            } else if (!touched && exists) {
-                mutableList.remove(ButtonState(note))
-            }
-            if (mutableList.isEmpty() && state.value!!.chordPlayed) {
-                chordTextChange.value = randomChord().toString()
-                state.value!!.chordPlayed = false
-            }
-            val isChordValid = isChordValid(currentState.chord, mutableList)
-         state.value = currentState.copy(isChordValid = isChordValid, buttonsTouched = mutableList)
-            //TODO- Zkontrolovat jestli je potreba duplikovat cyklus
-            if (mutableList.isEmpty() && state.value!!.chordPlayed) {
-                chordTextChange.value = randomChord().toString()
-                state.value!!.chordPlayed = false
-            }
+    fun buttonTouched(note: Note, touched: Boolean) {
+        val currentState = state.value!!
+        val mutableList = currentState.buttonsTouched.toMutableSet()
+        val exists = mutableList.any { it.note == note }
+        if (touched && !exists) {
+            mutableList.add(ButtonState(note))
+        } else if (!touched && exists) {
+            mutableList.remove(ButtonState(note))
+        }
+        if (mutableList.isEmpty() && state.value!!.chordPlayed) {
+            chordTextChange.value = randomChord().toString()
+            state.value!!.chordPlayed = false
+        }
+        val isChordValid = isChordValid(currentState.chord, mutableList)
+        state.value = currentState.copy(isChordValid = isChordValid, buttonsTouched = mutableList)
+        //TODO- Zkontrolovat jestli je potreba duplikovat cyklus
+        if (mutableList.isEmpty() && state.value!!.chordPlayed) {
+            chordTextChange.value = randomChord().toString()
+            state.value!!.chordPlayed = false
+        }
 
     }
 
@@ -94,4 +100,45 @@ class LectureViewModel(
             state.value = state.value?.copy(assistant = false)
         }
     }
+
+//
+//    fun noteTouched1(note: Note, touched: Boolean) {
+//        val currentState = noteState.value!!
+//        if (currentState.targetNote == note && touched) {
+//            currentState.targetNote = randomNote()
+//            val isNoteValid = true
+//            noteState.value =
+//                currentState.copy(isNoteValid = isNoteValid, note = currentState.targetNote)
+//        }
+//    }
+
+    fun noteTouched(note: Note, touched: Boolean) {
+        val currentState = noteState.value!!
+        val mutableList = currentState.notesTouched.toMutableSet()
+        val exists = mutableList.any { it.note == note }
+        if (touched && !exists) {
+            mutableList.add(ButtonState(note))
+        } else if (!touched && exists) {
+            mutableList.remove(ButtonState(note))
+        }
+        if (currentState.targetNote == note && touched && !currentState.notePlayed) {
+            currentState.targetNote = randomNote()
+            noteState.value =
+                currentState.copy(isNoteValid = true, note = currentState.note, notePlayed = touched, targetNote = currentState.targetNote)
+        } else {
+            if (noteState.value?.notePlayed == true) {
+
+                noteState.value = currentState.copy(isNoteValid = false, notesTouched = mutableList, notePlayed = touched, note = currentState.targetNote)
+            }
+            else {
+                noteState.value = currentState.copy(isNoteValid = false, notesTouched = mutableList)
+            }
+        }
+    }
+
+    private fun randomNote(): Note {
+        val pick = Random().nextInt(Note.values().size)
+        return Note.values()[pick]
+    }
+
 }

@@ -10,7 +10,7 @@
     tools:context="com.example.guitar_music_app.results.ResultActivity">
 
     <TextView
-        android:id="@+id/chordText"
+        android:id="@+id/noteText"
         style="@style/TextAppearance.AppCompat.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -58,6 +58,8 @@
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/lst_results"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/noteText"
         app:layout_constraintTop_toBottomOf="@+id/img_guitar" />
 
     <ImageButton
@@ -476,23 +478,6 @@
         app:layout_constraintVertical_bias="1.0">
 
     </View>
-
-    <Switch
-        android:id="@+id/swtch_asistant"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:textOff="@string/turn_off_asistant"
-        android:textOn="@string/turn_on_asisstant"
-        android:textColor="#FFFFFF"
-        android:thumbTint="#FFFFFF"
-        android:trackTint="#808080"
-        app:layout_constraintBottom_toTopOf="@+id/viewTab3"
-        app:layout_constraintEnd_toStartOf="@+id/lbl_results"
-        app:layout_constraintHorizontal_bias="0.895"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

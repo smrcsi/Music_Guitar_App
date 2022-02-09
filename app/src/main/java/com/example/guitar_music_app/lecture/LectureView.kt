@@ -15,10 +15,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.guitar_music_app.R
 import kotlinx.android.synthetic.main.chords_fragment.*
-import kotlinx.android.synthetic.main.login_fragment.*
 import kotlinx.coroutines.*
 import java.lang.Exception
-import java.util.*
 
 
 class LectureView : Fragment() {
@@ -62,7 +60,7 @@ class LectureView : Fragment() {
 
                     if (state.isChordValid) {
                         view?.findViewById<View>(viewId)?.setBackgroundColor(Color.GREEN)
-                        chordText.setTextColor(Color.GREEN)
+                        noteText.setTextColor(Color.GREEN)
 
                         //TODO- Upravit toast aby vypadal normalneji
 //                        Toast.makeText(
@@ -80,18 +78,19 @@ class LectureView : Fragment() {
                     }
                 } else {
                     view?.findViewById<View>(viewId)?.setBackgroundColor(Color.TRANSPARENT)
-                    chordText.setTextColor(Color.RED)
+                    noteText.setTextColor(Color.RED)
                 }
 
             }
         })
 
-        //Na zacatku posle prvni akord
+
         viewModel.chordTextChange.observe(viewLifecycleOwner, {
-            chordText.text = viewModel.chordTextChange.value
+            noteText.text = viewModel.chordTextChange.value
 
         })
 
+        //Na zacatku posle prvni akord
         viewModel.handleEvent(LectureEvent.OnStart)
     }
 
