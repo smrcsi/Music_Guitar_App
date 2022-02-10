@@ -90,10 +90,6 @@ class NotesView : Fragment() {
 
         }
         )
-        
-
-
-
 
         viewModel.handleEvent(LectureEvent.OnStart)
 

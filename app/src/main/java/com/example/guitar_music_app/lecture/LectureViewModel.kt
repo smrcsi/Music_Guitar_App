@@ -11,14 +11,13 @@ class LectureViewModel(
     uiContext: CoroutineContext
 ) : BaseViewModel<LectureEvent>(uiContext) {
 
-
     val state = MutableLiveData(State())
 
     val chordTextChange = MutableLiveData<String>()
 
     val noteState = MutableLiveData(NoteState())
 
-    val noteChange = MutableLiveData<Note>()
+    val rhythmState = MutableLiveData(RhythmState())
 
 
     override fun handleEvent(event: LectureEvent) {
@@ -43,6 +42,10 @@ class LectureViewModel(
         var isNoteValid: Boolean = false,
         var notePlayed: Boolean = false,
         val notesTouched: Set<ButtonState> = emptySet()
+    )
+
+    data class RhythmState(
+        var isFlingValid: Boolean = false
     )
 
 
@@ -101,17 +104,6 @@ class LectureViewModel(
         }
     }
 
-//
-//    fun noteTouched1(note: Note, touched: Boolean) {
-//        val currentState = noteState.value!!
-//        if (currentState.targetNote == note && touched) {
-//            currentState.targetNote = randomNote()
-//            val isNoteValid = true
-//            noteState.value =
-//                currentState.copy(isNoteValid = isNoteValid, note = currentState.targetNote)
-//        }
-//    }
-
     fun noteTouched(note: Note, touched: Boolean) {
         val currentState = noteState.value!!
         val mutableList = currentState.notesTouched.toMutableSet()
@@ -141,4 +133,7 @@ class LectureViewModel(
         return Note.values()[pick]
     }
 
+
+    private fun flingAction()  {
+    }
 }

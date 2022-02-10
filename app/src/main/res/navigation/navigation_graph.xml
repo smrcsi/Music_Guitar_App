@@ -69,6 +69,9 @@
         <action
             android:id="@+id/action_lecturesView_to_resultActivity"
             app:destination="@id/notesView" />
+        <action
+            android:id="@+id/action_lecturesView_to_rhythmView"
+            app:destination="@id/rhythmView" />
     </fragment>
     <fragment
         android:id="@+id/chordsView"
@@ -126,6 +129,19 @@
             app:destination="@id/lectureResult" />
         <action
             android:id="@+id/action_notesView_to_lecturesView"
+            app:destination="@id/lecturesView" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/rhythmView"
+        android:name="com.example.guitar_music_app.lecture.RhythmView"
+        android:label="rhythm_fragment"
+        tools:layout="@layout/rhythm_fragment" >
+        <action
+            android:id="@+id/action_rhythmView_to_lectureResult"
+            app:destination="@id/lectureResult" />
+        <action
+            android:id="@+id/action_rhythmView_to_lecturesView"
             app:destination="@id/lecturesView" />
     </fragment>
 </navigation>

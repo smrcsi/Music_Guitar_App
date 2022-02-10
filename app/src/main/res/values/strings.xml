@@ -31,4 +31,6 @@
     <string name="turn_off_asistant">Zapnout asistent</string>
     <string name="turn_on_asisstant">Vypnout asistent</string>
     <string name="notes">Noty</string>
+    <string name="rythm">Rytmus</string>
+    <string name="btn_back">btn_back</string>
 </resources>

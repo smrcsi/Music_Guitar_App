@@ -9,7 +9,7 @@
     tools:context="com.example.guitar_music_app.results.ResultActivity">
 
     <Button
-        android:id="@+id/btn_rythm"
+        android:id="@+id/btn_rhythm"
         android:layout_width="201dp"
         android:layout_height="49dp"
         android:layout_marginBottom="50dp"
