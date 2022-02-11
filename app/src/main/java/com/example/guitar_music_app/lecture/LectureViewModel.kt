@@ -1,5 +1,6 @@
 package com.example.guitar_music_app.lecture
 
+import android.widget.AdapterView
 import androidx.lifecycle.MutableLiveData
 import com.example.guitar_music_app.general.BaseViewModel
 import java.util.*
@@ -45,7 +46,7 @@ class LectureViewModel(
     )
 
     data class RhythmState(
-        var isFlingValid: Boolean = false
+        var isFlingUpValid: Boolean = false
     )
 
 
@@ -134,6 +135,8 @@ class LectureViewModel(
     }
 
 
-    private fun flingAction()  {
+     fun onItemSelected()  {
+
+
     }
 }

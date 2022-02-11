@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="rhythms_array">
+        <item>Choose a rhythm</item>
+        <item>rhythm1</item>
+        <item>rhythm2</item>
+        <item>rhythm3</item>
+        <item>rhythm4</item>
+    </string-array>
+</resources>

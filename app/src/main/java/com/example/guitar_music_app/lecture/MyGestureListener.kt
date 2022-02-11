@@ -1,13 +1,8 @@
 package com.example.guitar_music_app.lecture
 
-import android.content.Context
 import android.view.GestureDetector
 import android.view.MotionEvent
-import android.view.View
-import android.widget.Toast
-import kotlinx.android.synthetic.main.rhythm_fragment.*
 import java.lang.Exception
-import kotlin.coroutines.coroutineContext
 import kotlin.math.abs
 
 class MyGestureListener(private val viewModel: LectureViewModel) : GestureDetector.SimpleOnGestureListener() {
@@ -49,7 +44,7 @@ class MyGestureListener(private val viewModel: LectureViewModel) : GestureDetect
             println("nevyslo to")
         }
 
-        viewModel.rhythmState.value = currentState?.copy(isFlingValid = result)
+        viewModel.rhythmState.value = currentState?.copy(isFlingUpValid = result)
         return result
     }
 }
