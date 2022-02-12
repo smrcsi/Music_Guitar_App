@@ -531,9 +531,9 @@ class RhythmView : Fragment() {
         ArrayAdapter.createFromResource(
             activity?.applicationContext!!,
             R.array.rhythms_array,
-            android.R.layout.simple_spinner_item
+            R.layout.simple_spinner_item_top
         ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
+            adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
             rhythmSpinner.adapter = adapter
         }
 

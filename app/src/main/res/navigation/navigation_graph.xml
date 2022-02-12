@@ -44,6 +44,9 @@
         <action
             android:id="@+id/action_homepageView_to_loginView"
             app:destination="@id/loginView" />
+        <action
+            android:id="@+id/action_homepageView_to_resultListView2"
+            app:destination="@id/resultListView" />
     </fragment>
     <fragment
         android:id="@+id/createAccountView"

@@ -54,8 +54,7 @@
         app:layout_constraintEnd_toEndOf="@+id/text_rules"
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="@+id/text_rules"
-        app:layout_constraintTop_toBottomOf="@+id/lbl_rules"
-        android:theme="@android:style/ThemeOverlay.Material.Dark"/>
+        app:layout_constraintTop_toBottomOf="@+id/lbl_rules"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

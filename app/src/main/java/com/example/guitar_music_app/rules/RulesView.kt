@@ -6,16 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.TextView
+
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.guitar_music_app.R
-import com.example.guitar_music_app.lecture.LectureInjector
-import com.example.guitar_music_app.lecture.LectureViewModel
-import kotlinx.android.synthetic.main.chords_fragment.*
 import kotlinx.android.synthetic.main.chords_fragment.btn_back
-import kotlinx.android.synthetic.main.rhythm_fragment.*
 import kotlinx.android.synthetic.main.rules_fragment.*
 
 class RulesView : Fragment() {
@@ -40,9 +36,9 @@ class RulesView : Fragment() {
         ArrayAdapter.createFromResource(
             activity?.applicationContext!!,
             R.array.lectures_array,
-            android.R.layout.simple_spinner_item
+            R.layout.simple_spinner_item_top
         ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             rules_spinner.adapter = adapter
         }
         rules_spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
