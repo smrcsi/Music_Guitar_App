@@ -1,6 +1,5 @@
 package com.example.guitar_music_app.lecture
 
-import android.widget.AdapterView
 import androidx.lifecycle.MutableLiveData
 import com.example.guitar_music_app.general.BaseViewModel
 import java.util.*

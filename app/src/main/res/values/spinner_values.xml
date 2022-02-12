@@ -7,4 +7,10 @@
         <item>rhythm3</item>
         <item>rhythm4</item>
     </string-array>
+
+    <string-array name="lectures_array">
+        <item>Noty</item>
+        <item>Akordy</item>
+        <item>Rytmus</item>
+    </string-array>
 </resources>

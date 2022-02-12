@@ -33,4 +33,26 @@
     <string name="notes">Noty</string>
     <string name="rythm">Rytmus</string>
     <string name="btn_back">btn_back</string>
+    <string name="noty">notes</string>
+    <string name="rules">Pravidla</string>
+    <string name="notes_text">Lekce noty je jednoduchým cvičením na vybrnkávání při hře na kytaru.
+        Jedná se o cvičení, které lze cvičit jak levou tak pravou rukou. Správně držení zařízení by mělo být obrazovkou směrem od uživatele.
+        Jestliže bude užívána pravá ruka, lze použít všechny prsty a k přidržení zařízení by měla sloužit levá ruka.
+        Jestliže bude použita ruka levá, cvičení by mělo být ovládano všemi prsty bez palce, který by měl sloužit k přidržení zařízení.
+    Cílem cvičení je správně označit šedé pole, které symbolizuje pozici na kytaře. Po jejím úspěšném zmáčknutí je pole označeno zelenou barvou a šedé pole se objeví na ploše jinde.
+    Jestliže je pole označeno žlutou barvou, jedná se o chybné označení pole.</string>
+
+    <string name="chords_text">Lekce akordy je cvičení, které slouží k výuce základních akordů.
+        Cvičení by mělo být používáno výhradně levou rukou a zařízení by mělo být směrem od uživatele.
+        Ke správnému užívání tohoto cvičení by měly být použity všechny prsty levé ruky, krom palce, který slouží k přidržení telefonu.
+    Účelem cvičení je správně zahrát na "virtuální kytaře" daný akord.
+        Jestliže je uživatel uplný začátečník, může si zároveň zapnout asistenta, který bude ukazovat, jak daný akord zahrát.
+    Jakmile se uživatel správně zahraje akord, jeho pozice se označí zelenou barvou,zařízení zavibruje a bude zobrazen další zahraný akord.
+        V opačném případě budou pozice na kytaře označeny pouze žlutou barvou.</string>
+
+    <string name="rhythm_text">Lekce Rytmus je cvičení založené na držení rytmu v pravé ruce.
+        Cvičení by mělo být tedy využívano pouze pravou rukou (nejlépe vrchní částí ukazováčku) a levá by měla sloužit k přidržení zařízení.
+    Účelem cvičení je správně zahrát kombinaci šipek, která je vyznačena v horní části obrazovky. Šipky lze zahrát přejetím prstem ze shora dolů nebo ze spoda nahoru.
+    Jestliže pohyb odpovídá šipce, označí se zelenou barvou a uživatel může zahrát další šipku. Jestliže je provedena chyba, šipka a všechny předchozí šipky jsou označeny červenou barvou
+    a uživatel začíná hrát kombinaci znova. Hraný rytmus lze dle libosti změnit.</string>
 </resources>

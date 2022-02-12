@@ -14,7 +14,7 @@
         style="@style/TextAppearance.AppCompat.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Noty"
+        android:text="@string/noty"
         android:textColor="#FFFFFF"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/viewG2"

@@ -55,5 +55,10 @@ class LecturesView : Fragment () {
         btn_rhythm.setOnClickListener{
             findNavController().navigate(R.id.rhythmView)
         }
+
+        btn_rules.setOnClickListener{
+            findNavController().navigate(R.id.rulesView)
+        }
+
     }
 }

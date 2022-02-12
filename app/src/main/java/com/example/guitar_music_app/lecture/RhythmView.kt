@@ -69,8 +69,7 @@ class RhythmView : Fragment() {
         )[LectureViewModel::class.java]
 
         mDetector = GestureDetectorCompat(context, MyGestureListener(viewModel))
-
-        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         setUpClickListeners()
 
 
@@ -79,6 +78,15 @@ class RhythmView : Fragment() {
                 firstStep = true
             } else {
                 when (arrowPosition) {
+                    0 -> {
+                            if (rhythmState.isFlingUpValid) {
+                                stringField.setBackgroundColor(Color.GREEN)
+                                lifecycleScope.launch { playSound() }
+                            } else {
+                                stringField.setBackgroundColor(Color.RED)
+                                lifecycleScope.launch { playSecond() }
+                            }
+                        }
                     1 -> {
                         if (firstStep && !arrow1state && !arrow2state && !arrow3state && !arrow4state && !arrow5state) {
                             if (rhythmState.isFlingUpValid) {
@@ -539,7 +547,6 @@ class RhythmView : Fragment() {
                 position: Int,
                 id: Long
             ) {
-                val item: Any = parent?.getItemAtPosition(position).toString()
                 when (position) {
                     0 -> {
                         arrow1.visibility = View.GONE

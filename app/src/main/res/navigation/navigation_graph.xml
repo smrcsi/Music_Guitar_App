@@ -72,6 +72,9 @@
         <action
             android:id="@+id/action_lecturesView_to_rhythmView"
             app:destination="@id/rhythmView" />
+        <action
+            android:id="@+id/action_lecturesView_to_rulesView"
+            app:destination="@id/rulesView" />
     </fragment>
     <fragment
         android:id="@+id/chordsView"
@@ -142,6 +145,16 @@
             app:destination="@id/lectureResult" />
         <action
             android:id="@+id/action_rhythmView_to_lecturesView"
+            app:destination="@id/lecturesView" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/rulesView"
+        android:name="com.example.guitar_music_app.rules.RulesView"
+        android:label="rules_fragment"
+        tools:layout="@layout/rules_fragment" >
+        <action
+            android:id="@+id/action_rulesView_to_lecturesView"
             app:destination="@id/lecturesView" />
     </fragment>
 </navigation>
