@@ -14,14 +14,18 @@ class FirebaseUserRepo(val auth: FirebaseAuth = FirebaseAuth.getInstance()) : Us
     override suspend fun getCurrentUser(): GeneralResult<Exception, User?> {
         val firebaseUser = auth.currentUser
 
+
         return if (firebaseUser == null) {
             GeneralResult.build { null }
         } else {
                 GeneralResult.build {
+
+                    println("TOHLE JE UID A DISPLAYNAME" + firebaseUser.displayName)
                     User(
                         firebaseUser.uid,
                         firebaseUser.displayName ?: ""
                     )
+
                 }
             }
         }

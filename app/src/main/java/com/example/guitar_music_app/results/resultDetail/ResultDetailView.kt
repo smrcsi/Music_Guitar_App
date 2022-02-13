@@ -57,12 +57,12 @@ class ResultDetailView : Fragment() {
 
         (result_detail_fragment.background as AnimationDrawable).startWithFade()
 
-        viewModel.handleEvent(
-            ResultDetailEvent.OnStart(
-                //note NoteDetailViewArgs is genereted via Navigation component
-                ResultDetailViewArgs.fromBundle(requireArguments()).resultId
-            )
-        )
+//        viewModel.handleEvent(
+//            ResultDetailEvent.OnStart(
+//                //note NoteDetailViewArgs is genereted via Navigation component
+//                ResultDetailViewArgs.fromBundle(requireArguments()).resultId
+//            )
+//        )
     }
 
     private fun observeViewModel() {

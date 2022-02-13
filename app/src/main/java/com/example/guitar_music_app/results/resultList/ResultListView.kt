@@ -51,8 +51,8 @@ class ResultListView : Fragment() {
         observeViewModel()
 
         fab_create_new_item.setOnClickListener {
-            val direction = ResultListViewDirections.actionResultListViewToResultDetailView("")
-            findNavController().navigate(direction)
+//            val direction = ResultListViewDirections.actionResultListViewToResultDetailView("")
+//            findNavController().navigate(direction)
         }
 
         imv_toolbar_auth.setOnClickListener {
@@ -99,17 +99,17 @@ class ResultListView : Fragment() {
             }
         )
 
-        viewModel.editResult.observe(
-            viewLifecycleOwner,
-            Observer { resultId ->
-                startResultDetailWithArgs(resultId)
-            }
-        )
+//        viewModel.editResult.observe(
+//            viewLifecycleOwner,
+//            Observer { resultId ->
+//                startResultDetailWithArgs(resultId)
+//            }
+//        )
     }
 
-    private fun startResultDetailWithArgs(resultId: String) = findNavController().navigate(
-        ResultListViewDirections.actionResultListViewToResultDetailView(resultId)
-    )
+//    private fun startResultDetailWithArgs(resultId: String) = findNavController().navigate(
+////        ResultListViewDirections.actionResultListViewToResultDetailView(resultId)
+//    )
 
 
     private fun showErrorState(errorMessage: String?) = makeToast(errorMessage!!)

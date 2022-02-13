@@ -6,20 +6,11 @@
     app:startDestination="@id/homepageView">
 
 
-    <fragment android:id="@+id/resultDetailView"
-        android:name="com.example.guitar_music_app.results.resultDetail.ResultDetailView"
-        android:label="ResultDetailView"
-        tools:layout="@layout/result_detail_fragment"
-        >
-        <action android:id="@+id/action_resultDetailView_to_resultListView2" app:destination="@id/resultListView"/>
-        <argument android:name="resultId" app:argType="string" />
-    </fragment>
     <fragment android:id="@+id/resultListView"
         android:name="com.example.guitar_music_app.results.resultList.ResultListView"
         android:label="ResultListView"
         tools:layout="@layout/result_list_fragment"
         >
-        <action android:id="@+id/action_resultListView_to_resultDetailView" app:destination="@id/resultDetailView"/>
         <action
             android:id="@+id/action_resultListView_to_loginView"
             app:destination="@id/loginView" />
@@ -47,15 +38,6 @@
         <action
             android:id="@+id/action_homepageView_to_resultListView2"
             app:destination="@id/resultListView" />
-    </fragment>
-    <fragment
-        android:id="@+id/createAccountView"
-        android:name="com.example.guitar_music_app.accountManagement.CreateAccountView"
-        android:label="CreateAccountView"
-        tools:layout="@layout/create_account_fragment">
-        <action
-            android:id="@+id/action_createAccountView_to_loginView"
-            app:destination="@id/loginView" />
     </fragment>
     <fragment
         android:id="@+id/lecturesView"
@@ -90,15 +72,6 @@
         <action
             android:id="@+id/action_lectureView_to_lecturesView"
             app:destination="@id/lecturesView" />
-    </fragment>
-    <fragment
-        android:id="@+id/resetPasswordView"
-        android:name="com.example.guitar_music_app.accountManagement.ResetPasswordView"
-        android:label="ResetPasswordView"
-        tools:layout="@layout/forgotten_password_fragment">
-        <action
-            android:id="@+id/action_resetPasswordView_to_loginView"
-            app:destination="@id/loginView" />
     </fragment>
     <fragment
         android:id="@+id/personalInformationView"

@@ -14,11 +14,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.guitar_music_app.R
+import com.example.guitar_music_app.firebase.FirebaseUserRepo
 import com.example.guitar_music_app.login.LoginActivity
 import com.example.guitar_music_app.login.LoginEvent
 import com.example.guitar_music_app.login.LoginInjector
 import com.example.guitar_music_app.results.ResultActivity
 import com.example.guitar_music_app.viewModels.UserViewModel
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.common.api.ApiException
 import kotlinx.android.synthetic.main.homepage_fragment.*
 import kotlinx.android.synthetic.main.login_fragment.*
 import kotlinx.android.synthetic.main.result_list_fragment.*
@@ -44,6 +47,15 @@ class HomepageView : Fragment() {
             .get(HomepageViewModel::class.java)
 
         setUpClickListeners()
+
+        if (FirebaseUserRepo::auth.get(FirebaseUserRepo()).currentUser?.displayName != null) {
+            email_text.text =
+                FirebaseUserRepo::auth.get(FirebaseUserRepo()).currentUser?.displayName
+        }
+        else {
+            email_text.text = "Rychlá lekce"
+        }
+
     }
     private fun setUpClickListeners() {
         //TODO-HODIT ALERT DO VLASTNI TRIDY + ZAJISTIT ABY BYL PRI LOGOUT UZIVATEL DOOPRAVDY PRYC
@@ -74,7 +86,7 @@ class HomepageView : Fragment() {
             findNavController().navigate(R.id.lecturesView)
         }
         btn_stats.setOnClickListener {
-            findNavController().navigate(R.id.resultDetailView)
+            findNavController().navigate(R.id.resultListView)
         }
         btn_personal_info.setOnClickListener {
             findNavController().navigate(R.id.personalInformationView)

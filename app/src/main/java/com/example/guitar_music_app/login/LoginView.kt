@@ -69,7 +69,7 @@ class LoginView : Fragment() {
                          startListActivity()
                      }
                  }
-                 else if (loginStatusTextView.text  == "Signed In") {
+                 else if (loginStatusTextView.text  == "Přihlášen") {
                      startSignInFlow()
                  }
              }
@@ -138,6 +138,7 @@ class LoginView : Fragment() {
             val account: GoogleSignInAccount? = task.getResult(ApiException::class.java)
 
             if (account != null) userToken = account.idToken
+
         } catch (exception: Exception) {
             Log.d("LOGIN", exception.toString())
         }
@@ -156,7 +157,7 @@ class LoginView : Fragment() {
         authButton.setOnClickListener{viewModel.handleEvent(LoginEvent.OnAuthButtonClick)
             }
 
-       backButton.setOnClickListener{ startListActivity() }
+       btn_hmpg.setOnClickListener{ startListActivity() }
         requireActivity().onBackPressedDispatcher.addCallback(this) {startListActivity()}
 
     }

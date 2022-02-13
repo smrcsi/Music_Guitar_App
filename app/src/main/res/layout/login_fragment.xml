@@ -49,7 +49,7 @@
         android:id="@+id/authButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Sign Out"
+        tools:text="Odhlášení"
         android:backgroundTint="#FFFFFF"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -63,7 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@android:color/background_light"
-        tools:text="Signed In"
+        tools:text="Přihlášení"
         app:layout_constraintBottom_toTopOf="@+id/authButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -71,10 +71,10 @@
         app:layout_constraintTop_toBottomOf="@+id/loginAnimation" />
 
     <Button
-        android:id="@+id/homepageButton"
+        android:id="@+id/btn_hmpg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="HomepageButton"
+        android:text="Rychlá lekce"
         android:backgroundTint="#FFFFFF"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"

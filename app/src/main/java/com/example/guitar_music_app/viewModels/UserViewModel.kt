@@ -72,6 +72,7 @@ class UserViewModel(
 
     private fun getUser() = launch {
         val result = repo.getCurrentUser()
+        println("not bad" + result)
         when (result) {
             is GeneralResult.Value -> {
                 userState.value = result.value

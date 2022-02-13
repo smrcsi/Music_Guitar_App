@@ -18,7 +18,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
+        app:srcCompat="@android:drawable/ic_menu_revert" />
 
     <Button
         android:id="@+id/btn_rules"
