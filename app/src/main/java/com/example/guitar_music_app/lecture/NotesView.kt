@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.guitar_music_app.R
+import com.example.guitar_music_app.general.toEditable
 import kotlinx.android.synthetic.main.chords_fragment.*
 import kotlinx.android.synthetic.main.chords_fragment.img_guitar
 import kotlinx.android.synthetic.main.chords_fragment.noteText
@@ -63,7 +64,7 @@ class NotesView : Fragment() {
         R.id.viewF_SHARP1 to Note.F_SHARP1, R.id.viewC_SHARP1 to Note.C_SHARP1,
         R.id.viewG_SHARP2 to Note.G_SHARP2
     )
-    private lateinit var viewModel: LectureViewModel
+    private lateinit var viewModel: NotesViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -72,13 +73,14 @@ class NotesView : Fragment() {
         return inflater.inflate(R.layout.notes_fragment, container, false)
     }
 
+
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onStart() {
         super.onStart()
         viewModel = ViewModelProvider(
             this,
-            LectureInjector(requireActivity().application).provideLectureViewModelFactory()
-        )[LectureViewModel::class.java]
+            NotesInjector(requireActivity().application).provideNotesViewModelFactory()
+        )[NotesViewModel::class.java]
 
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
 
@@ -113,14 +115,41 @@ class NotesView : Fragment() {
                 }
                 if (noteState.targetNote == note) {
                     view?.findViewById<View>(viewId)?.setBackgroundColor(Color.GRAY)
-
                 }
             }
-
         }
         )
 
         viewModel.handleEvent(LectureEvent.OnStart)
+
+        img_guitar.setOnClickListener {
+            viewModel.handleEvent(
+                LectureEvent.OnDoneClick(
+                    notes_result_text.text.toString()
+                )
+            )
+        }
+
+        viewModel.result.observe(
+            viewLifecycleOwner,
+            { result ->
+                notes_result_text.text = result.score.toEditable()
+            }
+        )
+
+        viewModel.updated.observe(
+            viewLifecycleOwner,
+            {
+                findNavController().navigate(R.id.lectureResultView)
+            }
+        )
+
+        viewModel.notesNumber.observe(
+            viewLifecycleOwner,
+            { result ->
+                notes_result_text_view.text = viewModel.notesNumber.value.toString()
+            }
+        )
 
     }
 
@@ -169,6 +198,7 @@ class NotesView : Fragment() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -476,14 +506,6 @@ class NotesView : Fragment() {
             true
         }
 
-//            viewG_SHARP2.setOnTouchListener { v, event ->
-//                val note = views[viewG_SHARP2.id]
-//                lifecycleScope.launch {
-//                    viewModel.noteTouched(note!!, touched = event.action != MotionEvent.ACTION_UP)
-//                }
-//                v.performClick()
-//                true
-//            }
     }
 
     private fun setUpClickListeners() {

@@ -38,7 +38,6 @@ class LectureView : Fragment() {
     )
 
     private lateinit var viewModel: LectureViewModel
-    private var points: Int = 0
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -77,7 +76,6 @@ class LectureView : Fragment() {
 
                         displayToast()
                         lifecycleScope.launch { vibrate(millisecond = 1) }
-                        points += 10
                     }
                 } else if (state.assistant && state.chord.notes.contains(note)) {
                     if (state.chord.notes.contains(note)) {
@@ -106,6 +104,7 @@ class LectureView : Fragment() {
 
         //Na zacatku posle prvni akord
         viewModel.handleEvent(LectureEvent.OnStart)
+
 //TODO-ZPROVOZNIT
         img_guitar.setOnClickListener {
             viewModel.handleEvent(
@@ -119,7 +118,6 @@ class LectureView : Fragment() {
             viewLifecycleOwner,
             {
                 findNavController().navigate(R.id.lectureResultView)
-                println("why not here")
             }
         )
 

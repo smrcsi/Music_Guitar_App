@@ -36,18 +36,6 @@
         app:srcCompat="@drawable/checkered_flag" />
 
 
-    <ListView
-        android:id="@+id/lst_results"
-        android:layout_width="121dp"
-        android:layout_height="191dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="40dp"
-        android:background="#4DB3AFAF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.583"
-        app:layout_constraintStart_toEndOf="@+id/viewTab1" />
-
     <TextView
         android:id="@+id/lbl_results"
         android:layout_width="wrap_content"
@@ -478,6 +466,57 @@
         app:layout_constraintVertical_bias="1.0">
 
     </View>
+
+    <TextView
+        android:id="@+id/notes_result_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Výsledek"
+        android:textColor="#FFFFFF"
+
+        app:layout_constraintBottom_toTopOf="@+id/notes_nmb_lbl"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toEndOf="@+id/viewTab1"
+        app:layout_constraintTop_toBottomOf="@+id/notes_score_lbl"
+        app:layout_constraintVertical_bias="0.269" />
+
+    <TextView
+        android:id="@+id/notes_score_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:text="Celkové skóre"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.605"
+        app:layout_constraintStart_toEndOf="@+id/viewStringA"
+        app:layout_constraintTop_toBottomOf="@+id/img_guitar" />
+
+    <TextView
+        android:id="@+id/notes_nmb_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="Počet not"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/notes_result_text_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/viewStringG" />
+
+    <TextView
+        android:id="@+id/notes_result_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="88dp"
+        android:text="Výsledek not"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintStart_toEndOf="@+id/viewStringG" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

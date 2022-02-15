@@ -29,7 +29,7 @@ class LectureViewModel(
 
     val chordTextChange = MutableLiveData<String>()
 
-    val noteState = MutableLiveData(NoteState())
+//    val noteState = MutableLiveData(NoteState())
 
     val rhythmState = MutableLiveData(RhythmState())
 
@@ -65,13 +65,13 @@ class LectureViewModel(
         var assistant: Boolean = false,
     )
 
-    data class NoteState(
-        var targetNote: Note = Note.G,
-        var note: Note = Note.G,
-        var isNoteValid: Boolean = false,
-        var notePlayed: Boolean = false,
-        val notesTouched: Set<ButtonState> = emptySet()
-    )
+//    data class NoteState(
+//        var targetNote: Note = Note.G,
+//        var note: Note = Note.G,
+//        var isNoteValid: Boolean = false,
+//        var notePlayed: Boolean = false,
+//        val notesTouched: Set<ButtonState> = emptySet()
+//    )
 
     data class RhythmState(
         var isFlingUpValid: Boolean = false
@@ -138,34 +138,34 @@ class LectureViewModel(
         }
     }
 
-    fun noteTouched(note: Note, touched: Boolean) {
-        val currentState = noteState.value!!
-        val mutableList = currentState.notesTouched.toMutableSet()
-        val exists = mutableList.any { it.note == note }
-        if (touched && !exists) {
-            mutableList.add(ButtonState(note))
-        } else if (!touched && exists) {
-            mutableList.remove(ButtonState(note))
-        }
-        if (currentState.targetNote == note && touched && !currentState.notePlayed) {
-            currentState.targetNote = randomNote()
-            noteState.value =
-                currentState.copy(isNoteValid = true, note = currentState.note, notePlayed = touched, targetNote = currentState.targetNote)
-        } else {
-            if (noteState.value?.notePlayed == true) {
-
-                noteState.value = currentState.copy(isNoteValid = false, notesTouched = mutableList, notePlayed = touched, note = currentState.targetNote)
-            }
-            else {
-                noteState.value = currentState.copy(isNoteValid = false, notesTouched = mutableList)
-            }
-        }
-    }
-
-    private fun randomNote(): Note {
-        val pick = Random().nextInt(Note.values().size)
-        return Note.values()[pick]
-    }
+//    fun noteTouched(note: Note, touched: Boolean) {
+//        val currentState = noteState.value!!
+//        val mutableList = currentState.notesTouched.toMutableSet()
+//        val exists = mutableList.any { it.note == note }
+//        if (touched && !exists) {
+//            mutableList.add(ButtonState(note))
+//        } else if (!touched && exists) {
+//            mutableList.remove(ButtonState(note))
+//        }
+//        if (currentState.targetNote == note && touched && !currentState.notePlayed) {
+//            currentState.targetNote = randomNote()
+//            noteState.value =
+//                currentState.copy(isNoteValid = true, note = currentState.note, notePlayed = touched, targetNote = currentState.targetNote)
+//        } else {
+//            if (noteState.value?.notePlayed == true) {
+//
+//                noteState.value = currentState.copy(isNoteValid = false, notesTouched = mutableList, notePlayed = touched, note = currentState.targetNote)
+//            }
+//            else {
+//                noteState.value = currentState.copy(isNoteValid = false, notesTouched = mutableList)
+//            }
+//        }
+//    }
+//
+//    private fun randomNote(): Note {
+//        val pick = Random().nextInt(Note.values().size)
+//        return Note.values()[pick]
+//    }
 
     private fun updateResult(contents: String) = launch {
         val updateGeneralResult = resultRepo.updateResult(
