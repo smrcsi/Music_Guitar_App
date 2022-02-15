@@ -4,26 +4,27 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.example.guitar_music_app.general.User
 
 //Room can autogenerate keys
 @Entity(
     tableName = "results",
-    indices = [Index("creation_date")]
+    indices = [Index("lecture_date")]
 )
 data class RoomResult(
     @PrimaryKey
-    @ColumnInfo(name = "creation_date")
-    val creationDate: String,
+    @ColumnInfo(name = "lecture_date")
+    val lectureDate: String,
 
-    @ColumnInfo(name = "contents")
-    val contents: String,
 
-    @ColumnInfo(name = "up_votes")
-    val upVotes: Int,
+    @ColumnInfo(name = "score")
+    val score: String,
 
-    @ColumnInfo(name = "image_url")
-    val imageUrl: String,
+    @ColumnInfo(name = "type")
+    val type: String,
 
     @ColumnInfo(name = "creator_id")
     val creatorId: String
+
+
 )

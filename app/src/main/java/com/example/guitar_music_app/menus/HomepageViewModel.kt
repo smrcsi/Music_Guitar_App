@@ -2,7 +2,7 @@ package com.example.guitar_music_app.menus
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.guitar_music_app.GET_RESULTS_ERROR
+import com.example.guitar_music_app.general.GET_RESULTS_ERROR
 import com.example.guitar_music_app.general.GeneralResult
 import com.example.guitar_music_app.results.Result
 import com.example.guitar_music_app.results.ResultRepository

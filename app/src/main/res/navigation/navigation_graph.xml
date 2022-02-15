@@ -6,26 +6,11 @@
     app:startDestination="@id/homepageView">
 
 
-    <fragment android:id="@+id/resultListView"
-        android:name="com.example.guitar_music_app.results.resultList.ResultListView"
-        android:label="ResultListView"
-        tools:layout="@layout/result_list_fragment"
-        >
-        <action
-            android:id="@+id/action_resultListView_to_loginView"
-            app:destination="@id/loginView" />
-        <action
-            android:id="@+id/action_resultListView_to_homepageView"
-            app:destination="@id/homepageView" />
-    </fragment>
     <fragment
         android:id="@+id/homepageView"
         android:name="com.example.guitar_music_app.menus.HomepageView"
         android:label="HomepageView"
         tools:layout="@layout/homepage_fragment">
-        <action
-            android:id="@+id/action_homepageView_to_resultListView"
-            app:destination="@id/resultListView" />
         <action
             android:id="@+id/action_homepageView_to_lecturesView"
             app:destination="@id/lecturesView" />
@@ -36,8 +21,8 @@
             android:id="@+id/action_homepageView_to_loginView"
             app:destination="@id/loginView" />
         <action
-            android:id="@+id/action_homepageView_to_resultListView2"
-            app:destination="@id/resultListView" />
+            android:id="@+id/action_homepageView_to_resultActivity2"
+            app:destination="@id/resultActivity2" />
     </fragment>
     <fragment
         android:id="@+id/lecturesView"
@@ -68,7 +53,7 @@
         tools:layout="@layout/chords_fragment">
         <action
             android:id="@+id/action_lectureView_to_lectureResultActivity"
-            app:destination="@id/lectureResult" />
+            app:destination="@id/lectureResultView" />
         <action
             android:id="@+id/action_lectureView_to_lecturesView"
             app:destination="@id/lecturesView" />
@@ -90,8 +75,8 @@
 
     </activity>
     <fragment
-        android:id="@+id/lectureResult"
-        android:name="com.example.guitar_music_app.lecture.LectureResultView"
+        android:id="@+id/lectureResultView"
+        android:name="com.example.guitar_music_app.statistics.LectureResultView"
         android:label="LectureResult"
         tools:layout="@layout/result_fragment">
         <action
@@ -105,7 +90,7 @@
         tools:layout="@layout/notes_fragment" >
         <action
             android:id="@+id/action_notesView_to_lectureResult"
-            app:destination="@id/lectureResult" />
+            app:destination="@id/lectureResultView" />
         <action
             android:id="@+id/action_notesView_to_lecturesView"
             app:destination="@id/lecturesView" />
@@ -118,7 +103,7 @@
         tools:layout="@layout/rhythm_fragment" >
         <action
             android:id="@+id/action_rhythmView_to_lectureResult"
-            app:destination="@id/lectureResult" />
+            app:destination="@id/lectureResultView" />
         <action
             android:id="@+id/action_rhythmView_to_lecturesView"
             app:destination="@id/lecturesView" />
@@ -133,4 +118,17 @@
             android:id="@+id/action_rulesView_to_lecturesView"
             app:destination="@id/lecturesView" />
     </fragment>
+
+    <fragment
+        android:id="@+id/statisticsView"
+        android:name="com.example.guitar_music_app.statistics.StatisticsView"
+        android:label="statistics_fragment"
+        tools:layout="@layout/statistics_fragment" >
+    </fragment>
+    <activity
+        android:id="@+id/resultActivity2"
+        android:name="com.example.guitar_music_app.results.ResultActivity"
+        android:label="statistics_fragment"
+        tools:layout="@layout/statistics_fragment" />
+
 </navigation>

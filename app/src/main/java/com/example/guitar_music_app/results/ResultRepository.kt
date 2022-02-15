@@ -7,4 +7,5 @@ interface ResultRepository {
     suspend fun getResults(): GeneralResult<Exception, List<Result>>
     suspend fun deleteResult(result: Result): GeneralResult<Exception, Unit>
     suspend fun updateResult(result: Result): GeneralResult<Exception, Unit>
+
 }

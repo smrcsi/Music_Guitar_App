@@ -40,36 +40,32 @@ internal val FirebaseUser.toUser: User
 internal val FirebaseResult.toResult: Result
     get() = Result(
         this.creationDate ?: "",
-        this.contents ?: "",
-        this.upVotes ?: 0,
-        this.imageurl ?: "",
+        this.score,
+        this.type,
         User(this.creator ?: "")
     )
 
 internal val Result.toFirebaseResult: FirebaseResult
     get() = FirebaseResult(
         this.creationDate,
-        this.contents,
-        this.upVotes,
-        this.imageUrl,
+        this.score,
+        this.type,
         this.safeGetUid
     )
 
 internal val RoomResult.toResult: Result
     get() = Result(
-        this.creationDate,
-        this.contents,
-        this.upVotes,
-        this.imageUrl,
+        this.lectureDate,
+        this.score,
+        this.type,
         User(this.creatorId)
     )
 
 internal val Result.toRoomResult: RoomResult
     get() = RoomResult(
         this.creationDate,
-        this.contents,
-        this.upVotes,
-        this.imageUrl,
+        this.score,
+        this.type,
         this.safeGetUid
     )
 

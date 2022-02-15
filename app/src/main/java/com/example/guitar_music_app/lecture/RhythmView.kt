@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.guitar_music_app.R
-import kotlinx.android.synthetic.main.chords_fragment.btn_back
 import kotlinx.android.synthetic.main.chords_fragment.img_guitar
 import kotlinx.android.synthetic.main.rhythm_fragment.*
 import kotlinx.coroutines.launch
@@ -63,11 +62,13 @@ class RhythmView : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
         viewModel = ViewModelProvider(
             this,
             LectureInjector(requireActivity().application).provideLectureViewModelFactory()
         )[LectureViewModel::class.java]
 
+        stringField.setBackgroundColor(Color.LTGRAY)
         mDetector = GestureDetectorCompat(context, MyGestureListener(viewModel))
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         setUpClickListeners()
@@ -476,7 +477,7 @@ class RhythmView : Fragment() {
                             arrow19.setBackgroundColor(Color.TRANSPARENT)
                             arrow20.setBackgroundColor(Color.TRANSPARENT)
                             stringField.setBackgroundColor(Color.TRANSPARENT)
-                            Toast.makeText(context, "SPRAVNE", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, "SPRÁVNĚ", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
@@ -674,7 +675,7 @@ class RhythmView : Fragment() {
             findNavController().navigate(R.id.lecturesView)
         }
         img_guitar.setOnClickListener {
-            findNavController().navigate(R.id.lectureResult)
+            findNavController().navigate(R.id.lectureResultView)
         }
     }
 

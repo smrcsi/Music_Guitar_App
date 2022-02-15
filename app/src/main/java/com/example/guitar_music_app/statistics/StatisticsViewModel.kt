@@ -1,17 +1,18 @@
-package com.example.guitar_music_app.results.resultList
+package com.example.guitar_music_app.statistics
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.guitar_music_app.general.BaseViewModel
 import com.example.guitar_music_app.general.GET_RESULTS_ERROR
 import com.example.guitar_music_app.general.GeneralResult
 import com.example.guitar_music_app.results.Result
 import com.example.guitar_music_app.results.ResultRepository
-import com.example.guitar_music_app.general.BaseViewModel
+import com.example.guitar_music_app.results.resultList.ResultListEvent
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-class ResultListViewModel(
-   val resultRepo: ResultRepository,
+class StatisticsViewModel(
+    val resultRepo: ResultRepository,
     uiContext: CoroutineContext
 ) : BaseViewModel<ResultListEvent>(uiContext) {
     private val resultListState = MutableLiveData<List<Result>>()

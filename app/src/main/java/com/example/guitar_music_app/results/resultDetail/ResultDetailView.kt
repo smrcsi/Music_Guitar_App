@@ -68,40 +68,40 @@ class ResultDetailView : Fragment() {
     private fun observeViewModel() {
         viewModel.error.observe(
             viewLifecycleOwner,
-            Observer { errorMessage ->
+            { errorMessage ->
                 showErrorState(errorMessage)
             }
         )
 
         viewModel.result.observe(
             viewLifecycleOwner,
-            Observer { result ->
-                edt_result_detail_text.text = result.contents.toEditable()
+            { result ->
+                edt_result_detail_text.text = result.score.toEditable()
             }
         )
 
         viewModel.updated.observe(
             viewLifecycleOwner,
-            Observer {
-                findNavController().navigate(R.id.resultListView)
+            {
+                findNavController().navigate(R.id.statisticsView)
             }
         )
 
         viewModel.deleted.observe(
             viewLifecycleOwner,
-            Observer {
-                findNavController().navigate(R.id.resultListView)
+            {
+                findNavController().navigate(R.id.statisticsView)
             }
         )
 
         requireActivity().onBackPressedDispatcher.addCallback(this) {
-            findNavController().navigate(R.id.resultListView)
+            findNavController().navigate(R.id.statisticsView)
         }
     }
 
     private fun showErrorState(errorMessage: String?) {
         makeToast(errorMessage!!)
-        findNavController().navigate(R.id.resultListView)
+        findNavController().navigate(R.id.statisticsView)
     }
 
     private fun showLoadingState() {

@@ -22,7 +22,7 @@ class ResultListAdapter(val event: MutableLiveData<ResultListEvent> = MutableLiv
 
     override fun onBindViewHolder(holder: ResultViewHolder, position: Int) {
         getItem(position).let { result ->
-            holder.content.text = result.contents
+            holder.content.text = result.score
             holder.date.text = result.creationDate
 
             holder.itemView.setOnClickListener {

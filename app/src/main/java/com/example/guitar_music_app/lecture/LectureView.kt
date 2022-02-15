@@ -9,12 +9,16 @@ import android.os.*
 import android.text.Html
 import android.view.*
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.guitar_music_app.R
+import com.example.guitar_music_app.general.toEditable
+import com.example.guitar_music_app.results.resultDetail.ResultDetailEvent
 import kotlinx.android.synthetic.main.chords_fragment.*
+import kotlinx.android.synthetic.main.result_detail_fragment.*
 import kotlinx.coroutines.*
 import java.lang.Exception
 
@@ -34,6 +38,7 @@ class LectureView : Fragment() {
     )
 
     private lateinit var viewModel: LectureViewModel
+    private var points: Int = 0
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,6 +47,7 @@ class LectureView : Fragment() {
         return inflater.inflate(R.layout.chords_fragment, container, false)
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onStart() {
         super.onStart()
         viewModel = ViewModelProvider(
@@ -67,10 +73,11 @@ class LectureView : Fragment() {
 //                            context, "Správně",
 //                            Toast.LENGTH_SHORT
 //                        ).show()
-                        lifecycleScope.launch{playSound()}
+                        lifecycleScope.launch { playSound() }
 
                         displayToast()
-                        lifecycleScope.launch{ vibrate(millisecond = 1)}
+                        lifecycleScope.launch { vibrate(millisecond = 1) }
+                        points += 10
                     }
                 } else if (state.assistant && state.chord.notes.contains(note)) {
                     if (state.chord.notes.contains(note)) {
@@ -90,37 +97,69 @@ class LectureView : Fragment() {
 
         })
 
+        viewModel.result.observe(
+            viewLifecycleOwner,
+            { result ->
+                result_text.text = result.score.toEditable()
+            }
+        )
+
         //Na zacatku posle prvni akord
         viewModel.handleEvent(LectureEvent.OnStart)
+//TODO-ZPROVOZNIT
+        img_guitar.setOnClickListener {
+            viewModel.handleEvent(
+                LectureEvent.OnDoneClick(
+                    result_text.text.toString()
+                )
+            )
+        }
+
+        viewModel.updated.observe(
+            viewLifecycleOwner,
+            {
+                findNavController().navigate(R.id.lectureResultView)
+                println("why not here")
+            }
+        )
+
+
+        viewModel.chordsNumber.observe(
+            viewLifecycleOwner,
+            { result ->
+                chords_result_text_view.text = viewModel.chordsNumber.value.toString()
+            }
+        )
+
     }
 
     private fun displayToast() {
 //Toast nejde v backgroundu
-            val toast = Toast.makeText(
-                context,
-                Html.fromHtml("<font color='#FFFFFF' ><b>" + "Správně" + "</b></font>"),
-                Toast.LENGTH_SHORT
-            )
-            toast.setGravity(Gravity.TOP, 0, 0)
+        val toast = Toast.makeText(
+            context,
+            Html.fromHtml("<font color='#FFFFFF' ><b>" + "Správně" + "</b></font>"),
+            Toast.LENGTH_SHORT
+        )
+        toast.setGravity(Gravity.TOP, 0, 0)
 
-            val toastView = toast.view
-            toastView!!.setBackgroundResource(R.drawable.toast_drawable)
-            toast.show()
+        val toastView = toast.view
+        toastView!!.setBackgroundResource(R.drawable.toast_drawable)
+        toast.show()
     }
 
     private suspend fun playSound() {
         withContext(Dispatchers.IO) {
-        val mediaPlayer = MediaPlayer.create(activity, R.raw.c_vbr)
-        try {
-            if (mediaPlayer.isPlaying) {
-                mediaPlayer.stop()
-                mediaPlayer.release()
-            } else {
-                mediaPlayer.start()
-            }
-        } catch (e: Exception) {
-            e.printStackTrace(); }
-            }
+            val mediaPlayer = MediaPlayer.create(activity, R.raw.c_vbr)
+            try {
+                if (mediaPlayer.isPlaying) {
+                    mediaPlayer.stop()
+                    mediaPlayer.release()
+                } else {
+                    mediaPlayer.start()
+                }
+            } catch (e: Exception) {
+                e.printStackTrace(); }
+        }
 
     }
 
@@ -139,6 +178,7 @@ class LectureView : Fragment() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -165,7 +205,7 @@ class LectureView : Fragment() {
         }
         viewC.setOnTouchListener { v, event ->
             val note = views[viewC.id]
-            lifecycleScope.launch{
+            lifecycleScope.launch {
                 viewModel.buttonTouched(
                     note!!,
                     touched = event.action != MotionEvent.ACTION_UP
@@ -466,11 +506,11 @@ class LectureView : Fragment() {
 
 
     private fun setUpClickListeners() {
-        btn_back.setOnClickListener {
+        btn_back_chords.setOnClickListener {
             findNavController().navigate(R.id.lecturesView)
         }
         img_guitar.setOnClickListener {
-            findNavController().navigate(R.id.lectureResult)
+            findNavController().navigate(R.id.lectureResultView)
         }
     }
 

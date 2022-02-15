@@ -6,7 +6,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.guitar_music_app.GET_RESULT_ERROR
+import com.example.guitar_music_app.general.GET_RESULT_ERROR
 import com.example.guitar_music_app.general.GeneralResult
 import com.example.guitar_music_app.results.ResultRepository
 import com.example.guitar_music_app.general.BaseViewModel
@@ -51,7 +51,7 @@ class ResultViewModel(
     private fun updateResult(contents: String) = launch {
         val updateGeneralResult = resultRepo.updateResult(
             result.value!!
-                .copy(contents = contents)
+                .copy(score = contents)
         )
 
         when (updateGeneralResult) {
@@ -76,7 +76,7 @@ class ResultViewModel(
     @RequiresApi(Build.VERSION_CODES.N)
     private fun newResult() {
         resultState.value =
-            Result(getCalendarTime(), "", 0, "rocket_loop", null)
+            Result(getCalendarTime(), "", "chords", null)
     }
 
 

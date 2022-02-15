@@ -51,9 +51,11 @@ class HomepageView : Fragment() {
         if (FirebaseUserRepo::auth.get(FirebaseUserRepo()).currentUser?.displayName != null) {
             email_text.text =
                 FirebaseUserRepo::auth.get(FirebaseUserRepo()).currentUser?.displayName
+            btn_personal_info.visibility = View.VISIBLE
         }
         else {
             email_text.text = "Rychlá lekce"
+            btn_personal_info.visibility = View.GONE
         }
 
     }
@@ -86,7 +88,7 @@ class HomepageView : Fragment() {
             findNavController().navigate(R.id.lecturesView)
         }
         btn_stats.setOnClickListener {
-            findNavController().navigate(R.id.resultListView)
+            findNavController().navigate(R.id.statisticsView)
         }
         btn_personal_info.setOnClickListener {
             findNavController().navigate(R.id.personalInformationView)

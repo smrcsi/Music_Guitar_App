@@ -1,4 +1,4 @@
-package com.example.guitar_music_app.lecture
+package com.example.guitar_music_app.statistics
 
 import android.content.pm.ActivityInfo
 import android.os.Bundle
@@ -11,9 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.guitar_music_app.R
 import com.example.guitar_music_app.menus.HomepageInjector
 import com.example.guitar_music_app.menus.HomepageViewModel
-import kotlinx.android.synthetic.main.personal_information_fragment.*
 import kotlinx.android.synthetic.main.result_fragment.*
-import kotlinx.android.synthetic.main.result_list_fragment.*
 
 class LectureResultView : Fragment() {
     private lateinit var viewModel: HomepageViewModel

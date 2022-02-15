@@ -1,4 +1,4 @@
-package com.example.guitar_music_app.results.resultList
+package com.example.guitar_music_app.statistics
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -7,15 +7,15 @@ import com.example.guitar_music_app.results.ResultRepository
 import com.example.guitar_music_app.results.room.RoomResultDatabase
 import com.google.firebase.FirebaseApp
 
-class ResultListInjector(application: Application): AndroidViewModel(application) {
+class StatisticsInjector(application: Application): AndroidViewModel(application) {
     private fun getResultRepository(): ResultRepository {
         FirebaseApp.initializeApp(getApplication())
         return ResultRepoImpl(
             local = RoomResultDatabase.getInstance(getApplication()).roomResultDao())
     }
 
-    fun provideResultListViewModelFactory(): ResultListViewModelFactory =
-        ResultListViewModelFactory(
+    fun provideStatisticsViewModelFactory(): StatisticsViewModelFactory =
+        StatisticsViewModelFactory(
             getResultRepository()
         )
 }

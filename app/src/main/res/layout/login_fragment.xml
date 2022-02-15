@@ -8,16 +8,6 @@
     android:background="#1B1818">
 
 
-    <ImageButton
-        android:id="@+id/backButton"
-        style="@style/Widget.AppCompat.ActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@android:string/VideoView_error_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_revert" />
-
     <ImageView
         android:id="@+id/loginAnimation"
         android:layout_width="129dp"

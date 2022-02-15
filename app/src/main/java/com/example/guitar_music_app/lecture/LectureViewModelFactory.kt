@@ -7,13 +7,13 @@ import com.example.guitar_music_app.results.resultDetail.ResultViewModel
 import kotlinx.coroutines.Dispatchers
 
 class LectureViewModelFactory(
-    private val lectureRepo: LectureRepository
+    private val resultRepo: ResultRepository
 ) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
 
-        return LectureViewModel(lectureRepo, Dispatchers.Main) as T
+        return LectureViewModel(resultRepo, Dispatchers.Main) as T
     }
 
 }

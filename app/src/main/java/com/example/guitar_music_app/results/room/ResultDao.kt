@@ -9,8 +9,8 @@ interface ResultDao {
     @Query("SELECT * FROM results")
     suspend fun getResults(): List<RoomResult>
 
-    @Query("SELECT * FROM results WHERE creation_date= :creationDate")
-    suspend fun getResultById(creationDate: String): RoomResult
+    @Query("SELECT * FROM results WHERE lecture_date= :lectureDate")
+    suspend fun getResultById(lectureDate: String): RoomResult
 
     @Delete
     suspend fun  deleteResult(result: RoomResult)

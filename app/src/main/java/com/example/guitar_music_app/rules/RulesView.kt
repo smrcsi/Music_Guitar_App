@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.guitar_music_app.R
-import kotlinx.android.synthetic.main.chords_fragment.btn_back
 import kotlinx.android.synthetic.main.rules_fragment.*
 
 class RulesView : Fragment() {

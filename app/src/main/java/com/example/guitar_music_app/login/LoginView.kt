@@ -1,6 +1,5 @@
 package com.example.guitar_music_app.login
 
-import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
@@ -12,13 +11,10 @@ import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.example.guitar_music_app.*
-import com.example.guitar_music_app.general.awaitTaskCompletable
-import com.example.guitar_music_app.general.awaitTaskResult
-import com.example.guitar_music_app.menus.HomepageView
-import com.example.guitar_music_app.repositories.UserRepository
+import com.example.guitar_music_app.general.ANTENNA_LOOP
+import com.example.guitar_music_app.general.RC_SIGN_IN
+import com.example.guitar_music_app.general.SIGNED_IN
 import com.example.guitar_music_app.results.ResultActivity
 import com.example.guitar_music_app.viewModels.UserViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -26,7 +22,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import kotlinx.android.synthetic.main.login_fragment.*
-import kotlinx.android.synthetic.main.result_list_fragment.*
 
 class LoginView : Fragment() {
     private lateinit var viewModel : UserViewModel
@@ -54,7 +49,7 @@ class LoginView : Fragment() {
      private fun observeViewModel() {
         viewModel.signInStatusText.observe(
             viewLifecycleOwner,
-            Observer {
+            {
                 //"it" is the value of the MutableLiveData object, which is inferred to be a String automatically
                 loginStatusTextView.text = it
             }
@@ -69,7 +64,7 @@ class LoginView : Fragment() {
                          startListActivity()
                      }
                  }
-                 else if (loginStatusTextView.text  == "Přihlášen") {
+                 else if (loginStatusTextView.text  == SIGNED_IN) {
                      startSignInFlow()
                  }
              }
@@ -86,14 +81,14 @@ class LoginView : Fragment() {
 
         viewModel.authButtonText.observe(
             viewLifecycleOwner,
-            Observer {
+            {
                 authButton.text = it
             }
         )
 
         viewModel.startAnimation.observe(
             viewLifecycleOwner,
-            Observer {
+            {
                 loginAnimation.setImageResource(
                     resources.getIdentifier(ANTENNA_LOOP, "drawable", activity?.packageName)
                 )
@@ -103,12 +98,12 @@ class LoginView : Fragment() {
 
         viewModel.authAttempt.observe(
             viewLifecycleOwner,
-            Observer { startSignInFlow() }
+            { startSignInFlow() }
         )
 
         viewModel.satelliteDrawable.observe(
             viewLifecycleOwner,
-            Observer {
+            {
                 loginAnimation.setImageResource(
                     resources.getIdentifier(it, "drawable", activity?.packageName)
                 )

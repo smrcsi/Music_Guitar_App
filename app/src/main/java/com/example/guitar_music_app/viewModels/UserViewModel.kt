@@ -1,10 +1,17 @@
 package com.example.guitar_music_app.viewModels
 
 import androidx.lifecycle.MutableLiveData
-import com.example.guitar_music_app.*
-import com.example.guitar_music_app.general.BaseViewModel
-import com.example.guitar_music_app.general.GeneralResult
-import com.example.guitar_music_app.general.User
+import com.example.guitar_music_app.general.*
+import com.example.guitar_music_app.general.ANTENNA_EMPTY
+import com.example.guitar_music_app.general.ANTENNA_FULL
+import com.example.guitar_music_app.general.ANTENNA_LOOP
+import com.example.guitar_music_app.general.LOADING
+import com.example.guitar_music_app.general.LOGIN_ERROR
+import com.example.guitar_music_app.general.RC_SIGN_IN
+import com.example.guitar_music_app.general.SIGNED_IN
+import com.example.guitar_music_app.general.SIGNED_OUT
+import com.example.guitar_music_app.general.SIGN_IN
+import com.example.guitar_music_app.general.SIGN_OUT
 import com.example.guitar_music_app.login.LoginEvent
 import com.example.guitar_music_app.login.LoginResult
 import com.example.guitar_music_app.repositories.UserRepository

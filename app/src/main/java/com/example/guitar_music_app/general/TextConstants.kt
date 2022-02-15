@@ -1,4 +1,4 @@
-package com.example.guitar_music_app
+package com.example.guitar_music_app.general
 
 // Konstanty, compile time, efficient, slouzi k rendrovani do UI
     internal const val LOGIN_ERROR = "Problém s přihlášením."
@@ -18,8 +18,6 @@ package com.example.guitar_music_app
     internal const val ANTENNA_LOOP = "antenna_loop_fast"
 
     /**
-     * This value is just a constant to denote our sign in request; It can be any int.
-     * Would have been great if that was explained in the docs, I assumed at first that it had to
-     * be a specific value.
+     *Nahodna hodnota, ktera musi zacinat sign in request
      */
     internal const val RC_SIGN_IN = 1337

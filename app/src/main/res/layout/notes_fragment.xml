@@ -28,12 +28,12 @@
         android:layout_width="58dp"
         android:layout_height="58dp"
         android:layout_marginTop="16dp"
+        android:contentDescription="@string/btn_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.976"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/papapishu_guitar_2"
-        android:contentDescription="@string/btn_back" />
+        app:srcCompat="@drawable/checkered_flag" />
 
 
     <ListView

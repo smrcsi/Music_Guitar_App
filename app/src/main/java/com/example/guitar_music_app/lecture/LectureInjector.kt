@@ -9,15 +9,15 @@ import com.example.guitar_music_app.results.room.RoomResultDatabase
 import com.google.firebase.FirebaseApp
 
 class LectureInjector(application: Application): AndroidViewModel(application) {
-    private fun getLectureRepository(): LectureRepository {
+    private fun getResultRepository(): ResultRepository {
         FirebaseApp.initializeApp(getApplication())
-        return LectureRepoImpl(
+        return ResultRepoImpl(
             local = RoomResultDatabase.getInstance(getApplication()).roomResultDao())
     }
 
     fun provideLectureViewModelFactory(): LectureViewModelFactory =
         LectureViewModelFactory(
-            getLectureRepository()
+            getResultRepository()
         )
 
 

@@ -11,12 +11,40 @@ import android.os.Vibrator
 import android.text.Html
 import android.view.*
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.guitar_music_app.R
 import kotlinx.android.synthetic.main.chords_fragment.*
+import kotlinx.android.synthetic.main.chords_fragment.img_guitar
+import kotlinx.android.synthetic.main.chords_fragment.noteText
+import kotlinx.android.synthetic.main.chords_fragment.viewA
+import kotlinx.android.synthetic.main.chords_fragment.viewA_SHARP
+import kotlinx.android.synthetic.main.chords_fragment.viewA_SHARP1
+import kotlinx.android.synthetic.main.chords_fragment.viewB
+import kotlinx.android.synthetic.main.chords_fragment.viewB1
+import kotlinx.android.synthetic.main.chords_fragment.viewC
+import kotlinx.android.synthetic.main.chords_fragment.viewC1
+import kotlinx.android.synthetic.main.chords_fragment.viewC_SHARP
+import kotlinx.android.synthetic.main.chords_fragment.viewC_SHARP1
+import kotlinx.android.synthetic.main.chords_fragment.viewD
+import kotlinx.android.synthetic.main.chords_fragment.viewD_SHARP
+import kotlinx.android.synthetic.main.chords_fragment.viewD_SHARP1
+import kotlinx.android.synthetic.main.chords_fragment.viewE
+import kotlinx.android.synthetic.main.chords_fragment.viewF
+import kotlinx.android.synthetic.main.chords_fragment.viewF1
+import kotlinx.android.synthetic.main.chords_fragment.viewF2
+import kotlinx.android.synthetic.main.chords_fragment.viewF_SHARP
+import kotlinx.android.synthetic.main.chords_fragment.viewF_SHARP1
+import kotlinx.android.synthetic.main.chords_fragment.viewF_SHARP2
+import kotlinx.android.synthetic.main.chords_fragment.viewG
+import kotlinx.android.synthetic.main.chords_fragment.viewG2
+import kotlinx.android.synthetic.main.chords_fragment.viewG_SHARP
+import kotlinx.android.synthetic.main.chords_fragment.viewG_SHARP1
+import kotlinx.android.synthetic.main.chords_fragment.viewG_SHARP2
+import kotlinx.android.synthetic.main.notes_fragment.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -44,6 +72,7 @@ class NotesView : Fragment() {
         return inflater.inflate(R.layout.notes_fragment, container, false)
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onStart() {
         super.onStart()
         viewModel = ViewModelProvider(
@@ -462,7 +491,7 @@ class NotesView : Fragment() {
             findNavController().navigate(R.id.lecturesView)
         }
         img_guitar.setOnClickListener {
-            findNavController().navigate(R.id.lectureResult)
+            findNavController().navigate(R.id.lectureResultView)
         }
     }
 }
