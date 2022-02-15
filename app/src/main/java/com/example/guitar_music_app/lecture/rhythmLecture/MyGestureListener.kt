@@ -1,11 +1,12 @@
-package com.example.guitar_music_app.lecture
+package com.example.guitar_music_app.lecture.rhythmLecture
 
 import android.view.GestureDetector
 import android.view.MotionEvent
+import com.example.guitar_music_app.lecture.chordLecture.ChordsViewModel
 import java.lang.Exception
 import kotlin.math.abs
 
-class MyGestureListener(private val viewModel: LectureViewModel) : GestureDetector.SimpleOnGestureListener() {
+class MyGestureListener(private val viewModel: RhythmViewModel) : GestureDetector.SimpleOnGestureListener() {
     private val swipeMinDistance = 120
     private val swipeMaxOffPath = 250
     private val swipeThresholdVelocity = 200

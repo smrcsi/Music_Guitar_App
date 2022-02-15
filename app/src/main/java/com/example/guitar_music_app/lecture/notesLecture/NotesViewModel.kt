@@ -1,4 +1,4 @@
-package com.example.guitar_music_app.lecture
+package com.example.guitar_music_app.lecture.notesLecture
 
 import android.icu.util.Calendar
 import android.icu.util.TimeZone
@@ -8,6 +8,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.guitar_music_app.general.BaseViewModel
 import com.example.guitar_music_app.general.GeneralResult
+import com.example.guitar_music_app.lecture.ButtonState
+import com.example.guitar_music_app.lecture.LectureEvent
+import com.example.guitar_music_app.lecture.Note
 import com.example.guitar_music_app.results.Result
 import com.example.guitar_music_app.results.ResultRepository
 import kotlinx.coroutines.launch

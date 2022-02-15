@@ -474,15 +474,15 @@
         android:text="Výsledek"
         android:textColor="#FFFFFF"
 
-        app:layout_constraintBottom_toTopOf="@+id/notes_nmb_lbl"
+        app:layout_constraintBottom_toTopOf="@+id/rhythm_nmb_lbl"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toEndOf="@+id/viewTab1"
-        app:layout_constraintTop_toBottomOf="@+id/notes_score_lbl"
+        app:layout_constraintTop_toBottomOf="@+id/rhythm_score_lbl"
         app:layout_constraintVertical_bias="0.269" />
 
     <TextView
-        android:id="@+id/notes_score_lbl"
+        android:id="@+id/rhythm_score_lbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="84dp"
@@ -495,7 +495,7 @@
         app:layout_constraintTop_toBottomOf="@+id/img_guitar" />
 
     <TextView
-        android:id="@+id/notes_nmb_lbl"
+        android:id="@+id/rhythm_nmb_lbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"

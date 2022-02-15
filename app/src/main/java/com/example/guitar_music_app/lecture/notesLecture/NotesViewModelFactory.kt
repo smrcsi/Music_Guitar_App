@@ -1,9 +1,8 @@
-package com.example.guitar_music_app.lecture
+package com.example.guitar_music_app.lecture.notesLecture
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.guitar_music_app.results.ResultRepository
-import com.example.guitar_music_app.results.resultDetail.ResultViewModel
 import kotlinx.coroutines.Dispatchers
 
 class NotesViewModelFactory(

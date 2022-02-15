@@ -1,8 +1,10 @@
-package com.example.guitar_music_app.lecture
+package com.example.guitar_music_app.lecture.rhythmLecture
 
 import android.content.pm.ActivityInfo
 import android.graphics.Color
+
 import android.media.MediaPlayer
+import android.os.Build
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -18,6 +20,11 @@ import java.lang.Exception
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+
+import androidx.annotation.RequiresApi
+import com.example.guitar_music_app.general.toEditable
+import com.example.guitar_music_app.lecture.LectureEvent
+import kotlinx.android.synthetic.main.rhythm_fragment.btn_back
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -25,8 +32,9 @@ import kotlinx.coroutines.withContext
 class RhythmView : Fragment() {
 
     private lateinit var mDetector: GestureDetectorCompat
-    private lateinit var viewModel: LectureViewModel
+    private lateinit var viewModel: RhythmViewModel
 
+    private var intSlidesNumber = 0
 
     private var arrow1state = false
     private var arrow2state = false
@@ -60,24 +68,28 @@ class RhythmView : Fragment() {
         return inflater.inflate(R.layout.rhythm_fragment, container, false)
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onStart() {
         super.onStart()
 
         viewModel = ViewModelProvider(
             this,
-            LectureInjector(requireActivity().application).provideLectureViewModelFactory()
-        )[LectureViewModel::class.java]
+            RhythmInjector(requireActivity().application).provideRhythmViewModelFactory()
+        )[RhythmViewModel::class.java]
 
         stringField.setBackgroundColor(Color.LTGRAY)
         mDetector = GestureDetectorCompat(context, MyGestureListener(viewModel))
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         setUpClickListeners()
+        observeViewModel()
 
 
         viewModel.rhythmState.observe(viewLifecycleOwner, { rhythmState ->
             if (!firstStep) {
                 firstStep = true
             } else {
+                intSlidesNumber += 1
+                viewModel.slidesNumber.value = intSlidesNumber
                 when (arrowPosition) {
                     0 -> {
                             if (rhythmState.isFlingUpValid) {
@@ -177,6 +189,7 @@ class RhythmView : Fragment() {
                             arrow3state = false
                             arrow4state = false
                             arrow5state = false
+                            viewModel.addToResult()
 
                             arrow1.setBackgroundColor(Color.TRANSPARENT)
                             arrow2.setBackgroundColor(Color.TRANSPARENT)
@@ -274,6 +287,8 @@ class RhythmView : Fragment() {
                             arrow8state = false
                             arrow9state = false
                             arrow10state = false
+
+                            viewModel.addToResult()
 
                             arrow6.setBackgroundColor(Color.TRANSPARENT)
                             arrow7.setBackgroundColor(Color.TRANSPARENT)
@@ -374,6 +389,8 @@ class RhythmView : Fragment() {
                             arrow14state = false
                             arrow15state = false
 
+                            viewModel.addToResult()
+
                             arrow11.setBackgroundColor(Color.TRANSPARENT)
                             arrow12.setBackgroundColor(Color.TRANSPARENT)
                             arrow13.setBackgroundColor(Color.TRANSPARENT)
@@ -471,6 +488,9 @@ class RhythmView : Fragment() {
                             arrow19state = false
                             arrow20state = false
 
+
+                            viewModel.addToResult()
+
                             arrow16.setBackgroundColor(Color.TRANSPARENT)
                             arrow17.setBackgroundColor(Color.TRANSPARENT)
                             arrow18.setBackgroundColor(Color.TRANSPARENT)
@@ -484,6 +504,40 @@ class RhythmView : Fragment() {
             }
         })
 
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun observeViewModel() {
+        viewModel.handleEvent(LectureEvent.OnStart)
+
+        img_guitar.setOnClickListener {
+            viewModel.handleEvent(
+                LectureEvent.OnDoneClick(
+                    rhythm_result_text.text.toString()
+                )
+            )
+        }
+
+        viewModel.result.observe(
+            viewLifecycleOwner,
+            { result ->
+                rhythm_result_text.text = result.score.toEditable()
+            }
+        )
+
+        viewModel.updated.observe(
+            viewLifecycleOwner,
+            {
+                findNavController().navigate(R.id.lectureResultView)
+            }
+        )
+
+        viewModel.slidesNumber.observe(
+            viewLifecycleOwner,
+            { result ->
+                rhythm_result_text_view.text = viewModel.slidesNumber.value.toString()
+            }
+        )
     }
 
     private suspend fun playSound() {

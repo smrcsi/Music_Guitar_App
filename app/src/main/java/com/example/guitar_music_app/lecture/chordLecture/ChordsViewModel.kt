@@ -1,4 +1,4 @@
-package com.example.guitar_music_app.lecture
+package com.example.guitar_music_app.lecture.chordLecture
 
 import android.icu.util.Calendar
 import android.icu.util.TimeZone
@@ -8,6 +8,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.guitar_music_app.general.BaseViewModel
 import com.example.guitar_music_app.general.GeneralResult
+import com.example.guitar_music_app.lecture.ButtonState
+import com.example.guitar_music_app.lecture.Chord
+import com.example.guitar_music_app.lecture.LectureEvent
+import com.example.guitar_music_app.lecture.Note
 import com.example.guitar_music_app.results.Result
 import com.example.guitar_music_app.results.ResultRepository
 import kotlinx.coroutines.launch
@@ -15,7 +19,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.coroutines.CoroutineContext
 
-class LectureViewModel(
+class ChordsViewModel(
 
     val resultRepo: ResultRepository,
     uiContext: CoroutineContext
@@ -29,9 +33,6 @@ class LectureViewModel(
 
     val chordTextChange = MutableLiveData<String>()
 
-//    val noteState = MutableLiveData(NoteState())
-
-    val rhythmState = MutableLiveData(RhythmState())
 
     private val resultState = MutableLiveData<Result>()
     val result: LiveData<Result> get() = resultState
@@ -63,18 +64,6 @@ class LectureViewModel(
         val buttonsTouched: Set<ButtonState> = emptySet(),
         var chordPlayed: Boolean = false,
         var assistant: Boolean = false,
-    )
-
-//    data class NoteState(
-//        var targetNote: Note = Note.G,
-//        var note: Note = Note.G,
-//        var isNoteValid: Boolean = false,
-//        var notePlayed: Boolean = false,
-//        val notesTouched: Set<ButtonState> = emptySet()
-//    )
-
-    data class RhythmState(
-        var isFlingUpValid: Boolean = false
     )
 
 
@@ -138,35 +127,6 @@ class LectureViewModel(
         }
     }
 
-//    fun noteTouched(note: Note, touched: Boolean) {
-//        val currentState = noteState.value!!
-//        val mutableList = currentState.notesTouched.toMutableSet()
-//        val exists = mutableList.any { it.note == note }
-//        if (touched && !exists) {
-//            mutableList.add(ButtonState(note))
-//        } else if (!touched && exists) {
-//            mutableList.remove(ButtonState(note))
-//        }
-//        if (currentState.targetNote == note && touched && !currentState.notePlayed) {
-//            currentState.targetNote = randomNote()
-//            noteState.value =
-//                currentState.copy(isNoteValid = true, note = currentState.note, notePlayed = touched, targetNote = currentState.targetNote)
-//        } else {
-//            if (noteState.value?.notePlayed == true) {
-//
-//                noteState.value = currentState.copy(isNoteValid = false, notesTouched = mutableList, notePlayed = touched, note = currentState.targetNote)
-//            }
-//            else {
-//                noteState.value = currentState.copy(isNoteValid = false, notesTouched = mutableList)
-//            }
-//        }
-//    }
-//
-//    private fun randomNote(): Note {
-//        val pick = Random().nextInt(Note.values().size)
-//        return Note.values()[pick]
-//    }
-
     private fun updateResult(contents: String) = launch {
         val updateGeneralResult = resultRepo.updateResult(
             result.value!!
@@ -185,10 +145,8 @@ class LectureViewModel(
         intResult += if (state.value?.assistant == true) {
             1
         } else {
-
             2
         }
-
         resultState.value =
             Result(getCalendarTime(), intResult.toString(), "chords", null)
     }

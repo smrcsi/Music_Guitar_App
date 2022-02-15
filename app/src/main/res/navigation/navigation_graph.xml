@@ -48,7 +48,7 @@
     </fragment>
     <fragment
         android:id="@+id/chordsView"
-        android:name="com.example.guitar_music_app.lecture.LectureView"
+        android:name="com.example.guitar_music_app.lecture.chordLecture.ChordsView"
         android:label="lectureView"
         tools:layout="@layout/chords_fragment">
         <action
@@ -85,7 +85,7 @@
     </fragment>
     <fragment
         android:id="@+id/notesView"
-        android:name="com.example.guitar_music_app.lecture.NotesView"
+        android:name="com.example.guitar_music_app.lecture.notesLecture.NotesView"
         android:label="notes_fragment"
         tools:layout="@layout/notes_fragment" >
         <action
@@ -98,7 +98,7 @@
 
     <fragment
         android:id="@+id/rhythmView"
-        android:name="com.example.guitar_music_app.lecture.RhythmView"
+        android:name="com.example.guitar_music_app.lecture.rhythmLecture.RhythmView"
         android:label="rhythm_fragment"
         tools:layout="@layout/rhythm_fragment" >
         <action

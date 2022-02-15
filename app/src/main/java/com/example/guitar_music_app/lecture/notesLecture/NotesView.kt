@@ -1,11 +1,13 @@
-package com.example.guitar_music_app.lecture
-
+package com.example.guitar_music_app.lecture.notesLecture
 
 import android.content.Context
 import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.media.MediaPlayer
-import android.os.*
+import android.os.Build
+import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.text.Html
 import android.view.*
 import android.widget.Toast
@@ -16,14 +18,41 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.guitar_music_app.R
 import com.example.guitar_music_app.general.toEditable
-import com.example.guitar_music_app.results.resultDetail.ResultDetailEvent
-import kotlinx.android.synthetic.main.chords_fragment.*
-import kotlinx.android.synthetic.main.result_detail_fragment.*
-import kotlinx.coroutines.*
+import com.example.guitar_music_app.lecture.LectureEvent
+import com.example.guitar_music_app.lecture.Note
+import kotlinx.android.synthetic.main.chords_fragment.img_guitar
+import kotlinx.android.synthetic.main.chords_fragment.noteText
+import kotlinx.android.synthetic.main.chords_fragment.viewA
+import kotlinx.android.synthetic.main.chords_fragment.viewA_SHARP
+import kotlinx.android.synthetic.main.chords_fragment.viewA_SHARP1
+import kotlinx.android.synthetic.main.chords_fragment.viewB
+import kotlinx.android.synthetic.main.chords_fragment.viewB1
+import kotlinx.android.synthetic.main.chords_fragment.viewC
+import kotlinx.android.synthetic.main.chords_fragment.viewC1
+import kotlinx.android.synthetic.main.chords_fragment.viewC_SHARP
+import kotlinx.android.synthetic.main.chords_fragment.viewC_SHARP1
+import kotlinx.android.synthetic.main.chords_fragment.viewD
+import kotlinx.android.synthetic.main.chords_fragment.viewD_SHARP
+import kotlinx.android.synthetic.main.chords_fragment.viewD_SHARP1
+import kotlinx.android.synthetic.main.chords_fragment.viewE
+import kotlinx.android.synthetic.main.chords_fragment.viewF
+import kotlinx.android.synthetic.main.chords_fragment.viewF1
+import kotlinx.android.synthetic.main.chords_fragment.viewF2
+import kotlinx.android.synthetic.main.chords_fragment.viewF_SHARP
+import kotlinx.android.synthetic.main.chords_fragment.viewF_SHARP1
+import kotlinx.android.synthetic.main.chords_fragment.viewF_SHARP2
+import kotlinx.android.synthetic.main.chords_fragment.viewG
+import kotlinx.android.synthetic.main.chords_fragment.viewG2
+import kotlinx.android.synthetic.main.chords_fragment.viewG_SHARP
+import kotlinx.android.synthetic.main.chords_fragment.viewG_SHARP1
+import kotlinx.android.synthetic.main.chords_fragment.viewG_SHARP2
+import kotlinx.android.synthetic.main.notes_fragment.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.lang.Exception
 
-
-class LectureView : Fragment() {
+class NotesView : Fragment() {
     private val views = mapOf(
         R.id.viewF to Note.F, R.id.viewC to Note.C,
         R.id.viewG_SHARP1 to Note.G_SHARP1, R.id.viewD_SHARP1 to Note.D_SHARP1,
@@ -36,83 +65,78 @@ class LectureView : Fragment() {
         R.id.viewF_SHARP1 to Note.F_SHARP1, R.id.viewC_SHARP1 to Note.C_SHARP1,
         R.id.viewG_SHARP2 to Note.G_SHARP2
     )
-
-    private lateinit var viewModel: LectureViewModel
+    private lateinit var viewModel: NotesViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.chords_fragment, container, false)
+        return inflater.inflate(R.layout.notes_fragment, container, false)
     }
+
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onStart() {
         super.onStart()
         viewModel = ViewModelProvider(
             this,
-            LectureInjector(requireActivity().application).provideLectureViewModelFactory()
-        )[LectureViewModel::class.java]
+            NotesInjector(requireActivity().application).provideNotesViewModelFactory()
+        )[NotesViewModel::class.java]
 
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
 
         setUpClickListeners()
 
-        viewModel.state.observe(viewLifecycleOwner, { state ->
+
+        viewModel.noteState.observe(viewLifecycleOwner, { noteState ->
             views.forEach { (viewId, note) ->
-                if (state.buttonsTouched.any { it.note == note }) {
-                    view?.findViewById<View>(viewId)?.setBackgroundColor(Color.YELLOW)
+                if (noteState.notesTouched.any { it.note == note }) {
+                    if (!noteState.isNoteValid && !noteState.notePlayed) {
+                        view?.findViewById<View>(viewId)?.setBackgroundColor(Color.YELLOW)
+                        println("dala se zluta")
 
-                    if (state.isChordValid) {
-                        view?.findViewById<View>(viewId)?.setBackgroundColor(Color.GREEN)
-                        noteText.setTextColor(Color.GREEN)
-
-                        //TODO- Upravit toast aby vypadal normalneji
-//                        Toast.makeText(
-//                            context, "Správně",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-                        lifecycleScope.launch { playSound() }
-
-                        displayToast()
-                        lifecycleScope.launch { vibrate(millisecond = 1) }
-                    }
-                } else if (state.assistant && state.chord.notes.contains(note)) {
-                    if (state.chord.notes.contains(note)) {
-                        view?.findViewById<View>(viewId)?.setBackgroundColor(Color.LTGRAY)
                     }
                 } else {
                     view?.findViewById<View>(viewId)?.setBackgroundColor(Color.TRANSPARENT)
-                    noteText.setTextColor(Color.RED)
                 }
+                if ((noteState.note == note)) {
+                    if (noteState.notePlayed) {
+                            view?.findViewById<View>(viewId)?.setBackgroundColor(Color.GREEN)
+                        noteText.setTextColor(Color.GREEN)
+                        println("Dala se zelena")
+                        lifecycleScope.launch { playSound() }
 
+                        displayToast()
+                        lifecycleScope.launch { vibrate(millisecond = 5) }
+                        noteText.setTextColor(Color.GREEN)
+                    }
+                    else {
+                        noteText.setTextColor(Color.RED)
+                    }
+                }
+                if (noteState.targetNote == note) {
+                    view?.findViewById<View>(viewId)?.setBackgroundColor(Color.GRAY)
+                }
             }
-        })
+        }
+        )
 
+        viewModel.handleEvent(LectureEvent.OnStart)
 
-        viewModel.chordTextChange.observe(viewLifecycleOwner, {
-            noteText.text = viewModel.chordTextChange.value
-
-        })
+        img_guitar.setOnClickListener {
+            viewModel.handleEvent(
+                LectureEvent.OnDoneClick(
+                    notes_result_text.text.toString()
+                )
+            )
+        }
 
         viewModel.result.observe(
             viewLifecycleOwner,
             { result ->
-                result_text.text = result.score.toEditable()
+                notes_result_text.text = result.score.toEditable()
             }
         )
-
-        //Na zacatku posle prvni akord
-        viewModel.handleEvent(LectureEvent.OnStart)
-
-//TODO-ZPROVOZNIT
-        img_guitar.setOnClickListener {
-            viewModel.handleEvent(
-                LectureEvent.OnDoneClick(
-                    result_text.text.toString()
-                )
-            )
-        }
 
         viewModel.updated.observe(
             viewLifecycleOwner,
@@ -121,11 +145,10 @@ class LectureView : Fragment() {
             }
         )
 
-
-        viewModel.chordsNumber.observe(
+        viewModel.notesNumber.observe(
             viewLifecycleOwner,
             { result ->
-                chords_result_text_view.text = viewModel.chordsNumber.value.toString()
+                notes_result_text_view.text = viewModel.notesNumber.value.toString()
             }
         )
 
@@ -180,19 +203,11 @@ class LectureView : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        swtch_asistant.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                viewModel.assistantSet()
-            } else {
-                viewModel.assistantSet()
-            }
-        }
 //TODO-jakmile odslidujeme, tak by se melo tlacitko prestat drzet
         viewF.setOnTouchListener { v, event ->
             lifecycleScope.launch {
                 val note = views[viewF.id]
-
-                viewModel.buttonTouched(
+                viewModel.noteTouched(
                     note!!,
                     touched = event.action != MotionEvent.ACTION_UP
                 )
@@ -204,7 +219,7 @@ class LectureView : Fragment() {
         viewC.setOnTouchListener { v, event ->
             val note = views[viewC.id]
             lifecycleScope.launch {
-                viewModel.buttonTouched(
+                viewModel.noteTouched(
                     note!!,
                     touched = event.action != MotionEvent.ACTION_UP
                 )
@@ -216,7 +231,7 @@ class LectureView : Fragment() {
         viewG_SHARP1.setOnTouchListener { v, event ->
             val note = views[viewG_SHARP1.id]
             lifecycleScope.launch {
-                viewModel.buttonTouched(
+                viewModel.noteTouched(
                     note!!,
                     touched = event.action != MotionEvent.ACTION_UP
                 )
@@ -229,7 +244,7 @@ class LectureView : Fragment() {
 
             val note = views[viewD_SHARP1.id]
             lifecycleScope.launch {
-                viewModel.buttonTouched(
+                viewModel.noteTouched(
                     note!!,
                     touched = event.action != MotionEvent.ACTION_UP
                 )
@@ -241,7 +256,7 @@ class LectureView : Fragment() {
         viewA_SHARP1.setOnTouchListener { v, event ->
             val note = views[viewA_SHARP1.id]
             lifecycleScope.launch {
-                viewModel.buttonTouched(
+                viewModel.noteTouched(
                     note!!,
                     touched = event.action != MotionEvent.ACTION_UP
                 )
@@ -253,7 +268,7 @@ class LectureView : Fragment() {
         viewF2.setOnTouchListener { v, event ->
             val note = views[viewF2.id]
             lifecycleScope.launch {
-                viewModel.buttonTouched(
+                viewModel.noteTouched(
                     note!!,
                     touched = event.action != MotionEvent.ACTION_UP
                 )
@@ -265,7 +280,7 @@ class LectureView : Fragment() {
         viewF_SHARP.setOnTouchListener { v, event ->
             val note = views[viewF_SHARP.id]
             lifecycleScope.launch {
-                viewModel.buttonTouched(
+                viewModel.noteTouched(
                     note!!,
                     touched = event.action != MotionEvent.ACTION_UP
                 )
@@ -277,7 +292,7 @@ class LectureView : Fragment() {
         viewC_SHARP.setOnTouchListener { v, event ->
             val note = views[viewC_SHARP.id]
             lifecycleScope.launch {
-                viewModel.buttonTouched(
+                viewModel.noteTouched(
                     note!!,
                     touched = event.action != MotionEvent.ACTION_UP
                 )
@@ -291,7 +306,7 @@ class LectureView : Fragment() {
         viewA.setOnTouchListener { v, event ->
             val note = views[viewA.id]
             lifecycleScope.launch {
-                viewModel.buttonTouched(
+                viewModel.noteTouched(
                     note!!,
                     touched = event.action != MotionEvent.ACTION_UP
                 )
@@ -304,7 +319,7 @@ class LectureView : Fragment() {
         viewE.setOnTouchListener { v, event ->
             val note = views[viewE.id]
             lifecycleScope.launch {
-                viewModel.buttonTouched(
+                viewModel.noteTouched(
                     note!!,
                     touched = event.action != MotionEvent.ACTION_UP
                 )
@@ -317,7 +332,7 @@ class LectureView : Fragment() {
         viewB1.setOnTouchListener { v, event ->
             val note = views[viewB1.id]
             lifecycleScope.launch {
-                viewModel.buttonTouched(
+                viewModel.noteTouched(
                     note!!,
                     touched = event.action != MotionEvent.ACTION_UP
                 )
@@ -330,7 +345,7 @@ class LectureView : Fragment() {
         viewF_SHARP2.setOnTouchListener { v, event ->
             val note = views[viewF_SHARP2.id]
             lifecycleScope.launch {
-                viewModel.buttonTouched(
+                viewModel.noteTouched(
                     note!!,
                     touched = event.action != MotionEvent.ACTION_UP
                 )
@@ -342,7 +357,7 @@ class LectureView : Fragment() {
         viewG.setOnTouchListener { v, event ->
             val note = views[viewG.id]
             lifecycleScope.launch {
-                viewModel.buttonTouched(
+                viewModel.noteTouched(
                     note!!,
                     touched = event.action != MotionEvent.ACTION_UP
                 )
@@ -354,7 +369,7 @@ class LectureView : Fragment() {
         viewD.setOnTouchListener { v, event ->
             val note = views[viewD.id]
             lifecycleScope.launch {
-                viewModel.buttonTouched(
+                viewModel.noteTouched(
                     note!!,
                     touched = event.action != MotionEvent.ACTION_UP
                 )
@@ -366,7 +381,7 @@ class LectureView : Fragment() {
         viewA_SHARP.setOnTouchListener { v, event ->
             val note = views[viewA_SHARP.id]
             lifecycleScope.launch {
-                viewModel.buttonTouched(
+                viewModel.noteTouched(
                     note!!,
                     touched = event.action != MotionEvent.ACTION_UP
                 )
@@ -380,7 +395,7 @@ class LectureView : Fragment() {
         viewF1.setOnTouchListener { v, event ->
             val note = views[viewF1.id]
             lifecycleScope.launch {
-                viewModel.buttonTouched(
+                viewModel.noteTouched(
                     note!!,
                     touched = event.action != MotionEvent.ACTION_UP
                 )
@@ -393,7 +408,7 @@ class LectureView : Fragment() {
         viewC1.setOnTouchListener { v, event ->
             val note = views[viewC1.id]
             lifecycleScope.launch {
-                viewModel.buttonTouched(
+                viewModel.noteTouched(
                     note!!,
                     touched = event.action != MotionEvent.ACTION_UP
                 )
@@ -406,7 +421,7 @@ class LectureView : Fragment() {
         viewG2.setOnTouchListener { v, event ->
             val note = views[viewG2.id]
             lifecycleScope.launch {
-                viewModel.buttonTouched(
+                viewModel.noteTouched(
                     note!!,
                     touched = event.action != MotionEvent.ACTION_UP
                 )
@@ -418,7 +433,7 @@ class LectureView : Fragment() {
         viewG_SHARP.setOnTouchListener { v, event ->
             val note = views[viewG_SHARP.id]
             lifecycleScope.launch {
-                viewModel.buttonTouched(
+                viewModel.noteTouched(
                     note!!,
                     touched = event.action != MotionEvent.ACTION_UP
                 )
@@ -431,7 +446,7 @@ class LectureView : Fragment() {
         viewD_SHARP.setOnTouchListener { v, event ->
             val note = views[viewD_SHARP.id]
             lifecycleScope.launch {
-                viewModel.buttonTouched(
+                viewModel.noteTouched(
                     note!!,
                     touched = event.action != MotionEvent.ACTION_UP
                 )
@@ -444,7 +459,7 @@ class LectureView : Fragment() {
         viewB.setOnTouchListener { v, event ->
             val note = views[viewB.id]
             lifecycleScope.launch {
-                viewModel.buttonTouched(
+                viewModel.noteTouched(
                     note!!,
                     touched = event.action != MotionEvent.ACTION_UP
                 )
@@ -457,7 +472,7 @@ class LectureView : Fragment() {
         viewF_SHARP1.setOnTouchListener { v, event ->
             val note = views[viewF_SHARP1.id]
             lifecycleScope.launch {
-                viewModel.buttonTouched(
+                viewModel.noteTouched(
                     note!!,
                     touched = event.action != MotionEvent.ACTION_UP
                 )
@@ -470,7 +485,7 @@ class LectureView : Fragment() {
         viewC_SHARP1.setOnTouchListener { v, event ->
             val note = views[viewC_SHARP1.id]
             lifecycleScope.launch {
-                viewModel.buttonTouched(
+                viewModel.noteTouched(
                     note!!,
                     touched = event.action != MotionEvent.ACTION_UP
                 )
@@ -483,34 +498,23 @@ class LectureView : Fragment() {
         viewG_SHARP2.setOnTouchListener { v, event ->
             val note = views[viewG_SHARP2.id]
             lifecycleScope.launch {
-                viewModel.buttonTouched(
+                viewModel.noteTouched(
                     note!!,
-                    touched = event.action == MotionEvent.ACTION_UP
+                    touched = event.action != MotionEvent.ACTION_UP
                 )
             }
             v.performClick()
             true
         }
 
-//            viewG_SHARP2.setOnTouchListener { v, event ->
-//                val note = views[viewG_SHARP2.id]
-//                lifecycleScope.launch {
-//                    viewModel.buttonTouched(note!!, touched = event.action != MotionEvent.ACTION_UP)
-//                }
-//                v.performClick()
-//                true
-//            }
     }
 
-
     private fun setUpClickListeners() {
-        btn_back_chords.setOnClickListener {
+        btn_back.setOnClickListener {
             findNavController().navigate(R.id.lecturesView)
         }
         img_guitar.setOnClickListener {
             findNavController().navigate(R.id.lectureResultView)
         }
     }
-
-
 }
