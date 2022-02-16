@@ -73,14 +73,14 @@ class RhythmViewModel(
     fun addToResult() {
         intResult += 5
         resultState.value =
-            Result(getCalendarTime(), intResult.toString(), "notes", null)
+            Result(getCalendarTime(), intResult.toString(), "rhythm", null)
     }
 
 
     @RequiresApi(Build.VERSION_CODES.N)
     private fun newResult() {
         resultState.value =
-            Result(getCalendarTime(), intResult.toString(), "notes", null)
+            Result(getCalendarTime(), intResult.toString(), "rhythm", null)
     }
 
     @RequiresApi(Build.VERSION_CODES.N)

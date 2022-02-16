@@ -6,7 +6,6 @@ import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.example.guitar_music_app.general.User
 
-//Room can autogenerate keys
 @Entity(
     tableName = "results",
     indices = [Index("lecture_date")]

@@ -23,13 +23,13 @@
         android:id="@+id/btn_homepage"
         android:layout_width="201dp"
         android:layout_height="49dp"
+        android:layout_marginBottom="84dp"
         android:backgroundTint="#FFFFFF"
+        android:textColor="#000000"
         android:text="@string/homepage"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/comparison_list" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/lbl_results"
@@ -40,61 +40,58 @@
         android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/lbl_last_game_results"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/img_guitar"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/img_guitar"
         app:layout_constraintTop_toBottomOf="@+id/img_guitar" />
 
     <TextView
         android:id="@+id/lbl_last_game_results"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:text="@string/last_game_results"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/result_list"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.069"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/last_result_text"
+        app:layout_constraintEnd_toEndOf="@+id/lbl_results"
+        app:layout_constraintStart_toStartOf="@+id/lbl_results"
         app:layout_constraintTop_toBottomOf="@+id/lbl_results" />
 
     <TextView
-        android:id="@+id/lbl_comparison"
+        android:id="@+id/lbl_highest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
         android:text="@string/comparison"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/comparison_list"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.111"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/result_list" />
-
-    <ListView
-        android:id="@+id/result_list"
-        android:layout_width="318dp"
-        android:layout_height="113dp"
-        android:background="#4DB3AFAF"
-        app:layout_constraintBottom_toTopOf="@+id/lbl_comparison"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lbl_last_game_results" />
-
-    <ListView
-        android:id="@+id/comparison_list"
-        android:layout_width="318dp"
-        android:layout_height="113dp"
-        android:background="#4DB3AFAF"
-
         app:layout_constraintBottom_toTopOf="@+id/btn_homepage"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lbl_comparison" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/last_result_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="Poslední výsledek"
+        app:layout_constraintBottom_toTopOf="@+id/lbl_highest"
+        app:layout_constraintEnd_toEndOf="@+id/lbl_last_game_results"
+        app:layout_constraintStart_toStartOf="@+id/lbl_last_game_results" />
+
+    <TextView
+        android:id="@+id/highest_score_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/comparison"
+        app:layout_constraintBottom_toTopOf="@+id/btn_homepage"
+        app:layout_constraintEnd_toEndOf="@+id/lbl_highest"
+        app:layout_constraintStart_toStartOf="@+id/lbl_highest"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_highest"
+        app:layout_constraintVertical_bias="0.535" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

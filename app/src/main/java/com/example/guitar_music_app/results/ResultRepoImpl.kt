@@ -106,6 +106,24 @@ class ResultRepoImpl(
         }
     }
 
+    //Mozna pujde delat vys
+    private suspend fun getLastRemoteResult(creationDate: String, user: User): GeneralResult<Exception, Result> {
+        return try {
+        val task = awaitTaskResult(
+            remote.collection(COLLECTION_NAME)
+                .document(creationDate + user.userid)
+                .get()
+        )
+
+        GeneralResult.build {
+            //Task<DocumentSnapshot!>
+            task.toObject(FirebaseResult::class.java)?.toResult ?: throw Exception()
+        }
+    } catch (exception: Exception) {
+        GeneralResult.build { throw exception }
+    }
+    }
+
     private suspend fun deleteRemoteResult(result: Result): GeneralResult<Exception, Unit> = GeneralResult.build {
         awaitTaskCompletable(
             remote.collection(COLLECTION_NAME)
