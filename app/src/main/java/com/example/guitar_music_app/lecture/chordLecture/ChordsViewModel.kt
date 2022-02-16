@@ -63,7 +63,7 @@ class ChordsViewModel(
         val isChordValid: Boolean = false,
         val buttonsTouched: Set<ButtonState> = emptySet(),
         var chordPlayed: Boolean = false,
-        var assistant: Boolean = false,
+        var assistant: Boolean = false
     )
 
 

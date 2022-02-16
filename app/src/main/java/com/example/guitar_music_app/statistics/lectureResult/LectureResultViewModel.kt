@@ -1,4 +1,4 @@
-package com.example.guitar_music_app.statistics
+package com.example.guitar_music_app.statistics.lectureResult
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -9,16 +9,12 @@ import com.example.guitar_music_app.general.GET_RESULTS_ERROR
 import com.example.guitar_music_app.general.GeneralResult
 import com.example.guitar_music_app.results.Result
 import com.example.guitar_music_app.results.ResultRepository
-import com.example.guitar_music_app.results.resultList.ResultListEvent
+import com.example.guitar_music_app.statistics.StatisticsEvent
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
-import java.util.stream.Collectors
-
-import java.util.ArrayList
-import java.util.function.Function
 
 
-class StatisticsViewModel(
+class LectureResultViewModel(
     val resultRepo: ResultRepository,
     uiContext: CoroutineContext
 ) : BaseViewModel<StatisticsEvent>(uiContext) {
@@ -31,6 +27,7 @@ class StatisticsViewModel(
     private val bestResultState = MutableLiveData<String>()
     val bestResult: LiveData<String> get() = bestResultState
 
+    val lecturePlayed = MutableLiveData<String>()
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun handleEvent(event: StatisticsEvent) {
@@ -47,27 +44,27 @@ class StatisticsViewModel(
                 resultListState.value = resultsResult.value
                 lastResultState.value = resultsResult.value.last().score
                 if (resultsResult.value.last().type == "chords") {
-                    val chordsResults = resultsResult.value.filter { result: Result -> result.type == "chords"  }
+                    val chordsResults =
+                        resultsResult.value.filter { result: Result -> result.type == "chords" }
                     bestResultState.value =
                         chordsResults.maxWithOrNull(Comparator.comparingInt { it.score.toInt() })?.score
-                }
-                else if(resultsResult.value.last().type == "notes") {
-                    val notesResults = resultsResult.value.filter { result: Result -> result.type == "notes" }
+                } else if (resultsResult.value.last().type == "notes") {
+                    val notesResults =
+                        resultsResult.value.filter { result: Result -> result.type == "notes" }
                     println(notesResults)
                     bestResultState.value =
                         notesResults.maxWithOrNull(Comparator.comparingInt { it.score.toInt() })?.score
-                }
-                else if(resultsResult.value.last().type == "rhythm") {
-                    val rhythmResults = resultsResult.value.filter { result: Result -> result.type == "rhythm" }
+                } else if (resultsResult.value.last().type == "rhythm") {
+                    val rhythmResults =
+                        resultsResult.value.filter { result: Result -> result.type == "rhythm" }
                     bestResultState.value =
                         rhythmResults.maxWithOrNull(Comparator.comparingInt { it.score.toInt() })?.score
                 }
-
+                lecturePlayed.value = resultsResult.value.last().type
             }
             is GeneralResult.Error -> errorState.value = GET_RESULTS_ERROR
         }
 
     }
-
 
 }

@@ -9,99 +9,353 @@
     tools:context="com.example.guitar_music_app.results.ResultActivity">
 
 
+    <View
+        android:id="@+id/view11"
+        android:layout_width="340dp"
+        android:layout_height="107dp"
+        android:layout_marginTop="4dp"
+        android:background="#4DB3AFAF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rhythm_results_lbl" />
+
+    <TextView
+        android:id="@+id/rhythm_last_result_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="176dp"
+        android:text="value"
+        app:layout_constraintEnd_toEndOf="@+id/view11"
+        app:layout_constraintTop_toTopOf="@+id/view11" />
+
+    <TextView
+        android:id="@+id/rhythm_best_result_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="176dp"
+        android:text="value"
+        app:layout_constraintEnd_toEndOf="@+id/view11"
+        app:layout_constraintTop_toBottomOf="@+id/rhythm_last_result_value" />
+
+    <TextView
+        android:id="@+id/rhythm_complete_result_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="176dp"
+        android:text="value"
+        app:layout_constraintBottom_toBottomOf="@+id/view11"
+        app:layout_constraintEnd_toEndOf="@+id/view11"
+        app:layout_constraintTop_toBottomOf="@+id/rhythm_best_result_value"
+        app:layout_constraintVertical_bias="0.529" />
+
+    <TextView
+        android:id="@+id/rhythm_last_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Poslední výsledek"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/rhythm_last_result_value"
+        app:layout_constraintHorizontal_bias="0.457"
+        app:layout_constraintStart_toStartOf="@+id/view11"
+        app:layout_constraintTop_toTopOf="@+id/view11" />
+
+    <TextView
+        android:id="@+id/rhythm_best_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nejlepší výsledek"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/rhythm_complete_result_value"
+        app:layout_constraintEnd_toStartOf="@+id/rhythm_best_result_value"
+        app:layout_constraintStart_toStartOf="@+id/view11"
+        app:layout_constraintTop_toBottomOf="@+id/rhythm_last_lbl"
+        app:layout_constraintVertical_bias="0.409" />
+
+    <TextView
+        android:id="@+id/rhythm_complete_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="13dp"
+        android:text="Celkový výsledek"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view11"
+        app:layout_constraintEnd_toStartOf="@+id/rhythm_complete_result_value"
+        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintStart_toStartOf="@+id/view11"
+        app:layout_constraintTop_toBottomOf="@+id/rhythm_best_lbl"
+        app:layout_constraintVertical_bias="1.0" />
+
+
     <ImageButton
         android:id="@+id/btn_back"
         style="@style/Widget.AppCompat.ActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.045"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_revert" />
-
 
     <TextView
         android:id="@+id/lbl_statistics"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
         android:text="@string/statistics"
         android:textColor="#FFFFFF"
         android:textSize="32sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/lbl_recent_games"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.306"
+        app:layout_constraintStart_toEndOf="@+id/btn_back"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/lbl_recent_games"
+        android:id="@+id/notes_results_lbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
-        android:text="@string/recent_games"
+        android:layout_marginTop="8dp"
+        android:text="Výsledky Not"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/lastResultText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_statistics" />
 
     <TextView
-        android:id="@+id/lbl_best_resutls"
+        android:id="@+id/chords_results_lbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
-        android:text="@string/best_results"
+        android:layout_marginTop="4dp"
+        android:text="Výsledky Akordů"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/list_best_results"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view3" />
 
-    <ListView
-        android:id="@+id/list_best_results"
-        android:layout_width="320dp"
-        android:layout_height="161dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginBottom="12dp"
+    <TextView
+        android:id="@+id/rhythm_results_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Výsledky Rytmu"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view8" />
+
+    <TextView
+        android:id="@+id/complete_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Celkové body"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view11" />
+
+    <TextView
+        android:id="@+id/complete_value_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Celkově"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/view10"
+        app:layout_constraintEnd_toEndOf="@+id/view10"
+        app:layout_constraintStart_toStartOf="@+id/view10"
+        app:layout_constraintTop_toTopOf="@+id/view10"
+        app:layout_constraintVertical_bias="0.433" />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="350dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="4dp"
         android:background="#4DB3AFAF"
-        app:layout_constraintBottom_toTopOf="@+id/lbl_additional_stats"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.54"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notes_results_lbl" />
 
     <TextView
-        android:id="@+id/lbl_additional_stats"
+        android:id="@+id/note_complete_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="124dp"
-        android:layout_marginBottom="24dp"
-        android:text="@string/additional_statistics"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/list_additional_statistics"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:text="Celkový výsledek"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view3"
+        app:layout_constraintEnd_toStartOf="@+id/notes_complete_result_value"
+        app:layout_constraintHorizontal_bias="0.527"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/note_best_lbl"
+        app:layout_constraintVertical_bias="0.535" />
 
-    <ListView
-        android:id="@+id/list_additional_statistics"
-        android:layout_width="319dp"
-        android:layout_height="139dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginBottom="44dp"
+    <TextView
+        android:id="@+id/notes_best_result_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="156dp"
+        android:text="value"
+        app:layout_constraintBottom_toTopOf="@+id/notes_complete_result_value"
+        app:layout_constraintEnd_toEndOf="@+id/view3"
+        app:layout_constraintTop_toBottomOf="@+id/notes_last_result_value"
+        app:layout_constraintVertical_bias="0.666" />
+
+    <TextView
+        android:id="@+id/notes_last_result_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="value"
+        app:layout_constraintEnd_toEndOf="@+id/view3"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="@+id/view3"
+        app:layout_constraintTop_toTopOf="@+id/view3" />
+
+    <TextView
+        android:id="@+id/note_last_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Poslední výsledek"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/notes_last_result_value"
+        app:layout_constraintHorizontal_bias="0.068"
+        app:layout_constraintStart_toStartOf="@+id/view3"
+        app:layout_constraintTop_toTopOf="@+id/view3" />
+
+    <TextView
+        android:id="@+id/note_best_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Nejlepší výsledek"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/notes_best_result_value"
+        app:layout_constraintHorizontal_bias="0.205"
+        app:layout_constraintStart_toStartOf="@+id/view3"
+        app:layout_constraintTop_toBottomOf="@+id/note_last_lbl" />
+
+    <TextView
+        android:id="@+id/notes_complete_result_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="188dp"
+        android:layout_marginBottom="8dp"
+        android:text="value"
+        app:layout_constraintBottom_toBottomOf="@+id/view3"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <View
+        android:id="@+id/view8"
+        android:layout_width="338dp"
+        android:layout_height="108dp"
+        android:layout_marginTop="8dp"
+        android:background="#4DB3AFAF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chords_results_lbl" />
+
+    <TextView
+        android:id="@+id/chords_last_result_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="176dp"
+        android:text="value"
+        app:layout_constraintEnd_toEndOf="@+id/view8"
+        app:layout_constraintTop_toTopOf="@+id/view8" />
+
+    <TextView
+        android:id="@+id/chords_best_result_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="176dp"
+        android:text="value"
+        app:layout_constraintEnd_toEndOf="@+id/view8"
+        app:layout_constraintTop_toBottomOf="@+id/chords_last_result_value" />
+
+    <TextView
+        android:id="@+id/chords_complete_result_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="176dp"
+        android:text="value"
+        app:layout_constraintBottom_toBottomOf="@+id/view8"
+        app:layout_constraintEnd_toEndOf="@+id/view8"
+        app:layout_constraintTop_toBottomOf="@+id/chords_best_result_value"
+        app:layout_constraintVertical_bias="0.529" />
+
+    <TextView
+        android:id="@+id/chords_last_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Poslední výsledek"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/chords_last_result_value"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toStartOf="@+id/view8"
+        app:layout_constraintTop_toTopOf="@+id/view8" />
+
+    <TextView
+        android:id="@+id/chords_best_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Nejlepší výsledek"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/chords_best_result_value"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="@+id/view8"
+        app:layout_constraintTop_toBottomOf="@+id/chords_last_lbl" />
+
+    <TextView
+        android:id="@+id/chords_complete_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Celkový výsledek"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view8"
+        app:layout_constraintEnd_toStartOf="@+id/chords_complete_result_value"
+        app:layout_constraintHorizontal_bias="0.485"
+        app:layout_constraintStart_toStartOf="@+id/view8"
+        app:layout_constraintTop_toBottomOf="@+id/chords_best_lbl"
+        app:layout_constraintVertical_bias="0.476" />
+
+    <View
+        android:id="@+id/view10"
+        android:layout_width="276dp"
+        android:layout_height="62dp"
         android:background="#4DB3AFAF"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/lastResultText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:text="Poslední výsledek"
-        app:layout_constraintBottom_toTopOf="@+id/lbl_best_resutls"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/complete_lbl"
+        app:layout_constraintVertical_bias="0.067" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

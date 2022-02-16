@@ -1,8 +1,9 @@
-package com.example.guitar_music_app.statistics
+package com.example.guitar_music_app.statistics.statistics
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.guitar_music_app.results.ResultRepository
+import com.example.guitar_music_app.statistics.lectureResult.LectureResultViewModel
 import kotlinx.coroutines.Dispatchers
 
 class StatisticsViewModelFactory(

@@ -47,7 +47,6 @@ class ResultRepoImpl(
 
     override suspend fun getResults(): GeneralResult<Exception, List<Result>> {
         val user = getActiveUser()
-        println("GOT HERE")
         return if (user != null) getRemoteResults(user)
         else getLocalResults()
     }

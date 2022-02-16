@@ -10,7 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity android:name="com.example.guitar_music_app.results.ResultActivity">
-
         </activity>
         <activity android:name="com.example.guitar_music_app.login.LoginActivity"
             android:exported="true">
@@ -21,5 +20,6 @@
             </intent-filter>
         </activity>
     </application>
+
 
 </manifest>

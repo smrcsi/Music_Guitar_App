@@ -1,10 +1,11 @@
-package com.example.guitar_music_app.statistics
+package com.example.guitar_music_app.statistics.statistics
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import com.example.guitar_music_app.results.ResultRepoImpl
 import com.example.guitar_music_app.results.ResultRepository
 import com.example.guitar_music_app.results.room.RoomResultDatabase
+import com.example.guitar_music_app.statistics.statistics.StatisticsViewModelFactory
 import com.google.firebase.FirebaseApp
 
 class StatisticsInjector(application: Application): AndroidViewModel(application) {
