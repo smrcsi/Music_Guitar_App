@@ -96,7 +96,7 @@ class RhythmView : Fragment() {
                                 stringField.setBackgroundColor(Color.GREEN)
                                 lifecycleScope.launch { playSound() }
                             } else {
-                                stringField.setBackgroundColor(Color.RED)
+                                stringField.setBackgroundColor(Color.BLUE)
                                 lifecycleScope.launch { playSecond() }
                             }
                         }
@@ -108,7 +108,7 @@ class RhythmView : Fragment() {
                                 stringField.setBackgroundColor(Color.GREEN)
                                 lifecycleScope.launch { playSound() }
                             } else {
-                                stringField.setBackgroundColor(Color.RED)
+                                stringField.setBackgroundColor(Color.BLUE)
                                 lifecycleScope.launch { playSecond() }
                                 arrow1state = true
                                 arrow1.setBackgroundColor(Color.GREEN)
@@ -122,7 +122,7 @@ class RhythmView : Fragment() {
                                 stringField.setBackgroundColor(Color.GREEN)
                                 lifecycleScope.launch { playSound() }
                             } else {
-                                stringField.setBackgroundColor(Color.RED)
+                                stringField.setBackgroundColor(Color.BLUE)
                                 lifecycleScope.launch { playSecond() }
                                 arrow2state = true
                                 arrow2.setBackgroundColor(Color.GREEN)
@@ -138,7 +138,7 @@ class RhythmView : Fragment() {
                                 stringField.setBackgroundColor(Color.GREEN)
                                 lifecycleScope.launch { playSound() }
                             } else {
-                                stringField.setBackgroundColor(Color.RED)
+                                stringField.setBackgroundColor(Color.BLUE)
                                 lifecycleScope.launch { playSecond() }
 
                                 arrow3state = true
@@ -152,7 +152,7 @@ class RhythmView : Fragment() {
                                 stringField.setBackgroundColor(Color.GREEN)
                                 lifecycleScope.launch { playSound() }
                             } else {
-                                stringField.setBackgroundColor(Color.RED)
+                                stringField.setBackgroundColor(Color.BLUE)
                                 lifecycleScope.launch { playSecond() }
                                 arrow1state = false
                                 arrow2state = false
@@ -178,7 +178,7 @@ class RhythmView : Fragment() {
                                 stringField.setBackgroundColor(Color.GREEN)
                                 lifecycleScope.launch { playSound() }
                             } else {
-                                stringField.setBackgroundColor(Color.RED)
+                                stringField.setBackgroundColor(Color.BLUE)
                                 lifecycleScope.launch { playSecond() }
                                 arrow5state = true
                                 arrow5.setBackgroundColor(Color.GREEN)
@@ -208,7 +208,7 @@ class RhythmView : Fragment() {
                                 stringField.setBackgroundColor(Color.GREEN)
                                 lifecycleScope.launch { playSound() }
                             } else {
-                                stringField.setBackgroundColor(Color.RED)
+                                stringField.setBackgroundColor(Color.BLUE)
                                 lifecycleScope.launch { playSecond() }
                                 arrow6state = true
                                 arrow6.setBackgroundColor(Color.GREEN)
@@ -222,7 +222,7 @@ class RhythmView : Fragment() {
                                 stringField.setBackgroundColor(Color.GREEN)
                                 lifecycleScope.launch { playSound() }
                             } else {
-                                stringField.setBackgroundColor(Color.RED)
+                                stringField.setBackgroundColor(Color.BLUE)
                                 lifecycleScope.launch { playSecond() }
                                 arrow7state = true
                                 arrow7.setBackgroundColor(Color.GREEN)
@@ -240,7 +240,7 @@ class RhythmView : Fragment() {
                                 arrow6.setBackgroundColor(Color.RED)
                                 arrow7.setBackgroundColor(Color.RED)
                                 arrow8.setBackgroundColor(Color.RED)
-                                stringField.setBackgroundColor(Color.RED)
+                                stringField.setBackgroundColor(Color.BLUE)
                                 lifecycleScope.launch { playSound() }
                             }
                         } else if (arrow6state && arrow7state && arrow8state && !arrow9state && !arrow10state) {
@@ -258,7 +258,7 @@ class RhythmView : Fragment() {
                             } else {
                                 arrow9state = true
                                 arrow9.setBackgroundColor(Color.GREEN)
-                                stringField.setBackgroundColor(Color.RED)
+                                stringField.setBackgroundColor(Color.BLUE)
                                 lifecycleScope.launch { playSound() }
                             }
                         } else if (arrow6state && arrow7state && arrow8state && arrow9state && !arrow10state) {
@@ -278,7 +278,7 @@ class RhythmView : Fragment() {
                                 arrow8.setBackgroundColor(Color.RED)
                                 arrow9.setBackgroundColor(Color.RED)
                                 arrow10.setBackgroundColor(Color.RED)
-                                stringField.setBackgroundColor(Color.RED)
+                                stringField.setBackgroundColor(Color.BLUE)
                                 lifecycleScope.launch { playSound() }
                             }
                         } else if (arrow6state && arrow7state && arrow8state && arrow9state && arrow10state) {
@@ -307,14 +307,14 @@ class RhythmView : Fragment() {
                                 stringField.setBackgroundColor(Color.GREEN)
                                 lifecycleScope.launch { playSound() }
                             } else {
-                                stringField.setBackgroundColor(Color.RED)
+                                stringField.setBackgroundColor(Color.BLUE)
                                 lifecycleScope.launch { playSecond() }
                                 arrow11state = true
                                 arrow11.setBackgroundColor(Color.GREEN)
                             }
                         } else if (arrow11state && !arrow12state && !arrow13state && !arrow14state && !arrow15state) {
                             if (rhythmState.isFlingUpValid) {
-                                stringField.setBackgroundColor(Color.RED)
+                                stringField.setBackgroundColor(Color.BLUE)
                                 lifecycleScope.launch { playSecond() }
                                 arrow12state = true
                                 arrow12.setBackgroundColor(Color.GREEN)
@@ -338,7 +338,7 @@ class RhythmView : Fragment() {
                                 lifecycleScope.launch { playSound() }
 
                             } else {
-                                stringField.setBackgroundColor(Color.RED)
+                                stringField.setBackgroundColor(Color.BLUE)
                                 lifecycleScope.launch { playSecond() }
                                 arrow13state = true
                                 arrow13.setBackgroundColor(Color.GREEN)
@@ -351,7 +351,7 @@ class RhythmView : Fragment() {
                                 stringField.setBackgroundColor(Color.GREEN)
                                 lifecycleScope.launch { playSound() }
                             } else {
-                                stringField.setBackgroundColor(Color.RED)
+                                stringField.setBackgroundColor(Color.BLUE)
                                 lifecycleScope.launch { playSecond() }
                                 arrow11state = false
                                 arrow12state = false
@@ -377,7 +377,7 @@ class RhythmView : Fragment() {
                                 stringField.setBackgroundColor(Color.GREEN)
                                 lifecycleScope.launch { playSound() }
                             } else {
-                                stringField.setBackgroundColor(Color.RED)
+                                stringField.setBackgroundColor(Color.BLUE)
                                 lifecycleScope.launch { playSecond() }
                                 arrow15state = true
                                 arrow15.setBackgroundColor(Color.GREEN)
@@ -409,13 +409,13 @@ class RhythmView : Fragment() {
                                 arrow16.setBackgroundColor(Color.GREEN)
                             } else {
                                 arrow16state = false
-                                arrow16.setBackgroundColor(Color.RED)
+                                arrow16.setBackgroundColor(Color.BLUE)
                                 stringField.setBackgroundColor(Color.GREEN)
                                 lifecycleScope.launch { playSound() }
                             }
                         } else if (arrow16state && !arrow17state && !arrow18state && !arrow19state && !arrow20state) {
                             if (rhythmState.isFlingUpValid) {
-                                stringField.setBackgroundColor(Color.RED)
+                                stringField.setBackgroundColor(Color.BLUE)
                                 lifecycleScope.launch { playSecond() }
                                 arrow17state = true
                                 arrow17.setBackgroundColor(Color.GREEN)
@@ -438,7 +438,7 @@ class RhythmView : Fragment() {
                                 stringField.setBackgroundColor(Color.GREEN)
                                 lifecycleScope.launch { playSound() }
                             } else {
-                                stringField.setBackgroundColor(Color.RED)
+                                stringField.setBackgroundColor(Color.BLUE)
                                 lifecycleScope.launch { playSecond() }
                                 arrow18state = true
                                 arrow18.setBackgroundColor(Color.GREEN)
@@ -450,7 +450,7 @@ class RhythmView : Fragment() {
                                 stringField.setBackgroundColor(Color.GREEN)
                                 lifecycleScope.launch { playSound() }
                             } else {
-                                stringField.setBackgroundColor(Color.RED)
+                                stringField.setBackgroundColor(Color.BLUE)
                                 lifecycleScope.launch { playSecond() }
                                 arrow16state = false
                                 arrow17state = false
@@ -476,7 +476,7 @@ class RhythmView : Fragment() {
                                 stringField.setBackgroundColor(Color.GREEN)
                                 lifecycleScope.launch { playSound() }
                             } else {
-                                stringField.setBackgroundColor(Color.RED)
+                                stringField.setBackgroundColor(Color.BLUE)
                                 lifecycleScope.launch { playSecond() }
                                 arrow20state = true
                                 arrow20.setBackgroundColor(Color.GREEN)

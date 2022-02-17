@@ -52,7 +52,7 @@
 
     <string name="rhythm_text">Lekce Rytmus je cvičení založené na držení rytmu v pravé ruce.
         Cvičení by mělo být tedy využívano pouze pravou rukou (nejlépe vrchní částí ukazováčku) a levá by měla sloužit k přidržení zařízení.
-    Účelem cvičení je správně zahrát kombinaci šipek, která je vyznačena v horní části obrazovky. Šipky lze zahrát přejetím prstem ze shora dolů nebo ze spoda nahoru.
+    Účelem cvičení je správně zahrát kombinaci šipek, která je vyznačena v horní části obrazovky. Šipky lze zahrát přejetím prstem ze shora dolů (obrazovka zmodrá) nebo ze spoda nahoru (obrazovka zezelená).
     Jestliže pohyb odpovídá šipce, označí se zelenou barvou a uživatel může zahrát další šipku. Jestliže je provedena chyba, šipka a všechny předchozí šipky jsou označeny červenou barvou
     a uživatel začíná hrát kombinaci znova. Hraný rytmus lze dle libosti změnit.</string>
 </resources>

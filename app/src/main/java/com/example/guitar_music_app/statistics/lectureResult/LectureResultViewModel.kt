@@ -46,19 +46,19 @@ class LectureResultViewModel(
                 if (resultsResult.value.last().type == "chords") {
                     val chordsResults =
                         resultsResult.value.filter { result: Result -> result.type == "chords" }
-                    bestResultState.value =
-                        chordsResults.maxWithOrNull(Comparator.comparingInt { it.score.toInt() })?.score
+                    bestResultState.value = chordsResults.map {it.score.toInt()}.sorted().lastOrNull().toString()
+//                        chordsResults.maxWithOrNull(Comparator.comparingInt { it.score.toInt() })?.score
                 } else if (resultsResult.value.last().type == "notes") {
                     val notesResults =
                         resultsResult.value.filter { result: Result -> result.type == "notes" }
                     println(notesResults)
-                    bestResultState.value =
-                        notesResults.maxWithOrNull(Comparator.comparingInt { it.score.toInt() })?.score
+                    bestResultState.value = notesResults.map {it.score.toInt()}.sorted().lastOrNull().toString()
+//                        notesResults.maxWithOrNull(Comparator.comparingInt { it.score.toInt() })?.score
                 } else if (resultsResult.value.last().type == "rhythm") {
                     val rhythmResults =
                         resultsResult.value.filter { result: Result -> result.type == "rhythm" }
-                    bestResultState.value =
-                        rhythmResults.maxWithOrNull(Comparator.comparingInt { it.score.toInt() })?.score
+                    bestResultState.value = rhythmResults.map {it.score.toInt()}.sorted().lastOrNull().toString()
+//                        rhythmResults.maxWithOrNull(Comparator.comparingInt { it.score.toInt() })?.score
                 }
                 lecturePlayed.value = resultsResult.value.last().type
             }

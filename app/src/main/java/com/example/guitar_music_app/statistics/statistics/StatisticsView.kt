@@ -46,27 +46,51 @@ class StatisticsView : Fragment() {
         viewModel.updateNotes.observe(
             viewLifecycleOwner,
             { updateNotes ->
-                notes_last_result_value.text = viewModel.updateNotes.value?.notesLastValue
-                notes_best_result_value.text = viewModel.updateNotes.value?.notesBestValue
-                notes_complete_result_value.text = viewModel.updateNotes.value?.notesCompleteValue
+                if(viewModel.updateNotes.value?.notesErrorState == 0) {
+                    notes_last_result_value.text = viewModel.updateNotes.value?.notesErrorState.toString()
+                    notes_best_result_value.text = viewModel.updateNotes.value?.notesErrorState.toString()
+                    notes_complete_result_value.text = viewModel.updateNotes.value?.notesErrorState.toString()
+                }
+                else {
+                    notes_last_result_value.text = viewModel.updateNotes.value?.notesLastValue
+                    notes_best_result_value.text = viewModel.updateNotes.value?.notesBestValue
+                    notes_complete_result_value.text =
+                        viewModel.updateNotes.value?.notesCompleteValue
+                }
             }
         )
 
         viewModel.updateChords.observe(
             viewLifecycleOwner,
             { updateChords ->
-                chords_last_result_value.text = viewModel.updateChords.value?.chordsLastValue
-                chords_best_result_value.text = viewModel.updateChords.value?.chordsBestValue
-                chords_complete_result_value.text = viewModel.updateChords.value?.chordsCompleteValue
+                if(viewModel.updateChords.value?.chordsErrorState == 0) {
+                    chords_last_result_value.text = viewModel.updateChords.value?.chordsErrorState.toString()
+                    chords_best_result_value.text = viewModel.updateChords.value?.chordsErrorState.toString()
+                    chords_complete_result_value.text = viewModel.updateChords.value?.chordsErrorState.toString()
+                }
+                else {
+                    chords_last_result_value.text = viewModel.updateChords.value?.chordsLastValue
+                    chords_best_result_value.text = viewModel.updateChords.value?.chordsBestValue
+                    chords_complete_result_value.text =
+                        viewModel.updateChords.value?.chordsCompleteValue
+                }
             }
         )
 
         viewModel.updateRhythm.observe(
             viewLifecycleOwner,
             { updateRhythm ->
-                rhythm_last_result_value.text = viewModel.updateRhythm.value?.rhythmLastValue
-                rhythm_best_result_value.text = viewModel.updateRhythm.value?.rhythmBestValue
-                rhythm_complete_result_value.text = viewModel.updateRhythm.value?.rhythmCompleteValue
+                if(viewModel.updateRhythm.value?.rhythmErrorState == 0) {
+                    rhythm_last_result_value.text = viewModel.updateRhythm.value?.rhythmErrorState.toString()
+                    rhythm_best_result_value.text = viewModel.updateRhythm.value?.rhythmErrorState.toString()
+                    rhythm_complete_result_value.text = viewModel.updateRhythm.value?.rhythmErrorState.toString()
+                }
+                else {
+                    rhythm_last_result_value.text = viewModel.updateRhythm.value?.rhythmLastValue
+                    rhythm_best_result_value.text = viewModel.updateRhythm.value?.rhythmBestValue
+                    rhythm_complete_result_value.text =
+                        viewModel.updateRhythm.value?.rhythmCompleteValue
+                }
             }
         )
 

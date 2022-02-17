@@ -28,7 +28,6 @@ import kotlinx.android.synthetic.main.result_list_fragment.*
 
 
 class HomepageView : Fragment() {
-    private lateinit var viewModel: HomepageViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,11 +39,6 @@ class HomepageView : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        viewModel = ViewModelProvider(
-            this,
-            HomepageInjector(requireActivity().application).provideHomepageViewModelFactory()
-        )
-            .get(HomepageViewModel::class.java)
 
         setUpClickListeners()
 
