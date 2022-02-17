@@ -17,7 +17,6 @@ import kotlinx.android.synthetic.main.lectures_fragment.*
 import kotlinx.android.synthetic.main.login_fragment.*
 
 class LecturesView : Fragment () {
-    private lateinit var viewModel: HomepageViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,12 +28,6 @@ class LecturesView : Fragment () {
 
     override fun onStart() {
         super.onStart()
-        viewModel = ViewModelProvider(
-            this,
-            HomepageInjector(requireActivity().application).provideHomepageViewModelFactory()
-        )
-            .get(HomepageViewModel::class.java)
-
         getActivity()?.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         setUpClickListeners()

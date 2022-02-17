@@ -44,7 +44,6 @@
         android:layout_marginBottom="8dp"
         android:text="@string/v_sledky"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/lst_results"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/noteText"

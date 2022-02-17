@@ -14,9 +14,7 @@
         <action
             android:id="@+id/action_homepageView_to_lecturesView"
             app:destination="@id/lecturesView" />
-        <action
-            android:id="@+id/action_homepageView_to_personalInformationView"
-            app:destination="@id/personalInformationView" />
+
         <action
             android:id="@+id/action_homepageView_to_loginView"
             app:destination="@id/loginView" />
@@ -58,15 +56,6 @@
         <action
             android:id="@+id/action_lectureView_to_lecturesView"
             app:destination="@id/lecturesView" />
-    </fragment>
-    <fragment
-        android:id="@+id/personalInformationView"
-        android:name="com.example.guitar_music_app.accountManagement.PersonalInformationView"
-        android:label="PersonalInformationView"
-        tools:layout="@layout/personal_information_fragment">
-        <action
-            android:id="@+id/action_personalInformationView_to_homepageView"
-            app:destination="@id/homepageView" />
     </fragment>
     <activity
             android:id="@+id/loginView"

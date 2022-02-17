@@ -5,8 +5,32 @@
     android:id="@+id/fragment_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1B1818">
 
+    android:background="@drawable/space_loop">
+
+    <TextView
+        android:id="@+id/lbl_app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="17dp"
+        android:text="MUSEAPP"
+        android:textColor="#FFFFFF"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/loginStatusTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_guitar"
+        android:layout_width="166dp"
+        android:layout_height="162dp"
+        app:layout_constraintBottom_toTopOf="@+id/lbl_app_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/papapishu_guitar_2" />
 
     <ImageView
         android:id="@+id/loginAnimation"
@@ -18,7 +42,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginStatusTextView"
-        app:srcCompat="?android:attr/fingerprintAuthDrawable"
+        app:srcCompat="@drawable/ic_antenna_empty"
         android:contentDescription="TODO" />
 
     <TextView
@@ -26,27 +50,27 @@
         style="@style/TextAppearance.AppCompat.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Login Status:"
         android:textColor="@android:color/background_light"
         app:layout_constraintBottom_toTopOf="@+id/loginAnimation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="Login Status:" />
 
     <Button
         android:id="@+id/authButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Odhlášení"
+        android:layout_width="191dp"
+        android:layout_height="52dp"
         android:backgroundTint="#FFFFFF"
         android:textColor="#000000"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/statusDisplay" />
+        app:layout_constraintTop_toBottomOf="@+id/statusDisplay"
+        tools:text="Odhlášení" />
 
     <TextView
         android:id="@+id/statusDisplay"
@@ -62,11 +86,12 @@
 
     <Button
         android:id="@+id/btn_hmpg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Rychlá lekce"
+        android:layout_width="191dp"
+        android:layout_height="52dp"
         android:backgroundTint="#FFFFFF"
+        android:text="Offline Mód"
         android:textColor="#000000"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

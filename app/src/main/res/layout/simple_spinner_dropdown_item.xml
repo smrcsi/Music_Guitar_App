@@ -5,5 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="30dp"
     android:textColor="#FFFFFF"
+    android:background = "#4DB3AFAF"
     android:textSize="20sp"
     android:ellipsize="marquee" />

@@ -4,6 +4,7 @@
     android:maxLines="1"
     android:textSize="20sp"
     android:textColor="#FFFFFF"
+    android:background = "#4DB3AFAF"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:ellipsize="marquee" />

@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/img_guitar"
-        android:layout_width="126dp"
-        android:layout_height="134dp"
+        android:layout_width="166dp"
+        android:layout_height="162dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_lectures"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -21,48 +21,34 @@
 
     <Button
         android:id="@+id/btn_stats"
-        android:layout_width="148dp"
-        android:layout_height="48dp"
+        android:layout_width="191dp"
+        android:layout_height="52dp"
+        android:layout_marginBottom="164dp"
         android:backgroundTint="#FFFFFF"
         android:text="@string/statistiky"
         android:textColor="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/btn_personal_info"
-        app:layout_constraintEnd_toEndOf="@+id/btn_personal_info"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="@+id/btn_personal_info"
-        app:layout_constraintTop_toBottomOf="@+id/btn_lectures" />
-
-    <Button
-        android:id="@+id/btn_personal_info"
-        android:layout_width="152dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#FFFFFF"
-        android:text="@string/osobní_informace"
-        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_stats" />
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btn_lectures"
-        android:layout_width="148dp"
-        android:layout_height="48dp"
+        android:layout_width="191dp"
+        android:layout_height="52dp"
         android:backgroundTint="#FFFFFF"
-        android:textColor="#000000"
         android:text="@string/lekce"
+        android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/btn_stats"
-        app:layout_constraintEnd_toEndOf="@+id/btn_stats"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/btn_stats"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_guitar" />
 
     <ImageButton
         android:id="@+id/imb_toolbar_logout"
         style="@style/Widget.AppCompat.ActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="59dp"
+        android:layout_height="58dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.044"
@@ -78,10 +64,11 @@
         android:text="emailText"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
+        android:textSize="17sp"
         app:layout_constraintBottom_toTopOf="@+id/img_guitar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.919"
         app:layout_constraintStart_toEndOf="@+id/imb_toolbar_logout"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.228" />
+        app:layout_constraintVertical_bias="0.2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
