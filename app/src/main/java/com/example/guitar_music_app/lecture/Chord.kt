@@ -15,3 +15,6 @@ enum class Note {
     A_SHARP1, B1, C1, C_SHARP1,
     F2, F_SHARP2, G2, G_SHARP2
 }
+
+enum class Tone {
+}

@@ -3,7 +3,7 @@ package com.example.guitar_music_app.firebase
 import com.example.guitar_music_app.general.awaitTaskCompletable
 import com.example.guitar_music_app.general.GeneralResult
 import com.example.guitar_music_app.general.User
-import com.example.guitar_music_app.repositories.UserRepository
+import com.example.guitar_music_app.login.UserRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.coroutines.Dispatchers

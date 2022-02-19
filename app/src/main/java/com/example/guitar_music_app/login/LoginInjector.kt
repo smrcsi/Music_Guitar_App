@@ -3,8 +3,6 @@ package com.example.guitar_music_app.login
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import com.example.guitar_music_app.firebase.FirebaseUserRepo
-import com.example.guitar_music_app.repositories.UserRepository
-import com.example.guitar_music_app.viewModels.UserViewModelFactory
 import com.google.firebase.FirebaseApp
 
 class LoginInjector(application: Application): AndroidViewModel(application) {

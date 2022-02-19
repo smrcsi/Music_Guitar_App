@@ -13,13 +13,9 @@ abstract class BaseViewModel<T>(protected val uiContext: CoroutineContext) : Vie
     //Generic type, <T> sealed trida ktera reprezentuje ruzne eventy ktere muzou propagovat z UI
     //Abstraktni trida, kterou rozsiruje UserViewModel a obsahuje vsechno spolecne pro ViewModely
    //Behem kazdeho launch je to rozsireni CoroutineScope tudiz ViewModelu
-    protected lateinit var jobTracker: Job
+    private var jobTracker: Job = Job()
 
-    init {
-        jobTracker = Job()
-    }
-
-    protected val loadingState = MutableLiveData<Unit>()
+    private val loadingState = MutableLiveData<Unit>()
     val loading: LiveData<Unit> get() = loadingState
 
 

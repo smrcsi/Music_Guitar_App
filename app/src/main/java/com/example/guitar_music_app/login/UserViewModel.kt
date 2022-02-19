@@ -1,4 +1,4 @@
-package com.example.guitar_music_app.viewModels
+package com.example.guitar_music_app.login
 
 import androidx.lifecycle.MutableLiveData
 import com.example.guitar_music_app.general.*
@@ -12,9 +12,7 @@ import com.example.guitar_music_app.general.SIGNED_IN
 import com.example.guitar_music_app.general.SIGNED_OUT
 import com.example.guitar_music_app.general.SIGN_IN
 import com.example.guitar_music_app.general.SIGN_OUT
-import com.example.guitar_music_app.login.LoginEvent
-import com.example.guitar_music_app.login.LoginResult
-import com.example.guitar_music_app.repositories.UserRepository
+import com.example.guitar_music_app.general.BaseViewModel
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 

@@ -1,8 +1,7 @@
-package com.example.guitar_music_app.viewModels
+package com.example.guitar_music_app.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.guitar_music_app.repositories.UserRepository
 import kotlinx.coroutines.Dispatchers
 
 class UserViewModelFactory(

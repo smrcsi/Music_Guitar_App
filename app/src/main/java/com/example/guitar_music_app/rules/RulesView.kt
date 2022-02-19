@@ -14,7 +14,6 @@ import com.example.guitar_music_app.R
 import kotlinx.android.synthetic.main.rules_fragment.*
 
 class RulesView : Fragment() {
-    private lateinit var viewModel: RulesViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -25,11 +24,6 @@ class RulesView : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        viewModel = ViewModelProvider(
-            this,
-            RulesInjector(requireActivity().application).provideRulesViewModelFactory()
-        )[RulesViewModel::class.java]
-
         setUpClickListeners()
 
         ArrayAdapter.createFromResource(

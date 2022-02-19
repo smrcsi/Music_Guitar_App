@@ -65,6 +65,23 @@ class NotesView : Fragment() {
         R.id.viewF_SHARP1 to Note.F_SHARP1, R.id.viewC_SHARP1 to Note.C_SHARP1,
         R.id.viewG_SHARP2 to Note.G_SHARP2
     )
+
+    private val tones = mapOf(
+        Note.F to R.raw.f, Note.C to R.raw.c,
+        Note.G_SHARP1 to R.raw.g_sharp_1, Note.D_SHARP1 to R.raw.d_sharp_1,
+        Note.A_SHARP1 to R.raw.a_sharp_1, Note.F2 to R.raw.f2,
+
+        Note.F_SHARP to R.raw.f_sharp, Note.C_SHARP to R.raw.c_sharp, Note.A to R.raw.a,
+        Note.E to R.raw.e, Note.B1 to R.raw.b1, Note.F_SHARP2 to R.raw.f_sharp_2,
+
+        Note.G to R.raw.g, Note.D to R.raw.d, Note.A_SHARP to R.raw.a_sharp,
+        Note.F1 to R.raw.f1, Note.C1 to R.raw.c1, Note.G2 to R.raw.g1,
+
+        Note.G_SHARP to R.raw.g_sharp, Note.D_SHARP to R.raw.d_sharp, Note.B to R.raw.b,
+        Note.F_SHARP1 to R.raw.f_sharp_1, Note.C_SHARP1 to R.raw.c_sharp_1,
+        Note.G_SHARP2 to R.raw.g_sharp_2
+    )
+
     private lateinit var viewModel: NotesViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -90,32 +107,35 @@ class NotesView : Fragment() {
 
         viewModel.noteState.observe(viewLifecycleOwner, { noteState ->
             views.forEach { (viewId, note) ->
-                if (noteState.notesTouched.any { it.note == note }) {
-                    if (!noteState.isNoteValid && !noteState.notePlayed) {
-                        view?.findViewById<View>(viewId)?.setBackgroundColor(Color.YELLOW)
-                        println("dala se zluta")
+                tones.forEach { (note1, tone) ->
+                    if (noteState.notesTouched.any { it.note == note }) {
+                        if (noteState.notesTouched.any { it.note == note1 }) {
+                            lifecycleScope.launch { playSound(tone) }
+                        }
+                        if (!noteState.isNoteValid && !noteState.notePlayed) {
+                            view?.findViewById<View>(viewId)?.setBackgroundColor(Color.YELLOW)
+                            println("dala se zluta")
 
+                        }
+                    } else {
+                        view?.findViewById<View>(viewId)?.setBackgroundColor(Color.TRANSPARENT)
                     }
-                } else {
-                    view?.findViewById<View>(viewId)?.setBackgroundColor(Color.TRANSPARENT)
-                }
-                if ((noteState.note == note)) {
-                    if (noteState.notePlayed) {
+                    if ((noteState.note == note)) {
+                        if (noteState.notePlayed) {
                             view?.findViewById<View>(viewId)?.setBackgroundColor(Color.GREEN)
-                        noteText.setTextColor(Color.GREEN)
-                        println("Dala se zelena")
-                        lifecycleScope.launch { playSound() }
+                            noteText.setTextColor(Color.GREEN)
+                            println("Dala se zelena")
 
-                        displayToast()
-                        lifecycleScope.launch { vibrate(millisecond = 5) }
-                        noteText.setTextColor(Color.GREEN)
+                            displayToast()
+                            lifecycleScope.launch { vibrate(millisecond = 5) }
+                            noteText.setTextColor(Color.GREEN)
+                        } else {
+                            noteText.setTextColor(Color.RED)
+                        }
                     }
-                    else {
-                        noteText.setTextColor(Color.RED)
+                    if (noteState.targetNote == note) {
+                        view?.findViewById<View>(viewId)?.setBackgroundColor(Color.GRAY)
                     }
-                }
-                if (noteState.targetNote == note) {
-                    view?.findViewById<View>(viewId)?.setBackgroundColor(Color.GRAY)
                 }
             }
         }
@@ -168,9 +188,10 @@ class NotesView : Fragment() {
         toast.show()
     }
 
-    private suspend fun playSound() {
+    private suspend fun playSound(tone: Int) {
         withContext(Dispatchers.IO) {
-            val mediaPlayer = MediaPlayer.create(activity, R.raw.c_vbr)
+            val mediaPlayer = MediaPlayer.create(activity, tone)
+            mediaPlayer.start()
             try {
                 if (mediaPlayer.isPlaying) {
                     mediaPlayer.stop()
@@ -180,8 +201,8 @@ class NotesView : Fragment() {
                 }
             } catch (e: Exception) {
                 e.printStackTrace(); }
-        }
 
+        }
     }
 
     private suspend fun vibrate(millisecond: Long) {

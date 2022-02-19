@@ -1,4 +1,4 @@
-package com.example.guitar_music_app.repositories
+package com.example.guitar_music_app.login
 
 import com.example.guitar_music_app.general.User
 import com.example.guitar_music_app.general.GeneralResult

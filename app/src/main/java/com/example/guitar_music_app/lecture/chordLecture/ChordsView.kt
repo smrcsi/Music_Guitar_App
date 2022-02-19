@@ -28,13 +28,32 @@ class ChordsView : Fragment() {
         R.id.viewF to Note.F, R.id.viewC to Note.C,
         R.id.viewG_SHARP1 to Note.G_SHARP1, R.id.viewD_SHARP1 to Note.D_SHARP1,
         R.id.viewA_SHARP1 to Note.A_SHARP1, R.id.viewF2 to Note.F2,
+
         R.id.viewF_SHARP to Note.F_SHARP, R.id.viewC_SHARP to Note.C_SHARP, R.id.viewA to Note.A,
         R.id.viewE to Note.E, R.id.viewB1 to Note.B1, R.id.viewF_SHARP2 to Note.F_SHARP2,
+
         R.id.viewG to Note.G, R.id.viewD to Note.D, R.id.viewA_SHARP to Note.A_SHARP,
         R.id.viewF1 to Note.F1, R.id.viewC1 to Note.C1, R.id.viewG2 to Note.G2,
+
         R.id.viewG_SHARP to Note.G_SHARP, R.id.viewD_SHARP to Note.D_SHARP, R.id.viewB to Note.B,
         R.id.viewF_SHARP1 to Note.F_SHARP1, R.id.viewC_SHARP1 to Note.C_SHARP1,
         R.id.viewG_SHARP2 to Note.G_SHARP2
+    )
+
+    private val tones = mapOf(
+        Note.F to R.raw.f, Note.C to R.raw.c,
+        Note.G_SHARP1 to R.raw.g_sharp_1, Note.D_SHARP1 to R.raw.d_sharp_1,
+        Note.A_SHARP1 to R.raw.a_sharp_1, Note.F2 to R.raw.f2,
+
+        Note.F_SHARP to R.raw.f_sharp, Note.C_SHARP to R.raw.c_sharp,Note.A to R.raw.a,
+        Note.E to R.raw.e, Note.B1 to R.raw.b1, Note.F_SHARP2 to R.raw.f_sharp_2,
+
+        Note.G to R.raw.g, Note.D to R.raw.d, Note.A_SHARP to R.raw.a_sharp,
+        Note.F1 to R.raw.f1, Note.C1 to R.raw.c1, Note.G2 to R.raw.g1,
+
+        Note.G_SHARP to R.raw.g_sharp, Note.D_SHARP to R.raw.d_sharp, Note.B to R.raw.b,
+        Note.F_SHARP1 to R.raw.f_sharp_1, Note.C_SHARP1 to R.raw.c_sharp_1,
+        Note.G_SHARP2 to  R.raw.g_sharp_2
     )
 
     private lateinit var viewModel: ChordsViewModel
@@ -60,33 +79,37 @@ class ChordsView : Fragment() {
 
         viewModel.state.observe(viewLifecycleOwner, { state ->
             views.forEach { (viewId, note) ->
-                if (state.buttonsTouched.any { it.note == note }) {
-                    view?.findViewById<View>(viewId)?.setBackgroundColor(Color.YELLOW)
+                tones.forEach { (note1, tone) ->
+                    if (state.buttonsTouched.any { it.note == note }) {
+                        view?.findViewById<View>(viewId)?.setBackgroundColor(Color.YELLOW)
+                        if (state.buttonsTouched.any { it.note == note1 }) {
+                            lifecycleScope.launch { playSound(tone) }
+                        }
+                        if (state.isChordValid) {
+                            view?.findViewById<View>(viewId)?.setBackgroundColor(Color.GREEN)
+                            noteText.setTextColor(Color.GREEN)
 
-                    if (state.isChordValid) {
-                        view?.findViewById<View>(viewId)?.setBackgroundColor(Color.GREEN)
-                        noteText.setTextColor(Color.GREEN)
-
-                        //TODO- Upravit toast aby vypadal normalneji
+                            //TODO- Upravit toast aby vypadal normalneji
 //                        Toast.makeText(
 //                            context, "Správně",
 //                            Toast.LENGTH_SHORT
 //                        ).show()
-                        lifecycleScope.launch { playSound() }
 
-                        displayToast()
-                        lifecycleScope.launch { vibrate(millisecond = 1) }
+                            displayToast()
+                            lifecycleScope.launch { vibrate(millisecond = 1) }
+                        }
+                    } else if (state.assistant && state.chord.notes.contains(note)) {
+                        if (state.chord.notes.contains(note)) {
+                            view?.findViewById<View>(viewId)?.setBackgroundColor(Color.LTGRAY)
+                        }
+                    } else {
+                        view?.findViewById<View>(viewId)?.setBackgroundColor(Color.TRANSPARENT)
+                        noteText.setTextColor(Color.RED)
                     }
-                } else if (state.assistant && state.chord.notes.contains(note)) {
-                    if (state.chord.notes.contains(note)) {
-                        view?.findViewById<View>(viewId)?.setBackgroundColor(Color.LTGRAY)
-                    }
-                } else {
-                    view?.findViewById<View>(viewId)?.setBackgroundColor(Color.TRANSPARENT)
-                    noteText.setTextColor(Color.RED)
                 }
-
             }
+
+
         })
 
 
@@ -145,9 +168,9 @@ class ChordsView : Fragment() {
         toast.show()
     }
 
-    private suspend fun playSound() {
+    private suspend fun playSound(tone: Int) {
         withContext(Dispatchers.IO) {
-            val mediaPlayer = MediaPlayer.create(activity, R.raw.c_vbr)
+            val mediaPlayer = MediaPlayer.create(activity, tone)
             try {
                 if (mediaPlayer.isPlaying) {
                     mediaPlayer.stop()
@@ -157,9 +180,10 @@ class ChordsView : Fragment() {
                 }
             } catch (e: Exception) {
                 e.printStackTrace(); }
-        }
 
+        }
     }
+
 
     private suspend fun vibrate(millisecond: Long) {
         withContext(Dispatchers.IO) {
@@ -485,7 +509,7 @@ class ChordsView : Fragment() {
             lifecycleScope.launch {
                 viewModel.buttonTouched(
                     note!!,
-                    touched = event.action == MotionEvent.ACTION_UP
+                    touched = event.action != MotionEvent.ACTION_UP
                 )
             }
             v.performClick()

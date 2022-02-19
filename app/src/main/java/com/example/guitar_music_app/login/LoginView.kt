@@ -9,14 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.guitar_music_app.*
 import com.example.guitar_music_app.general.ANTENNA_LOOP
 import com.example.guitar_music_app.general.RC_SIGN_IN
 import com.example.guitar_music_app.general.SIGNED_IN
 import com.example.guitar_music_app.results.ResultActivity
-import com.example.guitar_music_app.viewModels.UserViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions

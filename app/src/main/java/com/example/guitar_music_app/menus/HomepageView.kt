@@ -3,7 +3,6 @@ package com.example.guitar_music_app.menus
 
 import android.app.AlertDialog
 import android.content.Intent
-import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,15 +15,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.guitar_music_app.R
 import com.example.guitar_music_app.firebase.FirebaseUserRepo
 import com.example.guitar_music_app.login.LoginActivity
-import com.example.guitar_music_app.login.LoginEvent
 import com.example.guitar_music_app.login.LoginInjector
-import com.example.guitar_music_app.results.ResultActivity
-import com.example.guitar_music_app.viewModels.UserViewModel
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.common.api.ApiException
+import com.example.guitar_music_app.login.UserViewModel
 import kotlinx.android.synthetic.main.homepage_fragment.*
-import kotlinx.android.synthetic.main.login_fragment.*
-import kotlinx.android.synthetic.main.result_list_fragment.*
 
 
 class HomepageView : Fragment() {

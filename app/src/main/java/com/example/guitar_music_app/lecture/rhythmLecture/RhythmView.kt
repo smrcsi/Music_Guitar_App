@@ -542,7 +542,7 @@ class RhythmView : Fragment() {
 
     private suspend fun playSound() {
         withContext(Dispatchers.IO) {
-            val mediaPlayer = MediaPlayer.create(activity, R.raw.a_sharp1)
+            val mediaPlayer = MediaPlayer.create(activity, R.raw.a_sharp)
             try {
                 if (mediaPlayer.isPlaying) {
                     mediaPlayer.stop()
@@ -558,7 +558,7 @@ class RhythmView : Fragment() {
 
     private suspend fun playSecond() {
         withContext(Dispatchers.IO) {
-            val mediaPlayer = MediaPlayer.create(activity, R.raw.a_sharp1)
+            val mediaPlayer = MediaPlayer.create(activity, R.raw.a_sharp)
             try {
                 if (mediaPlayer.isPlaying) {
                     mediaPlayer.stop()
