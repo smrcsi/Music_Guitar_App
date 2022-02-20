@@ -91,5 +91,13 @@ class RhythmViewModel(
         return format.format(cal.time)
     }
 
-
+    data class UiState(val flings: List<Fling>) {
+        data class Fling(val direction: Direction, val state: FlingState)
+        enum class Direction {
+            UP, DOWN
+        }
+        enum class FlingState {
+            START, VALID, INVALID
+        }
+    }
 }
