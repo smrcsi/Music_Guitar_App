@@ -1,6 +1,7 @@
 package com.example.guitar_music_app.lecture.chordLecture
 
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.pm.ActivityInfo
 import android.graphics.Color
@@ -529,7 +530,18 @@ class ChordsView : Fragment() {
 
     private fun setUpClickListeners() {
         btn_back_chords.setOnClickListener {
+            val builder = AlertDialog.Builder(this.activity)
+            builder.setMessage("Opuštěním cvičení příjdete o výsledek. Doopravdy chcete cvičení opustit?")
+                .setCancelable(false)
+                .setPositiveButton("Ano") { dialog, id ->
             findNavController().navigate(R.id.lecturesView)
+                }.setNegativeButton("Ne") { dialog, id ->
+                    // Dismiss the dialog
+                    dialog.dismiss()
+                }
+
+            val alert = builder.create()
+            alert.show()
         }
         endPicture.setOnClickListener {
             findNavController().navigate(R.id.lectureResultView)

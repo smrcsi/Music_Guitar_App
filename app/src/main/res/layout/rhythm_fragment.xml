@@ -321,9 +321,10 @@
         android:text="Výsledek"
         android:textColor="#FFFFFF"
 
+        android:translationZ="90dp"
         app:layout_constraintBottom_toTopOf="@+id/rhythm_nmb_lbl"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintHorizontal_bias="0.522"
         app:layout_constraintStart_toEndOf="@+id/stringField"
         app:layout_constraintTop_toBottomOf="@+id/rhythm_score_lbl"
         app:layout_constraintVertical_bias="0.269" />
@@ -360,10 +361,38 @@
         android:layout_marginBottom="88dp"
         android:text="Výsledek rytmu"
         android:textColor="#FFFFFF"
+        android:translationZ="90dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toEndOf="@+id/stringField" />
+
+    <View
+        android:id="@+id/outline_text_view"
+        android:layout_width="116dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="28dp"
+        android:background="#4DB3AFAF"
+        app:layout_constraintBottom_toTopOf="@+id/rhythm_nmb_lbl"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/stringField"
+        app:layout_constraintTop_toBottomOf="@+id/rhythm_score_lbl"
+        app:layout_constraintVertical_bias="0.208" />
+
+    <View
+        android:id="@+id/outline_text_view_2"
+        android:layout_width="118dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="80dp"
+        android:background="#4DB3AFAF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/stringField"
+        app:layout_constraintTop_toBottomOf="@+id/rhythm_nmb_lbl" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

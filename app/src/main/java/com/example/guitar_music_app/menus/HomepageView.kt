@@ -48,9 +48,9 @@ class HomepageView : Fragment() {
         //TODO-HODIT ALERT DO VLASTNI TRIDY + ZAJISTIT ABY BYL PRI LOGOUT UZIVATEL DOOPRAVDY PRYC
         imb_toolbar_logout.setOnClickListener{
             val builder = AlertDialog.Builder(this.activity)
-            builder.setMessage("Are you sure you want to sign out?")
+            builder.setMessage("Doopravdy se chcete odhlásit?")
                 .setCancelable(false)
-                .setPositiveButton("Yes") { dialog, id ->
+                .setPositiveButton("Ano") { dialog, id ->
                     startLoginActivity()
                     val userViewModel: UserViewModel = ViewModelProvider(
                         this,
@@ -58,7 +58,7 @@ class HomepageView : Fragment() {
                     )[UserViewModel::class.java]
                     userViewModel.signOutUser()
                     userViewModel.signedIn.value = false
-                }.setNegativeButton("No") { dialog, id ->
+                }.setNegativeButton("Ne") { dialog, id ->
                     // Dismiss the dialog
                     dialog.dismiss()
                 }

@@ -1,5 +1,6 @@
 package com.example.guitar_music_app.lecture.rhythmLecture
 
+import android.app.AlertDialog
 import android.content.pm.ActivityInfo
 import android.graphics.Color
 
@@ -12,7 +13,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.guitar_music_app.R
-import kotlinx.android.synthetic.main.chords_fragment.endPicture
 import kotlinx.android.synthetic.main.rhythm_fragment.*
 import kotlinx.coroutines.launch
 import androidx.core.view.GestureDetectorCompat
@@ -24,6 +24,8 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.example.guitar_music_app.general.toEditable
 import com.example.guitar_music_app.lecture.LectureEvent
+import kotlinx.android.synthetic.main.chords_fragment.*
+import kotlinx.android.synthetic.main.chords_fragment.endPicture
 import kotlinx.android.synthetic.main.rhythm_fragment.btn_back
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -727,7 +729,18 @@ class RhythmView : Fragment() {
 
     private fun setUpClickListeners() {
         btn_back.setOnClickListener {
-            findNavController().navigate(R.id.lecturesView)
+            val builder = AlertDialog.Builder(this.activity)
+            builder.setMessage("Opuštěním cvičení příjdete o výsledek. Doopravdy chcete cvičení opustit?")
+                .setCancelable(false)
+                .setPositiveButton("Ano") { dialog, id ->
+                    findNavController().navigate(R.id.lecturesView)
+                }.setNegativeButton("Ne") { dialog, id ->
+                    // Dismiss the dialog
+                    dialog.dismiss()
+                }
+
+            val alert = builder.create()
+            alert.show()
         }
         endPicture.setOnClickListener {
             findNavController().navigate(R.id.lectureResultView)
