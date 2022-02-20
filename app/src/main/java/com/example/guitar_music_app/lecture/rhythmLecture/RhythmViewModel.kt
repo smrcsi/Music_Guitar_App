@@ -8,15 +8,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.guitar_music_app.general.BaseViewModel
 import com.example.guitar_music_app.general.GeneralResult
-import com.example.guitar_music_app.lecture.ButtonState
 import com.example.guitar_music_app.lecture.LectureEvent
-import com.example.guitar_music_app.lecture.Note
-import com.example.guitar_music_app.lecture.chordLecture.ChordsViewModel
+import com.example.guitar_music_app.lecture.rhythmLecture.RhythmViewModel.UiState.Direction.*
 import com.example.guitar_music_app.results.Result
 import com.example.guitar_music_app.results.ResultRepository
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.coroutines.CoroutineContext
 
 class RhythmViewModel(
@@ -33,6 +30,15 @@ class RhythmViewModel(
 
     private val updatedState = MutableLiveData<Boolean>()
     val updated: LiveData<Boolean> get() = updatedState
+
+
+    private val _uiState = MutableLiveData(UiState(RhythmType.RHYTHM_1, RhythmType.RHYTHM_1.directions.map {
+        UiState.Fling(
+            it,
+            UiState.FlingState.START
+        )
+    }))
+    val uiState: LiveData<UiState> get() = _uiState
 
 
     val slidesNumber = MutableLiveData<Int>()
@@ -91,13 +97,62 @@ class RhythmViewModel(
         return format.format(cal.time)
     }
 
-    data class UiState(val flings: List<Fling>) {
+    fun onFling(direction: UiState.Direction) {
+        val currentState = _uiState.value
+        var flingFound = false
+        var isValidFling = true
+        val mappedFlings = currentState!!.flings.map {
+            if (flingFound || it.state != UiState.FlingState.START) {
+                it
+            } else {
+                flingFound = true
+                if (it.direction == direction) {
+                    it.copy(state = UiState.FlingState.VALID)
+                } else {
+                    isValidFling = false
+                    it.copy(state = UiState.FlingState.INVALID)
+                }
+            }
+        }
+        when {
+            currentState.flings.all { it.state == UiState.FlingState.VALID } -> {
+                _uiState.value = UiState(currentState.rhythmType, successMessage = "jupii!")
+            }
+            isValidFling -> {
+                _uiState.value = currentState.copy(flings = mappedFlings, successMessage = null, errorMessage = null, tryAgain = false)
+            }
+            else -> {
+                // TODO zobraz neco
+                _uiState.value = UiState(currentState.rhythmType, errorMessage = "posralo se to")
+            }
+        }
+    }
+
+    fun changeRhythm(rhythmType: RhythmType) {
+        _uiState.value = UiState(rhythmType)
+    }
+
+    fun onIncorrect() {
+        _uiState.value = _uiState.value?.copy(tryAgain = true)
+    }
+
+    data class UiState(val rhythmType: RhythmType, val flings: List<Fling> = rhythmType.directions.map {
+        Fling(
+            it,
+            FlingState.START
+        )
+    }, val errorMessage: String? = null, val successMessage: String? = null, val tryAgain: Boolean = false) {
         data class Fling(val direction: Direction, val state: FlingState)
         enum class Direction {
             UP, DOWN
         }
+
         enum class FlingState {
             START, VALID, INVALID
         }
+    }
+
+    enum class RhythmType(val directions: List<UiState.Direction>) {
+        RHYTHM_1(listOf(UP, DOWN, UP))
     }
 }

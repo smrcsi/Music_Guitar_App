@@ -605,6 +605,7 @@ class RhythmView : Fragment() {
                 position: Int,
                 id: Long
             ) {
+                viewModel.changeRhythm(RhythmViewModel.RhythmType.values()[position])
                 when (position) {
                     0 -> {
                         arrow1.visibility = View.GONE
