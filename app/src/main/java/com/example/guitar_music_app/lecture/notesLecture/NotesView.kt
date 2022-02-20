@@ -21,7 +21,6 @@ import com.example.guitar_music_app.R
 import com.example.guitar_music_app.general.toEditable
 import com.example.guitar_music_app.lecture.LectureEvent
 import com.example.guitar_music_app.lecture.Note
-import kotlinx.android.synthetic.main.chords_fragment.*
 import kotlinx.android.synthetic.main.chords_fragment.endPicture
 import kotlinx.android.synthetic.main.chords_fragment.noteText
 import kotlinx.android.synthetic.main.chords_fragment.viewA
@@ -62,7 +61,7 @@ class NotesView : Fragment() {
         R.id.viewF_SHARP to Note.F_SHARP, R.id.viewC_SHARP to Note.C_SHARP, R.id.viewA to Note.A,
         R.id.viewE to Note.E, R.id.viewB1 to Note.B1, R.id.viewF_SHARP2 to Note.F_SHARP2,
         R.id.viewG to Note.G, R.id.viewD to Note.D, R.id.viewA_SHARP to Note.A_SHARP,
-        R.id.viewF1 to Note.F1, R.id.viewC1 to Note.C1, R.id.viewG2 to Note.G2,
+        R.id.viewF1 to Note.F1, R.id.viewC1 to Note.C1, R.id.viewG2 to Note.G1,
         R.id.viewG_SHARP to Note.G_SHARP, R.id.viewD_SHARP to Note.D_SHARP, R.id.viewB to Note.B,
         R.id.viewF_SHARP1 to Note.F_SHARP1, R.id.viewC_SHARP1 to Note.C_SHARP1,
         R.id.viewG_SHARP2 to Note.G_SHARP2
@@ -77,7 +76,7 @@ class NotesView : Fragment() {
         Note.E to R.raw.e, Note.B1 to R.raw.b1, Note.F_SHARP2 to R.raw.f_sharp_2,
 
         Note.G to R.raw.g, Note.D to R.raw.d, Note.A_SHARP to R.raw.a_sharp,
-        Note.F1 to R.raw.f1, Note.C1 to R.raw.c1, Note.G2 to R.raw.g1,
+        Note.F1 to R.raw.f1, Note.C1 to R.raw.c1, Note.G1 to R.raw.g1,
 
         Note.G_SHARP to R.raw.g_sharp, Note.D_SHARP to R.raw.d_sharp, Note.B to R.raw.b,
         Note.F_SHARP1 to R.raw.f_sharp_1, Note.C_SHARP1 to R.raw.c_sharp_1,

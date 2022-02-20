@@ -70,21 +70,25 @@ class ChordsViewModel(
     @RequiresApi(Build.VERSION_CODES.N)
     fun buttonTouched(note: Note, touched: Boolean) {
         val currentState = state.value!!
-        val mutableList = currentState.buttonsTouched.toMutableSet()
-        val exists = mutableList.any { it.note == note }
+        val updatesTouchedButtons = currentState.buttonsTouched.toMutableSet()
+        val exists = updatesTouchedButtons.any { it.note == note }
         if (touched && !exists) {
-            mutableList.add(ButtonState(note))
+            updatesTouchedButtons.add(ButtonState(note))
         } else if (!touched && exists) {
-            mutableList.remove(ButtonState(note))
+            updatesTouchedButtons.remove(ButtonState(note))
         }
-        if (mutableList.isEmpty() && state.value!!.chordPlayed) {
+        if (state.value?.buttonsTouched == updatesTouchedButtons) {
+            return
+        }
+        val isChordValid = isChordValid(currentState.chord, updatesTouchedButtons)
+        if (updatesTouchedButtons.isEmpty() && state.value!!.chordPlayed) {
             chordTextChange.value = randomChord().toString()
             state.value!!.chordPlayed = false
         }
-        val isChordValid = isChordValid(currentState.chord, mutableList)
-        state.value = currentState.copy(isChordValid = isChordValid, buttonsTouched = mutableList)
+        state.value =
+            currentState.copy(isChordValid = isChordValid, buttonsTouched = updatesTouchedButtons)
         //TODO- Zkontrolovat jestli je potreba duplikovat cyklus
-        if (mutableList.isEmpty() && state.value!!.chordPlayed) {
+        if (updatesTouchedButtons.isEmpty() && state.value!!.chordPlayed) {
             chordTextChange.value = randomChord().toString()
             state.value!!.chordPlayed = false
         }
@@ -119,10 +123,11 @@ class ChordsViewModel(
         return chord
     }
 
-    fun assistantSet() {
-        if (state.value?.assistant == false) {
+    fun assistantSet(isChecked: Boolean) {
+        val assistant = state.value?.assistant
+        if (assistant == false && isChecked) {
             state.value = state.value?.copy(assistant = true)
-        } else {
+        } else if (assistant == true && !isChecked) {
             state.value = state.value?.copy(assistant = false)
         }
     }
