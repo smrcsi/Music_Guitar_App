@@ -92,6 +92,7 @@ class ChordsView : Fragment() {
                     view?.findViewById<View>(viewId)?.setBackgroundColor(Color.TRANSPARENT)
                 }
             }
+            noteText.text = state.chord.toString()
             if (state.isChordValid) {
                 noteText.setTextColor(Color.GREEN)
                 displayToast()
@@ -101,10 +102,6 @@ class ChordsView : Fragment() {
             }
         })
 
-
-        viewModel.chordTextChange.observe(viewLifecycleOwner, {
-            noteText.text = viewModel.chordTextChange.value
-        })
 
         viewModel.result.observe(
             viewLifecycleOwner,

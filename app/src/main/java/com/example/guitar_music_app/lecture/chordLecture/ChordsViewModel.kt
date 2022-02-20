@@ -1,9 +1,5 @@
 package com.example.guitar_music_app.lecture.chordLecture
 
-import android.icu.util.Calendar
-import android.icu.util.TimeZone
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.guitar_music_app.general.BaseViewModel
@@ -31,9 +27,6 @@ class ChordsViewModel(
 
     val state = MutableLiveData(State())
 
-    val chordTextChange = MutableLiveData<String>()
-
-
     private val resultState = MutableLiveData<Result>()
     val result: LiveData<Result> get() = resultState
 
@@ -43,11 +36,11 @@ class ChordsViewModel(
     val chordsNumber = MutableLiveData<Int>()
 
 
-    @RequiresApi(Build.VERSION_CODES.N)
     override fun handleEvent(event: LectureEvent) {
         when (event) {
             is LectureEvent.OnStart -> {
-                chordTextChange.value = randomChord().toString()
+                val randomChord = randomChord()
+                state.value = state.value?.copy(chord = randomChord)
                 newResult()
                 chordsNumber.value = intChordNumber
             }
@@ -55,19 +48,20 @@ class ChordsViewModel(
                 updateResult(event.contents)
                 println("Uspech" + event.contents)
             }
+            is LectureEvent.OnLectureItemClick -> TODO()
+            LectureEvent.OnNewLectureClick -> TODO()
         }
     }
 
     data class State(
-        var chord: Chord = Chord.C_DUR,
+        val chord: Chord = Chord.C_DUR,
         val isChordValid: Boolean = false,
         val buttonsTouched: Set<ButtonState> = emptySet(),
-        var chordPlayed: Boolean = false,
-        var assistant: Boolean = false
+        val chordPlayed: Boolean = false,
+        val assistant: Boolean = false
     )
 
 
-    @RequiresApi(Build.VERSION_CODES.N)
     fun buttonTouched(note: Note, touched: Boolean) {
         val currentState = state.value!!
         val updatesTouchedButtons = currentState.buttonsTouched.toMutableSet()
@@ -76,49 +70,43 @@ class ChordsViewModel(
             updatesTouchedButtons.add(ButtonState(note))
         } else if (!touched && exists) {
             updatesTouchedButtons.remove(ButtonState(note))
-        }
-        if (state.value?.buttonsTouched == updatesTouchedButtons) {
+        } else {
             return
         }
         val isChordValid = isChordValid(currentState.chord, updatesTouchedButtons)
-        if (updatesTouchedButtons.isEmpty() && state.value!!.chordPlayed) {
-            chordTextChange.value = randomChord().toString()
-            state.value!!.chordPlayed = false
+        var newChord: Chord? = null
+        val chordPlayed = if (isChordValid) {
+            true
+        } else if (updatesTouchedButtons.isEmpty() && currentState.chordPlayed) {
+            newChord = randomChord()
+            false
+        } else {
+            currentState.chordPlayed
         }
-        state.value =
-            currentState.copy(isChordValid = isChordValid, buttonsTouched = updatesTouchedButtons)
-        //TODO- Zkontrolovat jestli je potreba duplikovat cyklus
-        if (updatesTouchedButtons.isEmpty() && state.value!!.chordPlayed) {
-            chordTextChange.value = randomChord().toString()
-            state.value!!.chordPlayed = false
-        }
+        state.value = currentState.copy(
+            isChordValid = isChordValid,
+            buttonsTouched = updatesTouchedButtons,
+            chordPlayed = chordPlayed,
+            chord = newChord ?: currentState.chord
+        )
 
     }
 
 
-    @RequiresApi(Build.VERSION_CODES.N)
     private fun isChordValid(chord: Chord, buttons: Set<ButtonState>): Boolean {
-        chord.notes.forEach { _ ->
-//            return if (chord.notes.sortedBy { it.name } == buttons.map { it.note }.sortedBy { it.name }) {
-            return if (chord.notes == buttons.map { it.note }.toSet()) {
-                println("wellplayed")
-                addToResult()
-                intChordNumber += 1
-                state.value?.chordPlayed = true
-                chordsNumber.value = intChordNumber
-                true
-            } else {
-                false
-            }
+        val isValid = buttons.size == chord.notes.size && buttons.map { it.note }.containsAll(chord.notes)
+        if (isValid) {
+            println("wellplayed")
+            addToResult()
+            intChordNumber += 1
+            chordsNumber.value = intChordNumber
         }
-        return isChordValid(chord, buttons)
+        return isValid
     }
 
     private fun randomChord(): Chord {
         val pick = Random().nextInt(Chord.values().size)
         val chord = Chord.values()[pick]
-        state.value = state.value?.copy(chord = chord)
-
         println("what" + state.value?.chord)
         return chord
     }
@@ -145,7 +133,6 @@ class ChordsViewModel(
     }
 
     //TODO-Jede to mnoooohokrat
-    @RequiresApi(Build.VERSION_CODES.N)
     private fun addToResult() {
         intResult += if (state.value?.assistant == true) {
             1
@@ -157,16 +144,14 @@ class ChordsViewModel(
     }
 
 
-    @RequiresApi(Build.VERSION_CODES.N)
     private fun newResult() {
         resultState.value =
             Result(getCalendarTime(), intResult.toString(), "chords", null)
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
     private fun getCalendarTime(): String {
         val cal = Calendar.getInstance(TimeZone.getDefault())
-        val format = SimpleDateFormat("d MMM yyyy HH:mm:ss Z")
+        val format = SimpleDateFormat("d MMM yyyy HH:mm:ss Z", Locale.getDefault())
 //       format.timeZone = cal.timeZone
         return format.format(cal.time)
     }
