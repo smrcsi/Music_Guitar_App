@@ -129,7 +129,7 @@ class ChordsView : Fragment() {
         viewModel.handleEvent(LectureEvent.OnStart)
 
 //TODO-ZPROVOZNIT
-        img_guitar.setOnClickListener {
+        endPicture.setOnClickListener {
             viewModel.handleEvent(
                 LectureEvent.OnDoneClick(
                     result_text.text.toString()
@@ -531,7 +531,7 @@ class ChordsView : Fragment() {
         btn_back_chords.setOnClickListener {
             findNavController().navigate(R.id.lecturesView)
         }
-        img_guitar.setOnClickListener {
+        endPicture.setOnClickListener {
             findNavController().navigate(R.id.lectureResultView)
         }
     }

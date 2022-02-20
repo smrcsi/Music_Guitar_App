@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.guitar_music_app.R
-import kotlinx.android.synthetic.main.chords_fragment.img_guitar
+import kotlinx.android.synthetic.main.chords_fragment.endPicture
 import kotlinx.android.synthetic.main.rhythm_fragment.*
 import kotlinx.coroutines.launch
 import androidx.core.view.GestureDetectorCompat
@@ -92,14 +92,14 @@ class RhythmView : Fragment() {
                 viewModel.slidesNumber.value = intSlidesNumber
                 when (arrowPosition) {
                     0 -> {
-                            if (rhythmState.isFlingUpValid) {
-                                stringField.setBackgroundColor(Color.GREEN)
-                                lifecycleScope.launch { playSound() }
-                            } else {
-                                stringField.setBackgroundColor(Color.BLUE)
-                                lifecycleScope.launch { playSecond() }
-                            }
+                        if (rhythmState.isFlingUpValid) {
+                            stringField.setBackgroundColor(Color.GREEN)
+                            lifecycleScope.launch { playSound() }
+                        } else {
+                            stringField.setBackgroundColor(Color.BLUE)
+                            lifecycleScope.launch { playSecond() }
                         }
+                    }
                     1 -> {
                         if (firstStep && !arrow1state && !arrow2state && !arrow3state && !arrow4state && !arrow5state) {
                             if (rhythmState.isFlingUpValid) {
@@ -510,7 +510,7 @@ class RhythmView : Fragment() {
     private fun observeViewModel() {
         viewModel.handleEvent(LectureEvent.OnStart)
 
-        img_guitar.setOnClickListener {
+        endPicture.setOnClickListener {
             viewModel.handleEvent(
                 LectureEvent.OnDoneClick(
                     rhythm_result_text.text.toString()
@@ -540,6 +540,7 @@ class RhythmView : Fragment() {
         )
     }
 
+    //TODO - Pridat random akordy meneny po konci
     private suspend fun playSound() {
         withContext(Dispatchers.IO) {
             val mediaPlayer = MediaPlayer.create(activity, R.raw.a_sharp)
@@ -558,7 +559,7 @@ class RhythmView : Fragment() {
 
     private suspend fun playSecond() {
         withContext(Dispatchers.IO) {
-            val mediaPlayer = MediaPlayer.create(activity, R.raw.a_sharp)
+            val mediaPlayer = MediaPlayer.create(activity, R.raw.c)
             try {
                 if (mediaPlayer.isPlaying) {
                     mediaPlayer.stop()
@@ -728,7 +729,7 @@ class RhythmView : Fragment() {
         btn_back.setOnClickListener {
             findNavController().navigate(R.id.lecturesView)
         }
-        img_guitar.setOnClickListener {
+        endPicture.setOnClickListener {
             findNavController().navigate(R.id.lectureResultView)
         }
     }

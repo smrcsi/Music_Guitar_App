@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:background="@drawable/space_loop">
+    android:background="@drawable/guitar_background2">
 
     <TextView
         android:id="@+id/lbl_app_name"
@@ -22,7 +22,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/img_guitar"
+        android:id="@+id/endPicture"
         android:layout_width="166dp"
         android:layout_height="162dp"
         app:layout_constraintBottom_toTopOf="@+id/lbl_app_name"

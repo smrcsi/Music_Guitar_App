@@ -5,7 +5,7 @@
     android:id="@+id/rules_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/space_loop"
+    android:background="@drawable/guitar_background2"
     tools:context="com.example.guitar_music_app.results.ResultActivity">
 
 

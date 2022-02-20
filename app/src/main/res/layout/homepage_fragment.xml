@@ -5,11 +5,11 @@
     android:id="@+id/homepage_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/space_loop"
+    android:background="@drawable/guitar_background2"
     tools:context="com.example.guitar_music_app.results.ResultActivity">
 
     <ImageView
-        android:id="@+id/img_guitar"
+        android:id="@+id/endPicture"
         android:layout_width="166dp"
         android:layout_height="162dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_lectures"
@@ -23,13 +23,12 @@
         android:id="@+id/btn_stats"
         android:layout_width="191dp"
         android:layout_height="52dp"
-        android:layout_marginBottom="164dp"
+        android:layout_marginBottom="92dp"
         android:backgroundTint="#FFFFFF"
         android:text="@string/statistiky"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -42,7 +41,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_stats"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_guitar" />
+        app:layout_constraintTop_toBottomOf="@+id/endPicture" />
 
     <ImageButton
         android:id="@+id/imb_toolbar_logout"
@@ -65,10 +64,10 @@
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="17sp"
-        app:layout_constraintBottom_toTopOf="@+id/img_guitar"
+        app:layout_constraintBottom_toTopOf="@+id/endPicture"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.919"
+        app:layout_constraintHorizontal_bias="0.934"
         app:layout_constraintStart_toEndOf="@+id/imb_toolbar_logout"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

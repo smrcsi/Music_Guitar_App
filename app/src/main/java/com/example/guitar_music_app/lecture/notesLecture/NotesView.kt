@@ -20,7 +20,7 @@ import com.example.guitar_music_app.R
 import com.example.guitar_music_app.general.toEditable
 import com.example.guitar_music_app.lecture.LectureEvent
 import com.example.guitar_music_app.lecture.Note
-import kotlinx.android.synthetic.main.chords_fragment.img_guitar
+import kotlinx.android.synthetic.main.chords_fragment.endPicture
 import kotlinx.android.synthetic.main.chords_fragment.noteText
 import kotlinx.android.synthetic.main.chords_fragment.viewA
 import kotlinx.android.synthetic.main.chords_fragment.viewA_SHARP
@@ -110,6 +110,8 @@ class NotesView : Fragment() {
                 tones.forEach { (note1, tone) ->
                     if (noteState.notesTouched.any { it.note == note }) {
                         if (noteState.notesTouched.any { it.note == note1 }) {
+                            //TODO - Problemy kdyz zahrajes spravne, tak se to provede jen nekdy
+
                             lifecycleScope.launch { playSound(tone) }
                         }
                         if (!noteState.isNoteValid && !noteState.notePlayed) {
@@ -127,6 +129,7 @@ class NotesView : Fragment() {
                             println("Dala se zelena")
 
                             displayToast()
+                            //TODO - Tohle se neprovede
                             lifecycleScope.launch { vibrate(millisecond = 5) }
                             noteText.setTextColor(Color.GREEN)
                         } else {
@@ -143,7 +146,7 @@ class NotesView : Fragment() {
 
         viewModel.handleEvent(LectureEvent.OnStart)
 
-        img_guitar.setOnClickListener {
+        endPicture.setOnClickListener {
             viewModel.handleEvent(
                 LectureEvent.OnDoneClick(
                     notes_result_text.text.toString()
@@ -191,7 +194,6 @@ class NotesView : Fragment() {
     private suspend fun playSound(tone: Int) {
         withContext(Dispatchers.IO) {
             val mediaPlayer = MediaPlayer.create(activity, tone)
-            mediaPlayer.start()
             try {
                 if (mediaPlayer.isPlaying) {
                     mediaPlayer.stop()
@@ -534,7 +536,7 @@ class NotesView : Fragment() {
         btn_back.setOnClickListener {
             findNavController().navigate(R.id.lecturesView)
         }
-        img_guitar.setOnClickListener {
+        endPicture.setOnClickListener {
             findNavController().navigate(R.id.lectureResultView)
         }
     }

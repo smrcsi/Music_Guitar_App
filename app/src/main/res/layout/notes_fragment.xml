@@ -5,7 +5,7 @@
     android:id="@+id/notes_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/space_loop"
+    android:background="@drawable/game_background"
     android:orientation="horizontal"
     tools:context="com.example.guitar_music_app.results.ResultActivity">
 
@@ -18,13 +18,13 @@
         android:textColor="#FFFFFF"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/viewG2"
-        app:layout_constraintEnd_toStartOf="@+id/img_guitar"
+        app:layout_constraintEnd_toStartOf="@+id/endPicture"
         app:layout_constraintHorizontal_bias="0.408"
         app:layout_constraintStart_toEndOf="@+id/btn_back"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/img_guitar"
+        android:id="@+id/endPicture"
         android:layout_width="58dp"
         android:layout_height="58dp"
         android:layout_marginTop="16dp"
@@ -33,21 +33,8 @@
         app:layout_constraintHorizontal_bias="0.976"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/checkered_flag" />
+        app:srcCompat="@drawable/ic_done_black_24dp" />
 
-
-    <TextView
-        android:id="@+id/lbl_results"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="48dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/v_sledky"
-        android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/noteText"
-        app:layout_constraintTop_toBottomOf="@+id/img_guitar" />
 
     <ImageButton
         android:id="@+id/btn_back"
@@ -491,7 +478,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.605"
         app:layout_constraintStart_toEndOf="@+id/viewStringA"
-        app:layout_constraintTop_toBottomOf="@+id/img_guitar" />
+        app:layout_constraintTop_toBottomOf="@+id/endPicture" />
 
     <TextView
         android:id="@+id/rhythm_nmb_lbl"

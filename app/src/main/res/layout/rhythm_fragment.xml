@@ -5,7 +5,7 @@
     android:id="@+id/rhythm_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/space_loop"
+    android:background="@drawable/game_background"
     android:orientation="horizontal"
     tools:context="com.example.guitar_music_app.results.ResultActivity">
 
@@ -26,7 +26,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/img_guitar"
+        android:id="@+id/endPicture"
         android:layout_width="58dp"
         android:layout_height="58dp"
         android:layout_marginTop="16dp"
@@ -35,7 +35,7 @@
         app:layout_constraintHorizontal_bias="0.992"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/checkered_flag" />
+        app:srcCompat="@drawable/ic_done_black_24dp" />
 
 
     <ImageButton
@@ -66,7 +66,7 @@
         android:layout_width="267dp"
         android:layout_height="57dp"
         app:layout_constraintBottom_toTopOf="@+id/stringField"
-        app:layout_constraintEnd_toStartOf="@+id/img_guitar"
+        app:layout_constraintEnd_toStartOf="@+id/endPicture"
         app:layout_constraintHorizontal_bias="0.294"
         app:layout_constraintStart_toEndOf="@+id/rhythmSpinner"
         app:layout_constraintTop_toTopOf="parent"
@@ -308,7 +308,7 @@
         android:foregroundTint="#FFFFFF"
         android:spinnerMode="dropdown"
         app:layout_constraintBottom_toTopOf="@+id/stringField"
-        app:layout_constraintEnd_toStartOf="@+id/img_guitar"
+        app:layout_constraintEnd_toStartOf="@+id/endPicture"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/rythmText"
         app:layout_constraintTop_toTopOf="parent"
@@ -339,7 +339,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.465"
         app:layout_constraintStart_toEndOf="@+id/stringField"
-        app:layout_constraintTop_toBottomOf="@+id/img_guitar" />
+        app:layout_constraintTop_toBottomOf="@+id/endPicture" />
 
     <TextView
         android:id="@+id/rhythm_nmb_lbl"

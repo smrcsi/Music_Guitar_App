@@ -5,7 +5,7 @@
     android:id="@+id/lectures_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/space_loop"
+    android:background="@drawable/guitar_background2"
     tools:context="com.example.guitar_music_app.results.ResultActivity">
 
 
@@ -33,7 +33,7 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_rhythm" />
 
     <ImageView
-        android:id="@+id/img_guitar"
+        android:id="@+id/endPicture"
         android:layout_width="166dp"
         android:layout_height="162dp"
         app:layout_constraintBottom_toTopOf="@+id/lbl_lectures"
@@ -53,9 +53,8 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/btn_notes"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_guitar" />
+        app:layout_constraintTop_toBottomOf="@+id/endPicture" />
 
     <Button
         android:id="@+id/btn_notes"
