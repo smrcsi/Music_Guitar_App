@@ -36,6 +36,7 @@ class RhythmView : Fragment() {
     private lateinit var mDetector: GestureDetectorCompat
     private lateinit var viewModel: RhythmViewModel
 
+
     private var intSlidesNumber = 0
 
     private var arrow1state = false
@@ -43,21 +44,21 @@ class RhythmView : Fragment() {
     private var arrow3state = false
     private var arrow4state = false
     private var arrow5state = false
-    private var arrow6state = false
-    private var arrow7state = false
-    private var arrow8state = false
-    private var arrow9state = false
-    private var arrow10state = false
-    private var arrow11state = false
-    private var arrow12state = false
-    private var arrow13state = false
-    private var arrow14state = false
-    private var arrow15state = false
-    private var arrow16state = false
-    private var arrow17state = false
-    private var arrow18state = false
-    private var arrow19state = false
-    private var arrow20state = false
+//    private var arrow6state = false
+//    private var arrow7state = false
+//    private var arrow8state = false
+//    private var arrow9state = false
+//    private var arrow10state = false
+//    private var arrow11state = false
+//    private var arrow12state = false
+//    private var arrow13state = false
+//    private var arrow14state = false
+//    private var arrow15state = false
+//    private var arrow16state = false
+//    private var arrow17state = false
+//    private var arrow18state = false
+//    private var arrow19state = false
+//    private var arrow20state = false
     private var firstStep = false
     private var arrowPosition = 0
 
@@ -70,7 +71,6 @@ class RhythmView : Fragment() {
         return inflater.inflate(R.layout.rhythm_fragment, container, false)
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
     override fun onStart() {
         super.onStart()
 
@@ -86,429 +86,429 @@ class RhythmView : Fragment() {
         observeViewModel()
 
 
-        viewModel.rhythmState.observe(viewLifecycleOwner, { rhythmState ->
-            if (!firstStep) {
-                firstStep = true
-            } else {
-                intSlidesNumber += 1
-                viewModel.slidesNumber.value = intSlidesNumber
-                when (arrowPosition) {
-                    0 -> {
-                        if (rhythmState.isFlingUpValid) {
-                            stringField.setBackgroundColor(Color.GREEN)
-                            lifecycleScope.launch { playSound() }
-                        } else {
-                            stringField.setBackgroundColor(Color.BLUE)
-                            lifecycleScope.launch { playSecond() }
-                        }
-                    }
-                    1 -> {
-                        if (firstStep && !arrow1state && !arrow2state && !arrow3state && !arrow4state && !arrow5state) {
-                            if (rhythmState.isFlingUpValid) {
-                                arrow1state = false
-                                arrow1.setBackgroundColor(Color.RED)
-                                stringField.setBackgroundColor(Color.GREEN)
-                                lifecycleScope.launch { playSound() }
-                            } else {
-                                stringField.setBackgroundColor(Color.BLUE)
-                                lifecycleScope.launch { playSecond() }
-                                arrow1state = true
-                                arrow1.setBackgroundColor(Color.GREEN)
-                            }
-                        } else if (arrow1state && !arrow2state && !arrow3state && !arrow4state && !arrow5state) {
-                            if (rhythmState.isFlingUpValid) {
-                                arrow1state = false
-                                arrow2state = false
-                                arrow1.setBackgroundColor(Color.RED)
-                                arrow2.setBackgroundColor(Color.RED)
-                                stringField.setBackgroundColor(Color.GREEN)
-                                lifecycleScope.launch { playSound() }
-                            } else {
-                                stringField.setBackgroundColor(Color.BLUE)
-                                lifecycleScope.launch { playSecond() }
-                                arrow2state = true
-                                arrow2.setBackgroundColor(Color.GREEN)
-                            }
-                        } else if (arrow1state && arrow2state && !arrow3state && !arrow4state && !arrow5state) {
-                            if (rhythmState.isFlingUpValid) {
-                                arrow1state = false
-                                arrow2state = false
-                                arrow3state = false
-                                arrow1.setBackgroundColor(Color.RED)
-                                arrow2.setBackgroundColor(Color.RED)
-                                arrow3.setBackgroundColor(Color.RED)
-                                stringField.setBackgroundColor(Color.GREEN)
-                                lifecycleScope.launch { playSound() }
-                            } else {
-                                stringField.setBackgroundColor(Color.BLUE)
-                                lifecycleScope.launch { playSecond() }
 
-                                arrow3state = true
-                                arrow3.setBackgroundColor(Color.GREEN)
-                            }
-                        } else if (arrow1state && arrow2state && arrow3state && !arrow4state && !arrow5state) {
-                            if (rhythmState.isFlingUpValid) {
-
-                                arrow4state = true
-                                arrow4.setBackgroundColor(Color.GREEN)
-                                stringField.setBackgroundColor(Color.GREEN)
-                                lifecycleScope.launch { playSound() }
-                            } else {
-                                stringField.setBackgroundColor(Color.BLUE)
-                                lifecycleScope.launch { playSecond() }
-                                arrow1state = false
-                                arrow2state = false
-                                arrow3state = false
-                                arrow4state = false
-                                arrow1.setBackgroundColor(Color.RED)
-                                arrow2.setBackgroundColor(Color.RED)
-                                arrow3.setBackgroundColor(Color.RED)
-                                arrow4.setBackgroundColor(Color.RED)
-                            }
-                        } else if (arrow1state && arrow2state && arrow3state && arrow4state && !arrow5state) {
-                            if (rhythmState.isFlingUpValid) {
-                                arrow1state = false
-                                arrow2state = false
-                                arrow3state = false
-                                arrow4state = false
-                                arrow5state = false
-                                arrow1.setBackgroundColor(Color.RED)
-                                arrow2.setBackgroundColor(Color.RED)
-                                arrow3.setBackgroundColor(Color.RED)
-                                arrow4.setBackgroundColor(Color.RED)
-                                arrow5.setBackgroundColor(Color.RED)
-                                stringField.setBackgroundColor(Color.GREEN)
-                                lifecycleScope.launch { playSound() }
-                            } else {
-                                stringField.setBackgroundColor(Color.BLUE)
-                                lifecycleScope.launch { playSecond() }
-                                arrow5state = true
-                                arrow5.setBackgroundColor(Color.GREEN)
-                            }
-                        } else if (arrow1state && arrow2state && arrow3state && arrow4state && arrow5state) {
-                            arrow1state = false
-                            arrow2state = false
-                            arrow3state = false
-                            arrow4state = false
-                            arrow5state = false
-                            viewModel.addToResult()
-
-                            arrow1.setBackgroundColor(Color.TRANSPARENT)
-                            arrow2.setBackgroundColor(Color.TRANSPARENT)
-                            arrow3.setBackgroundColor(Color.TRANSPARENT)
-                            arrow4.setBackgroundColor(Color.TRANSPARENT)
-                            arrow5.setBackgroundColor(Color.TRANSPARENT)
-                            stringField.setBackgroundColor(Color.TRANSPARENT)
-                            Toast.makeText(context, "SPRAVNE", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                    2 -> {
-                        if (firstStep && !arrow6state && !arrow7state && !arrow8state && !arrow9state && !arrow10state) {
-                            if (rhythmState.isFlingUpValid) {
-                                arrow6state = false
-                                arrow6.setBackgroundColor(Color.RED)
-                                stringField.setBackgroundColor(Color.GREEN)
-                                lifecycleScope.launch { playSound() }
-                            } else {
-                                stringField.setBackgroundColor(Color.BLUE)
-                                lifecycleScope.launch { playSecond() }
-                                arrow6state = true
-                                arrow6.setBackgroundColor(Color.GREEN)
-                            }
-                        } else if (arrow6state && !arrow7state && !arrow8state && !arrow9state && !arrow10state) {
-                            if (rhythmState.isFlingUpValid) {
-                                arrow6state = false
-                                arrow7state = false
-                                arrow6.setBackgroundColor(Color.RED)
-                                arrow7.setBackgroundColor(Color.RED)
-                                stringField.setBackgroundColor(Color.GREEN)
-                                lifecycleScope.launch { playSound() }
-                            } else {
-                                stringField.setBackgroundColor(Color.BLUE)
-                                lifecycleScope.launch { playSecond() }
-                                arrow7state = true
-                                arrow7.setBackgroundColor(Color.GREEN)
-                            }
-                        } else if (arrow6state && arrow7state && !arrow8state && !arrow9state && !arrow10state) {
-                            if (rhythmState.isFlingUpValid) {
-                                stringField.setBackgroundColor(Color.GREEN)
-                                lifecycleScope.launch { playSecond() }
-                                arrow8state = true
-                                arrow8.setBackgroundColor(Color.GREEN)
-                            } else {
-                                arrow6state = false
-                                arrow7state = false
-                                arrow8state = false
-                                arrow6.setBackgroundColor(Color.RED)
-                                arrow7.setBackgroundColor(Color.RED)
-                                arrow8.setBackgroundColor(Color.RED)
-                                stringField.setBackgroundColor(Color.BLUE)
-                                lifecycleScope.launch { playSound() }
-                            }
-                        } else if (arrow6state && arrow7state && arrow8state && !arrow9state && !arrow10state) {
-                            if (rhythmState.isFlingUpValid) {
-                                stringField.setBackgroundColor(Color.GREEN)
-                                lifecycleScope.launch { playSecond() }
-                                arrow6state = false
-                                arrow7state = false
-                                arrow8state = false
-                                arrow9state = false
-                                arrow6.setBackgroundColor(Color.RED)
-                                arrow7.setBackgroundColor(Color.RED)
-                                arrow8.setBackgroundColor(Color.RED)
-                                arrow9.setBackgroundColor(Color.RED)
-                            } else {
-                                arrow9state = true
-                                arrow9.setBackgroundColor(Color.GREEN)
-                                stringField.setBackgroundColor(Color.BLUE)
-                                lifecycleScope.launch { playSound() }
-                            }
-                        } else if (arrow6state && arrow7state && arrow8state && arrow9state && !arrow10state) {
-                            if (rhythmState.isFlingUpValid) {
-                                stringField.setBackgroundColor(Color.GREEN)
-                                lifecycleScope.launch { playSecond() }
-                                arrow10state = true
-                                arrow10.setBackgroundColor(Color.GREEN)
-                            } else {
-                                arrow6state = false
-                                arrow7state = false
-                                arrow8state = false
-                                arrow9state = false
-                                arrow10state = false
-                                arrow6.setBackgroundColor(Color.RED)
-                                arrow7.setBackgroundColor(Color.RED)
-                                arrow8.setBackgroundColor(Color.RED)
-                                arrow9.setBackgroundColor(Color.RED)
-                                arrow10.setBackgroundColor(Color.RED)
-                                stringField.setBackgroundColor(Color.BLUE)
-                                lifecycleScope.launch { playSound() }
-                            }
-                        } else if (arrow6state && arrow7state && arrow8state && arrow9state && arrow10state) {
-                            arrow6state = false
-                            arrow7state = false
-                            arrow8state = false
-                            arrow9state = false
-                            arrow10state = false
-
-                            viewModel.addToResult()
-
-                            arrow6.setBackgroundColor(Color.TRANSPARENT)
-                            arrow7.setBackgroundColor(Color.TRANSPARENT)
-                            arrow8.setBackgroundColor(Color.TRANSPARENT)
-                            arrow9.setBackgroundColor(Color.TRANSPARENT)
-                            arrow10.setBackgroundColor(Color.TRANSPARENT)
-                            stringField.setBackgroundColor(Color.TRANSPARENT)
-                            Toast.makeText(context, "SPRAVNE", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                    3 -> {
-                        if (firstStep && !arrow11state && !arrow12state && !arrow13state && !arrow14state && !arrow15state) {
-                            if (rhythmState.isFlingUpValid) {
-                                arrow11state = false
-                                arrow11.setBackgroundColor(Color.RED)
-                                stringField.setBackgroundColor(Color.GREEN)
-                                lifecycleScope.launch { playSound() }
-                            } else {
-                                stringField.setBackgroundColor(Color.BLUE)
-                                lifecycleScope.launch { playSecond() }
-                                arrow11state = true
-                                arrow11.setBackgroundColor(Color.GREEN)
-                            }
-                        } else if (arrow11state && !arrow12state && !arrow13state && !arrow14state && !arrow15state) {
-                            if (rhythmState.isFlingUpValid) {
-                                stringField.setBackgroundColor(Color.BLUE)
-                                lifecycleScope.launch { playSecond() }
-                                arrow12state = true
-                                arrow12.setBackgroundColor(Color.GREEN)
-                            } else {
-                                arrow11state = false
-                                arrow12state = false
-                                arrow11.setBackgroundColor(Color.RED)
-                                arrow12.setBackgroundColor(Color.RED)
-                                stringField.setBackgroundColor(Color.GREEN)
-                                lifecycleScope.launch { playSound() }
-                            }
-                        } else if (arrow11state && arrow12state && !arrow13state && !arrow14state && !arrow15state) {
-                            if (rhythmState.isFlingUpValid) {
-                                arrow11state = false
-                                arrow12state = false
-                                arrow13state = false
-                                arrow11.setBackgroundColor(Color.RED)
-                                arrow12.setBackgroundColor(Color.RED)
-                                arrow13.setBackgroundColor(Color.RED)
-                                stringField.setBackgroundColor(Color.GREEN)
-                                lifecycleScope.launch { playSound() }
-
-                            } else {
-                                stringField.setBackgroundColor(Color.BLUE)
-                                lifecycleScope.launch { playSecond() }
-                                arrow13state = true
-                                arrow13.setBackgroundColor(Color.GREEN)
-
-                            }
-                        } else if (arrow11state && arrow12state && arrow13state && !arrow14state && !arrow15state) {
-                            if (rhythmState.isFlingUpValid) {
-                                arrow14state = true
-                                arrow14.setBackgroundColor(Color.GREEN)
-                                stringField.setBackgroundColor(Color.GREEN)
-                                lifecycleScope.launch { playSound() }
-                            } else {
-                                stringField.setBackgroundColor(Color.BLUE)
-                                lifecycleScope.launch { playSecond() }
-                                arrow11state = false
-                                arrow12state = false
-                                arrow13state = false
-                                arrow14state = false
-                                arrow11.setBackgroundColor(Color.RED)
-                                arrow12.setBackgroundColor(Color.RED)
-                                arrow13.setBackgroundColor(Color.RED)
-                                arrow14.setBackgroundColor(Color.RED)
-                            }
-                        } else if (arrow11state && arrow12state && arrow13state && arrow14state && !arrow15state) {
-                            if (rhythmState.isFlingUpValid) {
-                                arrow11state = false
-                                arrow12state = false
-                                arrow13state = false
-                                arrow14state = false
-                                arrow15state = false
-                                arrow11.setBackgroundColor(Color.RED)
-                                arrow12.setBackgroundColor(Color.RED)
-                                arrow13.setBackgroundColor(Color.RED)
-                                arrow14.setBackgroundColor(Color.RED)
-                                arrow15.setBackgroundColor(Color.RED)
-                                stringField.setBackgroundColor(Color.GREEN)
-                                lifecycleScope.launch { playSound() }
-                            } else {
-                                stringField.setBackgroundColor(Color.BLUE)
-                                lifecycleScope.launch { playSecond() }
-                                arrow15state = true
-                                arrow15.setBackgroundColor(Color.GREEN)
-                            }
-                        } else if (arrow11state && arrow12state && arrow13state && arrow14state && arrow15state) {
-                            arrow11state = false
-                            arrow12state = false
-                            arrow13state = false
-                            arrow14state = false
-                            arrow15state = false
-
-                            viewModel.addToResult()
-
-                            arrow11.setBackgroundColor(Color.TRANSPARENT)
-                            arrow12.setBackgroundColor(Color.TRANSPARENT)
-                            arrow13.setBackgroundColor(Color.TRANSPARENT)
-                            arrow14.setBackgroundColor(Color.TRANSPARENT)
-                            arrow15.setBackgroundColor(Color.TRANSPARENT)
-                            stringField.setBackgroundColor(Color.TRANSPARENT)
-                            Toast.makeText(context, "SPRAVNE", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                    4 -> {
-                        if (firstStep && !arrow16state && !arrow17state && !arrow18state && !arrow19state && !arrow20state) {
-                            if (rhythmState.isFlingUpValid) {
-                                stringField.setBackgroundColor(Color.RED)
-                                lifecycleScope.launch { playSecond() }
-                                arrow16state = true
-                                arrow16.setBackgroundColor(Color.GREEN)
-                            } else {
-                                arrow16state = false
-                                arrow16.setBackgroundColor(Color.BLUE)
-                                stringField.setBackgroundColor(Color.GREEN)
-                                lifecycleScope.launch { playSound() }
-                            }
-                        } else if (arrow16state && !arrow17state && !arrow18state && !arrow19state && !arrow20state) {
-                            if (rhythmState.isFlingUpValid) {
-                                stringField.setBackgroundColor(Color.BLUE)
-                                lifecycleScope.launch { playSecond() }
-                                arrow17state = true
-                                arrow17.setBackgroundColor(Color.GREEN)
-                            } else {
-                                arrow16state = false
-                                arrow17state = false
-                                arrow16.setBackgroundColor(Color.RED)
-                                arrow17.setBackgroundColor(Color.RED)
-                                stringField.setBackgroundColor(Color.GREEN)
-                                lifecycleScope.launch { playSound() }
-                            }
-                        } else if (arrow16state && arrow17state && !arrow18state && !arrow19state && !arrow20state) {
-                            if (rhythmState.isFlingUpValid) {
-                                arrow16state = false
-                                arrow17state = false
-                                arrow18state = false
-                                arrow16.setBackgroundColor(Color.RED)
-                                arrow17.setBackgroundColor(Color.RED)
-                                arrow18.setBackgroundColor(Color.RED)
-                                stringField.setBackgroundColor(Color.GREEN)
-                                lifecycleScope.launch { playSound() }
-                            } else {
-                                stringField.setBackgroundColor(Color.BLUE)
-                                lifecycleScope.launch { playSecond() }
-                                arrow18state = true
-                                arrow18.setBackgroundColor(Color.GREEN)
-                            }
-                        } else if (arrow16state && arrow17state && arrow18state && !arrow19state && !arrow20state) {
-                            if (rhythmState.isFlingUpValid) {
-                                arrow19state = true
-                                arrow19.setBackgroundColor(Color.GREEN)
-                                stringField.setBackgroundColor(Color.GREEN)
-                                lifecycleScope.launch { playSound() }
-                            } else {
-                                stringField.setBackgroundColor(Color.BLUE)
-                                lifecycleScope.launch { playSecond() }
-                                arrow16state = false
-                                arrow17state = false
-                                arrow18state = false
-                                arrow19state = false
-                                arrow16.setBackgroundColor(Color.RED)
-                                arrow17.setBackgroundColor(Color.RED)
-                                arrow18.setBackgroundColor(Color.RED)
-                                arrow19.setBackgroundColor(Color.RED)
-                            }
-                        } else if (arrow16state && arrow17state && arrow18state && arrow19state && !arrow20state) {
-                            if (rhythmState.isFlingUpValid) {
-                                arrow16state = false
-                                arrow17state = false
-                                arrow18state = false
-                                arrow19state = false
-                                arrow20state = false
-                                arrow16.setBackgroundColor(Color.RED)
-                                arrow17.setBackgroundColor(Color.RED)
-                                arrow18.setBackgroundColor(Color.RED)
-                                arrow19.setBackgroundColor(Color.RED)
-                                arrow20.setBackgroundColor(Color.RED)
-                                stringField.setBackgroundColor(Color.GREEN)
-                                lifecycleScope.launch { playSound() }
-                            } else {
-                                stringField.setBackgroundColor(Color.BLUE)
-                                lifecycleScope.launch { playSecond() }
-                                arrow20state = true
-                                arrow20.setBackgroundColor(Color.GREEN)
-                            }
-                        } else if (arrow16state && arrow17state && arrow18state && arrow19state && arrow20state) {
-                            arrow16state = false
-                            arrow17state = false
-                            arrow18state = false
-                            arrow19state = false
-                            arrow20state = false
-
-
-                            viewModel.addToResult()
-
-                            arrow16.setBackgroundColor(Color.TRANSPARENT)
-                            arrow17.setBackgroundColor(Color.TRANSPARENT)
-                            arrow18.setBackgroundColor(Color.TRANSPARENT)
-                            arrow19.setBackgroundColor(Color.TRANSPARENT)
-                            arrow20.setBackgroundColor(Color.TRANSPARENT)
-                            stringField.setBackgroundColor(Color.TRANSPARENT)
-                            Toast.makeText(context, "SPRÁVNĚ", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }
-            }
-        })
+//        viewModel.rhythmState.observe(viewLifecycleOwner, { rhythmState ->
+//            if (!firstStep) {
+//                firstStep = true
+//            } else {
+//                intSlidesNumber += 1
+//                viewModel.slidesNumber.value = intSlidesNumber
+//                when (arrowPosition) {
+//                    0 -> {
+//                        if (rhythmState.isFlingUpValid) {
+//                            stringField.setBackgroundColor(Color.GREEN)
+//                            lifecycleScope.launch { playSound() }
+//                        } else {
+//                            stringField.setBackgroundColor(Color.BLUE)
+//                            lifecycleScope.launch { playSecond() }
+//                        }
+//                    }
+//                    1 -> {
+//                        if (firstStep && !arrow1state && !arrow2state && !arrow3state && !arrow4state && !arrow5state) {
+//                            if (rhythmState.isFlingUpValid) {
+//                                arrow1state = false
+//                                arrow1.setBackgroundColor(Color.RED)
+//                                stringField.setBackgroundColor(Color.GREEN)
+//                                lifecycleScope.launch { playSound() }
+//                            } else {
+//                                stringField.setBackgroundColor(Color.BLUE)
+//                                lifecycleScope.launch { playSecond() }
+//                                arrow1state = true
+//                                arrow1.setBackgroundColor(Color.GREEN)
+//                            }
+//                        } else if (arrow1state && !arrow2state && !arrow3state && !arrow4state && !arrow5state) {
+//                            if (rhythmState.isFlingUpValid) {
+//                                arrow1state = false
+//                                arrow2state = false
+//                                arrow1.setBackgroundColor(Color.RED)
+//                                arrow2.setBackgroundColor(Color.RED)
+//                                stringField.setBackgroundColor(Color.GREEN)
+//                                lifecycleScope.launch { playSound() }
+//                            } else {
+//                                stringField.setBackgroundColor(Color.BLUE)
+//                                lifecycleScope.launch { playSecond() }
+//                                arrow2state = true
+//                                arrow2.setBackgroundColor(Color.GREEN)
+//                            }
+//                        } else if (arrow1state && arrow2state && !arrow3state && !arrow4state && !arrow5state) {
+//                            if (rhythmState.isFlingUpValid) {
+//                                arrow1state = false
+//                                arrow2state = false
+//                                arrow3state = false
+//                                arrow1.setBackgroundColor(Color.RED)
+//                                arrow2.setBackgroundColor(Color.RED)
+//                                arrow3.setBackgroundColor(Color.RED)
+//                                stringField.setBackgroundColor(Color.GREEN)
+//                                lifecycleScope.launch { playSound() }
+//                            } else {
+//                                stringField.setBackgroundColor(Color.BLUE)
+//                                lifecycleScope.launch { playSecond() }
+//
+//                                arrow3state = true
+//                                arrow3.setBackgroundColor(Color.GREEN)
+//                            }
+//                        } else if (arrow1state && arrow2state && arrow3state && !arrow4state && !arrow5state) {
+//                            if (rhythmState.isFlingUpValid) {
+//
+//                                arrow4state = true
+//                                arrow4.setBackgroundColor(Color.GREEN)
+//                                stringField.setBackgroundColor(Color.GREEN)
+//                                lifecycleScope.launch { playSound() }
+//                            } else {
+//                                stringField.setBackgroundColor(Color.BLUE)
+//                                lifecycleScope.launch { playSecond() }
+//                                arrow1state = false
+//                                arrow2state = false
+//                                arrow3state = false
+//                                arrow4state = false
+//                                arrow1.setBackgroundColor(Color.RED)
+//                                arrow2.setBackgroundColor(Color.RED)
+//                                arrow3.setBackgroundColor(Color.RED)
+//                                arrow4.setBackgroundColor(Color.RED)
+//                            }
+//                        } else if (arrow1state && arrow2state && arrow3state && arrow4state && !arrow5state) {
+//                            if (rhythmState.isFlingUpValid) {
+//                                arrow1state = false
+//                                arrow2state = false
+//                                arrow3state = false
+//                                arrow4state = false
+//                                arrow5state = false
+//                                arrow1.setBackgroundColor(Color.RED)
+//                                arrow2.setBackgroundColor(Color.RED)
+//                                arrow3.setBackgroundColor(Color.RED)
+//                                arrow4.setBackgroundColor(Color.RED)
+//                                arrow5.setBackgroundColor(Color.RED)
+//                                stringField.setBackgroundColor(Color.GREEN)
+//                                lifecycleScope.launch { playSound() }
+//                            } else {
+//                                stringField.setBackgroundColor(Color.BLUE)
+//                                lifecycleScope.launch { playSecond() }
+//                                arrow5state = true
+//                                arrow5.setBackgroundColor(Color.GREEN)
+//                            }
+//                        } else if (arrow1state && arrow2state && arrow3state && arrow4state && arrow5state) {
+//                            arrow1state = false
+//                            arrow2state = false
+//                            arrow3state = false
+//                            arrow4state = false
+//                            arrow5state = false
+//                            viewModel.addToResult()
+//
+//                            arrow1.setBackgroundColor(Color.TRANSPARENT)
+//                            arrow2.setBackgroundColor(Color.TRANSPARENT)
+//                            arrow3.setBackgroundColor(Color.TRANSPARENT)
+//                            arrow4.setBackgroundColor(Color.TRANSPARENT)
+//                            arrow5.setBackgroundColor(Color.TRANSPARENT)
+//                            stringField.setBackgroundColor(Color.TRANSPARENT)
+//                            Toast.makeText(context, "SPRAVNE", Toast.LENGTH_SHORT).show()
+//                        }
+//                    }
+//                    2 -> {
+//                        if (firstStep && !arrow6state && !arrow7state && !arrow8state && !arrow9state && !arrow10state) {
+//                            if (rhythmState.isFlingUpValid) {
+//                                arrow6state = false
+//                                arrow6.setBackgroundColor(Color.RED)
+//                                stringField.setBackgroundColor(Color.GREEN)
+//                                lifecycleScope.launch { playSound() }
+//                            } else {
+//                                stringField.setBackgroundColor(Color.BLUE)
+//                                lifecycleScope.launch { playSecond() }
+//                                arrow6state = true
+//                                arrow6.setBackgroundColor(Color.GREEN)
+//                            }
+//                        } else if (arrow6state && !arrow7state && !arrow8state && !arrow9state && !arrow10state) {
+//                            if (rhythmState.isFlingUpValid) {
+//                                arrow6state = false
+//                                arrow7state = false
+//                                arrow6.setBackgroundColor(Color.RED)
+//                                arrow7.setBackgroundColor(Color.RED)
+//                                stringField.setBackgroundColor(Color.GREEN)
+//                                lifecycleScope.launch { playSound() }
+//                            } else {
+//                                stringField.setBackgroundColor(Color.BLUE)
+//                                lifecycleScope.launch { playSecond() }
+//                                arrow7state = true
+//                                arrow7.setBackgroundColor(Color.GREEN)
+//                            }
+//                        } else if (arrow6state && arrow7state && !arrow8state && !arrow9state && !arrow10state) {
+//                            if (rhythmState.isFlingUpValid) {
+//                                stringField.setBackgroundColor(Color.GREEN)
+//                                lifecycleScope.launch { playSecond() }
+//                                arrow8state = true
+//                                arrow8.setBackgroundColor(Color.GREEN)
+//                            } else {
+//                                arrow6state = false
+//                                arrow7state = false
+//                                arrow8state = false
+//                                arrow6.setBackgroundColor(Color.RED)
+//                                arrow7.setBackgroundColor(Color.RED)
+//                                arrow8.setBackgroundColor(Color.RED)
+//                                stringField.setBackgroundColor(Color.BLUE)
+//                                lifecycleScope.launch { playSound() }
+//                            }
+//                        } else if (arrow6state && arrow7state && arrow8state && !arrow9state && !arrow10state) {
+//                            if (rhythmState.isFlingUpValid) {
+//                                stringField.setBackgroundColor(Color.GREEN)
+//                                lifecycleScope.launch { playSecond() }
+//                                arrow6state = false
+//                                arrow7state = false
+//                                arrow8state = false
+//                                arrow9state = false
+//                                arrow6.setBackgroundColor(Color.RED)
+//                                arrow7.setBackgroundColor(Color.RED)
+//                                arrow8.setBackgroundColor(Color.RED)
+//                                arrow9.setBackgroundColor(Color.RED)
+//                            } else {
+//                                arrow9state = true
+//                                arrow9.setBackgroundColor(Color.GREEN)
+//                                stringField.setBackgroundColor(Color.BLUE)
+//                                lifecycleScope.launch { playSound() }
+//                            }
+//                        } else if (arrow6state && arrow7state && arrow8state && arrow9state && !arrow10state) {
+//                            if (rhythmState.isFlingUpValid) {
+//                                stringField.setBackgroundColor(Color.GREEN)
+//                                lifecycleScope.launch { playSecond() }
+//                                arrow10state = true
+//                                arrow10.setBackgroundColor(Color.GREEN)
+//                            } else {
+//                                arrow6state = false
+//                                arrow7state = false
+//                                arrow8state = false
+//                                arrow9state = false
+//                                arrow10state = false
+//                                arrow6.setBackgroundColor(Color.RED)
+//                                arrow7.setBackgroundColor(Color.RED)
+//                                arrow8.setBackgroundColor(Color.RED)
+//                                arrow9.setBackgroundColor(Color.RED)
+//                                arrow10.setBackgroundColor(Color.RED)
+//                                stringField.setBackgroundColor(Color.BLUE)
+//                                lifecycleScope.launch { playSound() }
+//                            }
+//                        } else if (arrow6state && arrow7state && arrow8state && arrow9state && arrow10state) {
+//                            arrow6state = false
+//                            arrow7state = false
+//                            arrow8state = false
+//                            arrow9state = false
+//                            arrow10state = false
+//
+//                            viewModel.addToResult()
+//
+//                            arrow6.setBackgroundColor(Color.TRANSPARENT)
+//                            arrow7.setBackgroundColor(Color.TRANSPARENT)
+//                            arrow8.setBackgroundColor(Color.TRANSPARENT)
+//                            arrow9.setBackgroundColor(Color.TRANSPARENT)
+//                            arrow10.setBackgroundColor(Color.TRANSPARENT)
+//                            stringField.setBackgroundColor(Color.TRANSPARENT)
+//                            Toast.makeText(context, "SPRAVNE", Toast.LENGTH_SHORT).show()
+//                        }
+//                    }
+//                    3 -> {
+//                        if (firstStep && !arrow11state && !arrow12state && !arrow13state && !arrow14state && !arrow15state) {
+//                            if (rhythmState.isFlingUpValid) {
+//                                arrow11state = false
+//                                arrow11.setBackgroundColor(Color.RED)
+//                                stringField.setBackgroundColor(Color.GREEN)
+//                                lifecycleScope.launch { playSound() }
+//                            } else {
+//                                stringField.setBackgroundColor(Color.BLUE)
+//                                lifecycleScope.launch { playSecond() }
+//                                arrow11state = true
+//                                arrow11.setBackgroundColor(Color.GREEN)
+//                            }
+//                        } else if (arrow11state && !arrow12state && !arrow13state && !arrow14state && !arrow15state) {
+//                            if (rhythmState.isFlingUpValid) {
+//                                stringField.setBackgroundColor(Color.BLUE)
+//                                lifecycleScope.launch { playSecond() }
+//                                arrow12state = true
+//                                arrow12.setBackgroundColor(Color.GREEN)
+//                            } else {
+//                                arrow11state = false
+//                                arrow12state = false
+//                                arrow11.setBackgroundColor(Color.RED)
+//                                arrow12.setBackgroundColor(Color.RED)
+//                                stringField.setBackgroundColor(Color.GREEN)
+//                                lifecycleScope.launch { playSound() }
+//                            }
+//                        } else if (arrow11state && arrow12state && !arrow13state && !arrow14state && !arrow15state) {
+//                            if (rhythmState.isFlingUpValid) {
+//                                arrow11state = false
+//                                arrow12state = false
+//                                arrow13state = false
+//                                arrow11.setBackgroundColor(Color.RED)
+//                                arrow12.setBackgroundColor(Color.RED)
+//                                arrow13.setBackgroundColor(Color.RED)
+//                                stringField.setBackgroundColor(Color.GREEN)
+//                                lifecycleScope.launch { playSound() }
+//
+//                            } else {
+//                                stringField.setBackgroundColor(Color.BLUE)
+//                                lifecycleScope.launch { playSecond() }
+//                                arrow13state = true
+//                                arrow13.setBackgroundColor(Color.GREEN)
+//
+//                            }
+//                        } else if (arrow11state && arrow12state && arrow13state && !arrow14state && !arrow15state) {
+//                            if (rhythmState.isFlingUpValid) {
+//                                arrow14state = true
+//                                arrow14.setBackgroundColor(Color.GREEN)
+//                                stringField.setBackgroundColor(Color.GREEN)
+//                                lifecycleScope.launch { playSound() }
+//                            } else {
+//                                stringField.setBackgroundColor(Color.BLUE)
+//                                lifecycleScope.launch { playSecond() }
+//                                arrow11state = false
+//                                arrow12state = false
+//                                arrow13state = false
+//                                arrow14state = false
+//                                arrow11.setBackgroundColor(Color.RED)
+//                                arrow12.setBackgroundColor(Color.RED)
+//                                arrow13.setBackgroundColor(Color.RED)
+//                                arrow14.setBackgroundColor(Color.RED)
+//                            }
+//                        } else if (arrow11state && arrow12state && arrow13state && arrow14state && !arrow15state) {
+//                            if (rhythmState.isFlingUpValid) {
+//                                arrow11state = false
+//                                arrow12state = false
+//                                arrow13state = false
+//                                arrow14state = false
+//                                arrow15state = false
+//                                arrow11.setBackgroundColor(Color.RED)
+//                                arrow12.setBackgroundColor(Color.RED)
+//                                arrow13.setBackgroundColor(Color.RED)
+//                                arrow14.setBackgroundColor(Color.RED)
+//                                arrow15.setBackgroundColor(Color.RED)
+//                                stringField.setBackgroundColor(Color.GREEN)
+//                                lifecycleScope.launch { playSound() }
+//                            } else {
+//                                stringField.setBackgroundColor(Color.BLUE)
+//                                lifecycleScope.launch { playSecond() }
+//                                arrow15state = true
+//                                arrow15.setBackgroundColor(Color.GREEN)
+//                            }
+//                        } else if (arrow11state && arrow12state && arrow13state && arrow14state && arrow15state) {
+//                            arrow11state = false
+//                            arrow12state = false
+//                            arrow13state = false
+//                            arrow14state = false
+//                            arrow15state = false
+//
+//                            viewModel.addToResult()
+//
+//                            arrow11.setBackgroundColor(Color.TRANSPARENT)
+//                            arrow12.setBackgroundColor(Color.TRANSPARENT)
+//                            arrow13.setBackgroundColor(Color.TRANSPARENT)
+//                            arrow14.setBackgroundColor(Color.TRANSPARENT)
+//                            arrow15.setBackgroundColor(Color.TRANSPARENT)
+//                            stringField.setBackgroundColor(Color.TRANSPARENT)
+//                            Toast.makeText(context, "SPRAVNE", Toast.LENGTH_SHORT).show()
+//                        }
+//                    }
+//                    4 -> {
+//                        if (firstStep && !arrow16state && !arrow17state && !arrow18state && !arrow19state && !arrow20state) {
+//                            if (rhythmState.isFlingUpValid) {
+//                                stringField.setBackgroundColor(Color.RED)
+//                                lifecycleScope.launch { playSecond() }
+//                                arrow16state = true
+//                                arrow16.setBackgroundColor(Color.GREEN)
+//                            } else {
+//                                arrow16state = false
+//                                arrow16.setBackgroundColor(Color.BLUE)
+//                                stringField.setBackgroundColor(Color.GREEN)
+//                                lifecycleScope.launch { playSound() }
+//                            }
+//                        } else if (arrow16state && !arrow17state && !arrow18state && !arrow19state && !arrow20state) {
+//                            if (rhythmState.isFlingUpValid) {
+//                                stringField.setBackgroundColor(Color.BLUE)
+//                                lifecycleScope.launch { playSecond() }
+//                                arrow17state = true
+//                                arrow17.setBackgroundColor(Color.GREEN)
+//                            } else {
+//                                arrow16state = false
+//                                arrow17state = false
+//                                arrow16.setBackgroundColor(Color.RED)
+//                                arrow17.setBackgroundColor(Color.RED)
+//                                stringField.setBackgroundColor(Color.GREEN)
+//                                lifecycleScope.launch { playSound() }
+//                            }
+//                        } else if (arrow16state && arrow17state && !arrow18state && !arrow19state && !arrow20state) {
+//                            if (rhythmState.isFlingUpValid) {
+//                                arrow16state = false
+//                                arrow17state = false
+//                                arrow18state = false
+//                                arrow16.setBackgroundColor(Color.RED)
+//                                arrow17.setBackgroundColor(Color.RED)
+//                                arrow18.setBackgroundColor(Color.RED)
+//                                stringField.setBackgroundColor(Color.GREEN)
+//                                lifecycleScope.launch { playSound() }
+//                            } else {
+//                                stringField.setBackgroundColor(Color.BLUE)
+//                                lifecycleScope.launch { playSecond() }
+//                                arrow18state = true
+//                                arrow18.setBackgroundColor(Color.GREEN)
+//                            }
+//                        } else if (arrow16state && arrow17state && arrow18state && !arrow19state && !arrow20state) {
+//                            if (rhythmState.isFlingUpValid) {
+//                                arrow19state = true
+//                                arrow19.setBackgroundColor(Color.GREEN)
+//                                stringField.setBackgroundColor(Color.GREEN)
+//                                lifecycleScope.launch { playSound() }
+//                            } else {
+//                                stringField.setBackgroundColor(Color.BLUE)
+//                                lifecycleScope.launch { playSecond() }
+//                                arrow16state = false
+//                                arrow17state = false
+//                                arrow18state = false
+//                                arrow19state = false
+//                                arrow16.setBackgroundColor(Color.RED)
+//                                arrow17.setBackgroundColor(Color.RED)
+//                                arrow18.setBackgroundColor(Color.RED)
+//                                arrow19.setBackgroundColor(Color.RED)
+//                            }
+//                        } else if (arrow16state && arrow17state && arrow18state && arrow19state && !arrow20state) {
+//                            if (rhythmState.isFlingUpValid) {
+//                                arrow16state = false
+//                                arrow17state = false
+//                                arrow18state = false
+//                                arrow19state = false
+//                                arrow20state = false
+//                                arrow16.setBackgroundColor(Color.RED)
+//                                arrow17.setBackgroundColor(Color.RED)
+//                                arrow18.setBackgroundColor(Color.RED)
+//                                arrow19.setBackgroundColor(Color.RED)
+//                                arrow20.setBackgroundColor(Color.RED)
+//                                stringField.setBackgroundColor(Color.GREEN)
+//                                lifecycleScope.launch { playSound() }
+//                            } else {
+//                                stringField.setBackgroundColor(Color.BLUE)
+//                                lifecycleScope.launch { playSecond() }
+//                                arrow20state = true
+//                                arrow20.setBackgroundColor(Color.GREEN)
+//                            }
+//                        } else if (arrow16state && arrow17state && arrow18state && arrow19state && arrow20state) {
+//                            arrow16state = false
+//                            arrow17state = false
+//                            arrow18state = false
+//                            arrow19state = false
+//                            arrow20state = false
+//
+//
+//                            viewModel.addToResult()
+//
+//                            arrow16.setBackgroundColor(Color.TRANSPARENT)
+//                            arrow17.setBackgroundColor(Color.TRANSPARENT)
+//                            arrow18.setBackgroundColor(Color.TRANSPARENT)
+//                            arrow19.setBackgroundColor(Color.TRANSPARENT)
+//                            arrow20.setBackgroundColor(Color.TRANSPARENT)
+//                            stringField.setBackgroundColor(Color.TRANSPARENT)
+//                            Toast.makeText(context, "SPRÁVNĚ", Toast.LENGTH_SHORT).show()
+//                        }
+//                    }
+//                }
+//            }
+//        })
 
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
     private fun observeViewModel() {
         viewModel.handleEvent(LectureEvent.OnStart)
 

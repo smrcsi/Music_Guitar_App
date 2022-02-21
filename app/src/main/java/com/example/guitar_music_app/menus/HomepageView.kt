@@ -62,7 +62,6 @@ class HomepageView : Fragment() {
                     // Dismiss the dialog
                     dialog.dismiss()
                 }
-
             val alert = builder.create()
             alert.show()
         }

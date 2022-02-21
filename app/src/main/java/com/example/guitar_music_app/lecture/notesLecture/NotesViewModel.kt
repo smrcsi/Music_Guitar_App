@@ -1,9 +1,5 @@
 package com.example.guitar_music_app.lecture.notesLecture
 
-import android.icu.util.Calendar
-import android.icu.util.TimeZone
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.guitar_music_app.general.BaseViewModel
@@ -38,7 +34,7 @@ class NotesViewModel(
     val notesNumber = MutableLiveData<Int>()
 
 
-    @RequiresApi(Build.VERSION_CODES.N)
+
     override fun handleEvent(event: LectureEvent) {
         when (event) {
             is LectureEvent.OnStart -> {
@@ -60,15 +56,15 @@ class NotesViewModel(
         val notesTouched: Set<ButtonState> = emptySet()
     )
 
-    @RequiresApi(Build.VERSION_CODES.N)
+
     fun noteTouched(note: Note, touched: Boolean) {
         val currentState = noteState.value!!
-        val mutableList = currentState.notesTouched.toMutableSet()
-        val exists = mutableList.any { it.note == note }
+        val updatesTouchedNotes = currentState.notesTouched.toMutableSet()
+        val exists = updatesTouchedNotes.any { it.note == note }
         if (touched && !exists) {
-            mutableList.add(ButtonState(note))
+            updatesTouchedNotes.add(ButtonState(note))
         } else if (!touched && exists) {
-            mutableList.remove(ButtonState(note))
+            updatesTouchedNotes.remove(ButtonState(note))
         }
         if (currentState.targetNote == note && touched && !currentState.notePlayed) {
             currentState.targetNote = randomNote()
@@ -84,15 +80,14 @@ class NotesViewModel(
             notesNumber.value = intNotesNumber
         } else {
             if (noteState.value?.notePlayed == true) {
-
                 noteState.value = currentState.copy(
                     isNoteValid = false,
-                    notesTouched = mutableList,
+                    notesTouched = updatesTouchedNotes,
                     notePlayed = touched,
                     note = currentState.targetNote
                 )
             } else {
-                noteState.value = currentState.copy(isNoteValid = false, notesTouched = mutableList)
+                noteState.value = currentState.copy(isNoteValid = false, notesTouched = updatesTouchedNotes)
             }
         }
     }
@@ -114,7 +109,7 @@ class NotesViewModel(
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
+
     private fun addToResult() {
         intResult += 5
         resultState.value =
@@ -122,16 +117,16 @@ class NotesViewModel(
     }
 
 
-    @RequiresApi(Build.VERSION_CODES.N)
+
     private fun newResult() {
         resultState.value =
             Result(getCalendarTime(), intResult.toString(), "notes", null)
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
+
     private fun getCalendarTime(): String {
         val cal = Calendar.getInstance(TimeZone.getDefault())
-        val format = SimpleDateFormat("d MMM yyyy HH:mm:ss Z")
+        val format = SimpleDateFormat("d MMM yyyy HH:mm:ss Z", Locale.getDefault())
 //       format.timeZone = cal.timeZone
         return format.format(cal.time)
     }

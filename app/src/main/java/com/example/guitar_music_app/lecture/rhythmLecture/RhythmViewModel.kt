@@ -1,7 +1,6 @@
 package com.example.guitar_music_app.lecture.rhythmLecture
 
-import android.icu.util.Calendar
-import android.icu.util.TimeZone
+
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
@@ -14,6 +13,7 @@ import com.example.guitar_music_app.results.Result
 import com.example.guitar_music_app.results.ResultRepository
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.coroutines.CoroutineContext
 
 class RhythmViewModel(
@@ -45,7 +45,6 @@ class RhythmViewModel(
 
     val rhythmState = MutableLiveData(RhythmState())
 
-    @RequiresApi(Build.VERSION_CODES.N)
     override fun handleEvent(event: LectureEvent) {
         when (event) {
             is LectureEvent.OnStart -> {
@@ -75,7 +74,7 @@ class RhythmViewModel(
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
+
     fun addToResult() {
         intResult += 5
         resultState.value =
@@ -83,16 +82,15 @@ class RhythmViewModel(
     }
 
 
-    @RequiresApi(Build.VERSION_CODES.N)
+
     private fun newResult() {
         resultState.value =
             Result(getCalendarTime(), intResult.toString(), "rhythm", null)
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
     private fun getCalendarTime(): String {
         val cal = Calendar.getInstance(TimeZone.getDefault())
-        val format = SimpleDateFormat("d MMM yyyy HH:mm:ss Z")
+        val format = SimpleDateFormat("d MMM yyyy HH:mm:ss Z", Locale.getDefault())
 //       format.timeZone = cal.timeZone
         return format.format(cal.time)
     }
@@ -123,7 +121,7 @@ class RhythmViewModel(
             }
             else -> {
                 // TODO zobraz neco
-                _uiState.value = UiState(currentState.rhythmType, errorMessage = "posralo se to")
+                _uiState.value = UiState(currentState.rhythmType, errorMessage = "posralo  se to")
             }
         }
     }
@@ -153,6 +151,10 @@ class RhythmViewModel(
     }
 
     enum class RhythmType(val directions: List<UiState.Direction>) {
-        RHYTHM_1(listOf(UP, DOWN, UP))
+        RHYTHM_1(listOf(DOWN, DOWN, DOWN, UP, DOWN)),
+        RHYTHM_2(listOf(DOWN, DOWN, UP, DOWN, UP)),
+        RHYTHM_3(listOf(DOWN, UP, DOWN, UP, DOWN)),
+        RHYTHM_4(listOf(UP, UP, DOWN, UP, DOWN)),
+        RHYTHM_5(listOf(DOWN, UP, UP)),
     }
 }

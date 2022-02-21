@@ -188,7 +188,7 @@ class ChordsView : Fragment() {
         swtch_asistant.setOnCheckedChangeListener { _, isChecked ->
             viewModel.assistantSet(isChecked)
         }
-//TODO-jakmile odslidujeme, tak by se melo tlacitko prestat drzet
+
         views.forEach { (viewId, note) ->
             view.findViewById<View>(viewId)?.setOnTouchListener { view, event ->
                 viewModel.buttonTouched(
