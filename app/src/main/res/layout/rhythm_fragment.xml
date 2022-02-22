@@ -59,7 +59,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.939"></View>
+        app:layout_constraintVertical_bias="0.939" />
 
     <View
         android:id="@+id/viewRhythm1"
@@ -72,233 +72,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.452" />
 
-    <ImageView
-        android:id="@+id/arrow4"
-        android:layout_width="38dp"
-        android:layout_height="36dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/viewRhythm1"
-        app:layout_constraintEnd_toStartOf="@+id/arrow5"
-        app:layout_constraintTop_toTopOf="@+id/viewRhythm1"
-        app:layout_constraintVertical_bias="0.333"
-        app:srcCompat="@android:drawable/arrow_up_float" />
-
-    <ImageView
-        android:id="@+id/arrow1"
-        android:layout_width="38dp"
-        android:layout_height="36dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/viewRhythm1"
-        app:layout_constraintEnd_toStartOf="@+id/arrow2"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/viewRhythm1"
-        app:layout_constraintTop_toTopOf="@+id/viewRhythm1"
-        app:layout_constraintVertical_bias="0.333"
-        app:srcCompat="@android:drawable/arrow_down_float" />
-
-    <ImageView
-        android:id="@+id/arrow5"
-        android:layout_width="38dp"
-        android:layout_height="36dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/viewRhythm1"
-        app:layout_constraintEnd_toEndOf="@+id/viewRhythm1"
-        app:layout_constraintTop_toTopOf="@+id/viewRhythm1"
-        app:layout_constraintVertical_bias="0.333"
-        app:srcCompat="@android:drawable/arrow_down_float" />
-
-    <ImageView
-        android:id="@+id/arrow2"
-        android:layout_width="38dp"
-        android:layout_height="36dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/viewRhythm1"
-        app:layout_constraintEnd_toStartOf="@+id/arrow3"
-        app:layout_constraintTop_toTopOf="@+id/viewRhythm1"
-        app:layout_constraintVertical_bias="0.333"
-        app:srcCompat="@android:drawable/arrow_down_float" />
-
-    <ImageView
-        android:id="@+id/arrow3"
-        android:layout_width="38dp"
-        android:layout_height="36dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/viewRhythm1"
-        app:layout_constraintEnd_toStartOf="@+id/arrow4"
-        app:layout_constraintTop_toTopOf="@+id/viewRhythm1"
-        app:layout_constraintVertical_bias="0.333"
-        app:srcCompat="@android:drawable/arrow_down_float" />
-
-    <ImageView
-        android:id="@+id/arrow14"
-        android:layout_width="38dp"
-        android:layout_height="36dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/viewRhythm1"
-        app:layout_constraintEnd_toStartOf="@+id/arrow5"
-        app:layout_constraintTop_toTopOf="@+id/viewRhythm1"
-        app:layout_constraintVertical_bias="0.333"
-        app:srcCompat="@android:drawable/arrow_up_float" />
-
-    <ImageView
-        android:id="@+id/arrow11"
-        android:layout_width="38dp"
-        android:layout_height="36dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/viewRhythm1"
-        app:layout_constraintEnd_toStartOf="@+id/arrow2"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/viewRhythm1"
-        app:layout_constraintTop_toTopOf="@+id/viewRhythm1"
-        app:layout_constraintVertical_bias="0.333"
-        app:srcCompat="@android:drawable/arrow_down_float" />
-
-    <ImageView
-        android:id="@+id/arrow15"
-        android:layout_width="38dp"
-        android:layout_height="36dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/viewRhythm1"
-        app:layout_constraintEnd_toEndOf="@+id/viewRhythm1"
-        app:layout_constraintTop_toTopOf="@+id/viewRhythm1"
-        app:layout_constraintVertical_bias="0.333"
-        app:srcCompat="@android:drawable/arrow_down_float" />
-
-    <ImageView
-        android:id="@+id/arrow12"
-        android:layout_width="38dp"
-        android:layout_height="36dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/viewRhythm1"
-        app:layout_constraintEnd_toStartOf="@+id/arrow3"
-        app:layout_constraintTop_toTopOf="@+id/viewRhythm1"
-        app:layout_constraintVertical_bias="0.333"
-        app:srcCompat="@android:drawable/arrow_up_float" />
-
-    <ImageView
-        android:id="@+id/arrow13"
-        android:layout_width="38dp"
-        android:layout_height="36dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/viewRhythm1"
-        app:layout_constraintEnd_toStartOf="@+id/arrow4"
-        app:layout_constraintTop_toTopOf="@+id/viewRhythm1"
-        app:layout_constraintVertical_bias="0.333"
-        app:srcCompat="@android:drawable/arrow_down_float" />
-
-    <ImageView
-        android:id="@+id/arrow9"
-        android:layout_width="38dp"
-        android:layout_height="36dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/viewRhythm1"
-        app:layout_constraintEnd_toStartOf="@+id/arrow5"
-        app:layout_constraintTop_toTopOf="@+id/viewRhythm1"
-        app:layout_constraintVertical_bias="0.333"
-        app:srcCompat="@android:drawable/arrow_down_float" />
-
-    <ImageView
-        android:id="@+id/arrow6"
-        android:layout_width="38dp"
-        android:layout_height="36dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/viewRhythm1"
-        app:layout_constraintEnd_toStartOf="@+id/arrow2"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/viewRhythm1"
-        app:layout_constraintTop_toTopOf="@+id/viewRhythm1"
-        app:layout_constraintVertical_bias="0.333"
-        app:srcCompat="@android:drawable/arrow_down_float" />
-
-    <ImageView
-        android:id="@+id/arrow10"
-        android:layout_width="38dp"
-        android:layout_height="36dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/viewRhythm1"
-        app:layout_constraintEnd_toEndOf="@+id/viewRhythm1"
-        app:layout_constraintTop_toTopOf="@+id/viewRhythm1"
-        app:layout_constraintVertical_bias="0.333"
-        app:srcCompat="@android:drawable/arrow_up_float" />
-
-    <ImageView
-        android:id="@+id/arrow7"
-        android:layout_width="38dp"
-        android:layout_height="36dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/viewRhythm1"
-        app:layout_constraintEnd_toStartOf="@+id/arrow3"
-        app:layout_constraintTop_toTopOf="@+id/viewRhythm1"
-        app:layout_constraintVertical_bias="0.333"
-        app:srcCompat="@android:drawable/arrow_down_float" />
-
-    <ImageView
-        android:id="@+id/arrow8"
-        android:layout_width="38dp"
-        android:layout_height="36dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/viewRhythm1"
-        app:layout_constraintEnd_toStartOf="@+id/arrow4"
-        app:layout_constraintTop_toTopOf="@+id/viewRhythm1"
-        app:layout_constraintVertical_bias="0.333"
-        app:srcCompat="@android:drawable/arrow_up_float" />
-
-    <ImageView
-        android:id="@+id/arrow19"
-        android:layout_width="38dp"
-        android:layout_height="36dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/viewRhythm1"
-        app:layout_constraintEnd_toStartOf="@+id/arrow5"
-        app:layout_constraintTop_toTopOf="@+id/viewRhythm1"
-        app:layout_constraintVertical_bias="0.333"
-        app:srcCompat="@android:drawable/arrow_up_float" />
-
-    <ImageView
-        android:id="@+id/arrow16"
-        android:layout_width="38dp"
-        android:layout_height="36dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/viewRhythm1"
-        app:layout_constraintEnd_toStartOf="@+id/arrow2"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/viewRhythm1"
-        app:layout_constraintTop_toTopOf="@+id/viewRhythm1"
-        app:layout_constraintVertical_bias="0.333"
-        app:srcCompat="@android:drawable/arrow_up_float" />
-
-    <ImageView
-        android:id="@+id/arrow20"
-        android:layout_width="38dp"
-        android:layout_height="36dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/viewRhythm1"
-        app:layout_constraintEnd_toEndOf="@+id/viewRhythm1"
-        app:layout_constraintTop_toTopOf="@+id/viewRhythm1"
-        app:layout_constraintVertical_bias="0.333"
-        app:srcCompat="@android:drawable/arrow_down_float" />
-
-    <ImageView
-        android:id="@+id/arrow17"
-        android:layout_width="38dp"
-        android:layout_height="36dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/viewRhythm1"
-        app:layout_constraintEnd_toStartOf="@+id/arrow3"
-        app:layout_constraintTop_toTopOf="@+id/viewRhythm1"
-        app:layout_constraintVertical_bias="0.333"
-        app:srcCompat="@android:drawable/arrow_up_float" />
-
-    <ImageView
-        android:id="@+id/arrow18"
-        android:layout_width="38dp"
-        android:layout_height="36dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/viewRhythm1"
-        app:layout_constraintEnd_toStartOf="@+id/arrow4"
-        app:layout_constraintTop_toTopOf="@+id/viewRhythm1"
-        app:layout_constraintVertical_bias="0.333"
-        app:srcCompat="@android:drawable/arrow_down_float" />
 
     <Spinner
         android:id="@+id/rhythmSpinner"
@@ -313,6 +86,124 @@
         app:layout_constraintStart_toEndOf="@+id/rythmText"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.478" />
+
+    <ImageView
+        android:id="@+id/arrow1_up"
+        android:layout_width="38dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="12dp"
+        app:layout_constraintStart_toEndOf="@+id/rhythmSpinner"
+        app:layout_constraintBottom_toBottomOf="@+id/viewRhythm1"
+        app:layout_constraintEnd_toStartOf="@+id/arrow2_up"
+        app:layout_constraintTop_toTopOf="@+id/viewRhythm1"
+        app:layout_constraintVertical_bias="0.333"
+        app:srcCompat="@android:drawable/arrow_up_float" />
+
+    <ImageView
+        android:id="@+id/arrow2_up"
+        android:layout_width="38dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="12dp"
+        app:layout_constraintStart_toEndOf="@+id/arrow1_up"
+        app:layout_constraintBottom_toBottomOf="@+id/viewRhythm1"
+        app:layout_constraintEnd_toStartOf="@+id/arrow3_up"
+        app:layout_constraintTop_toTopOf="@+id/viewRhythm1"
+        app:layout_constraintVertical_bias="0.333"
+        app:srcCompat="@android:drawable/arrow_up_float" />
+
+    <ImageView
+        android:id="@+id/arrow3_up"
+        android:layout_width="38dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="12dp"
+        app:layout_constraintStart_toEndOf="@+id/arrow2_up"
+        app:layout_constraintBottom_toBottomOf="@+id/viewRhythm1"
+        app:layout_constraintEnd_toStartOf="@+id/arrow4_up"
+        app:layout_constraintTop_toTopOf="@+id/viewRhythm1"
+        app:layout_constraintVertical_bias="0.333"
+        app:srcCompat="@android:drawable/arrow_up_float" />
+
+    <ImageView
+        android:id="@+id/arrow4_up"
+        android:layout_width="38dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="12dp"
+        app:layout_constraintStart_toEndOf="@+id/arrow3_up"
+        app:layout_constraintBottom_toBottomOf="@+id/viewRhythm1"
+        app:layout_constraintEnd_toStartOf="@+id/arrow5_up"
+        app:layout_constraintTop_toTopOf="@+id/viewRhythm1"
+        app:layout_constraintVertical_bias="0.333"
+        app:srcCompat="@android:drawable/arrow_up_float" />
+
+    <ImageView
+        android:id="@+id/arrow5_up"
+        android:layout_width="38dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="12dp"
+        app:layout_constraintStart_toEndOf="@+id/arrow4_up"
+        app:layout_constraintBottom_toBottomOf="@+id/viewRhythm1"
+        app:layout_constraintTop_toTopOf="@+id/viewRhythm1"
+        app:layout_constraintVertical_bias="0.333"
+        app:srcCompat="@android:drawable/arrow_up_float" />
+
+    <ImageView
+        android:id="@+id/arrow1_down"
+        android:layout_width="38dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="12dp"
+        app:layout_constraintStart_toEndOf="@+id/rhythmSpinner"
+        app:layout_constraintBottom_toBottomOf="@+id/viewRhythm1"
+        app:layout_constraintEnd_toStartOf="@+id/arrow2_down"
+        app:layout_constraintTop_toTopOf="@+id/viewRhythm1"
+        app:layout_constraintVertical_bias="0.333"
+        app:srcCompat="@android:drawable/arrow_down_float" />
+
+    <ImageView
+        android:id="@+id/arrow2_down"
+        android:layout_width="38dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="12dp"
+        app:layout_constraintStart_toEndOf="@+id/arrow1_down"
+        app:layout_constraintBottom_toBottomOf="@+id/viewRhythm1"
+        app:layout_constraintEnd_toStartOf="@+id/arrow3_down"
+        app:layout_constraintTop_toTopOf="@+id/viewRhythm1"
+        app:layout_constraintVertical_bias="0.333"
+        app:srcCompat="@android:drawable/arrow_down_float" />
+
+    <ImageView
+        android:id="@+id/arrow3_down"
+        android:layout_width="38dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="12dp"
+        app:layout_constraintStart_toEndOf="@+id/arrow2_down"
+        app:layout_constraintBottom_toBottomOf="@+id/viewRhythm1"
+        app:layout_constraintEnd_toStartOf="@+id/arrow4_down"
+        app:layout_constraintTop_toTopOf="@+id/viewRhythm1"
+        app:layout_constraintVertical_bias="0.333"
+        app:srcCompat="@android:drawable/arrow_down_float" />
+
+    <ImageView
+        android:id="@+id/arrow4_down"
+        android:layout_width="38dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="12dp"
+        app:layout_constraintStart_toEndOf="@+id/arrow3_down"
+        app:layout_constraintBottom_toBottomOf="@+id/viewRhythm1"
+        app:layout_constraintEnd_toStartOf="@+id/arrow5_down"
+        app:layout_constraintTop_toTopOf="@+id/viewRhythm1"
+        app:layout_constraintVertical_bias="0.333"
+        app:srcCompat="@android:drawable/arrow_down_float" />
+
+    <ImageView
+        android:id="@+id/arrow5_down"
+        android:layout_width="38dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="12dp"
+        app:layout_constraintStart_toEndOf="@+id/arrow4_down"
+        app:layout_constraintBottom_toBottomOf="@+id/viewRhythm1"
+        app:layout_constraintTop_toTopOf="@+id/viewRhythm1"
+        app:layout_constraintVertical_bias="0.333"
+        app:srcCompat="@android:drawable/arrow_down_float" />
 
     <TextView
         android:id="@+id/rhythm_result_text"

@@ -2,6 +2,7 @@ package com.example.guitar_music_app.lecture.rhythmLecture
 
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -33,7 +34,7 @@ class RhythmViewModel(
     val updated: LiveData<Boolean> get() = updatedState
 
 
-    private val _uiState = MutableLiveData(UiState(RhythmType.RHYTHM_1, RhythmType.RHYTHM_1.directions.map {
+    private val _uiState = MutableLiveData(UiState(RhythmType.FREE_RHYTHM, RhythmType.FREE_RHYTHM.directions.map {
         UiState.Fling(
             it,
             UiState.FlingState.START
@@ -43,8 +44,6 @@ class RhythmViewModel(
 
 
     val slidesNumber = MutableLiveData<Int>()
-
-    val rhythmState = MutableLiveData(RhythmState())
 
     override fun handleEvent(event: LectureEvent) {
         when (event) {
@@ -58,10 +57,6 @@ class RhythmViewModel(
             }
         }
     }
-
-    data class RhythmState(
-        var isFlingUpValid: Boolean = false
-    )
 
     private fun updateResult(contents: String) = launch {
         val updateGeneralResult = resultRepo.updateResult(
@@ -113,11 +108,14 @@ class RhythmViewModel(
                 }
             }
         }
+        Log.d("vojta", "Updating view model on fling")
         when {
             currentState.flings.all { it.state == UiState.FlingState.VALID } -> {
+                Log.d("vojta", "State je validni")
                 _uiState.value = UiState(currentState.rhythmType, successMessage = "jupii!")
             }
             isValidFling -> {
+                Log.d("vojta", "Kopiruju updatly flingy")
                 _uiState.value = currentState.copy(flings = mappedFlings, successMessage = null, errorMessage = null, tryAgain = false)
             }
             else -> {
@@ -152,10 +150,10 @@ class RhythmViewModel(
     }
 
     enum class RhythmType(val directions: List<UiState.Direction>) {
+        FREE_RHYTHM(listOf(DOWN)),
         RHYTHM_1(listOf(DOWN, DOWN, DOWN, UP, DOWN)),
         RHYTHM_2(listOf(DOWN, DOWN, UP, DOWN, UP)),
         RHYTHM_3(listOf(DOWN, UP, DOWN, UP, DOWN)),
-        RHYTHM_4(listOf(UP, UP, DOWN, UP, DOWN)),
-        RHYTHM_5(listOf(DOWN, UP, UP)),
+        RHYTHM_4(listOf(UP, UP, DOWN, UP, DOWN))
     }
 }

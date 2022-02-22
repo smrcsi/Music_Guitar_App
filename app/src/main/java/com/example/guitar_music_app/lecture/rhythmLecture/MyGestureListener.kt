@@ -51,7 +51,6 @@ class MyGestureListener(private val viewModel: RhythmViewModel) : GestureDetecto
         direction?.let {
             viewModel.onFling(it)
         } ?: viewModel.onIncorrect()
-//        viewModel.rhythmState.value = currentState?.copy(isFlingUpValid = result)
         return result
     }
 }
