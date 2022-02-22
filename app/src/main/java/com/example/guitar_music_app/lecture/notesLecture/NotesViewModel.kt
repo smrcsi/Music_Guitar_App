@@ -29,7 +29,7 @@ class NotesViewModel(
     private val updatedState = MutableLiveData<Boolean>()
     val updated: LiveData<Boolean> get() = updatedState
 
-    val noteState = MutableLiveData(NoteState())
+    val noteState = MutableLiveData(UiState())
 
     val notesNumber = MutableLiveData<Int>()
 
@@ -48,11 +48,9 @@ class NotesViewModel(
         }
     }
 
-    data class NoteState(
-        var targetNote: Note = Note.G,
-        var note: Note = Note.G,
-        var isNoteValid: Boolean = false,
-        var notePlayed: Boolean = false,
+    data class UiState(
+        val targetNote: Note = Note.G,
+        val targetAccomplished: Boolean = false,
         val notesTouched: Set<ButtonState> = emptySet()
     )
 
@@ -65,30 +63,18 @@ class NotesViewModel(
             updatesTouchedNotes.add(ButtonState(note))
         } else if (!touched && exists) {
             updatesTouchedNotes.remove(ButtonState(note))
+        } else {
+            return
         }
-        if (currentState.targetNote == note && touched && !currentState.notePlayed) {
-            currentState.targetNote = randomNote()
-            noteState.value =
-                currentState.copy(
-                    isNoteValid = true,
-                    note = currentState.note,
-                    notePlayed = touched,
-                    targetNote = currentState.targetNote
-                )
+        if (updatesTouchedNotes.isEmpty() && currentState.targetAccomplished) {
+            noteState.value = UiState(randomNote(), false, emptySet())
+        } else if (!currentState.targetAccomplished && updatesTouchedNotes.any { it.note == currentState.targetNote }) {
             addToResult()
             intNotesNumber += 1
             notesNumber.value = intNotesNumber
+            noteState.value = currentState.copy(targetAccomplished = true, notesTouched = updatesTouchedNotes)
         } else {
-            if (noteState.value?.notePlayed == true) {
-                noteState.value = currentState.copy(
-                    isNoteValid = false,
-                    notesTouched = updatesTouchedNotes,
-                    notePlayed = touched,
-                    note = currentState.targetNote
-                )
-            } else {
-                noteState.value = currentState.copy(isNoteValid = false, notesTouched = updatesTouchedNotes)
-            }
+            noteState.value = currentState.copy(notesTouched = updatesTouchedNotes)
         }
     }
 
