@@ -14,18 +14,31 @@
         android:layout_height="162dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_lectures"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.59"
         app:srcCompat="@drawable/papapishu_guitar_2" />
 
     <Button
         android:id="@+id/btn_stats"
         android:layout_width="191dp"
         android:layout_height="52dp"
-        android:layout_marginBottom="92dp"
+        android:layout_marginBottom="44dp"
         android:backgroundTint="#FFFFFF"
         android:text="@string/statistiky"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/btn_info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_info"
+        android:layout_width="191dp"
+        android:layout_height="52dp"
+        android:layout_marginBottom="124dp"
+        android:backgroundTint="#FFFFFF"
+        android:text="O Aplikaci"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,13 +48,13 @@
         android:id="@+id/btn_lectures"
         android:layout_width="191dp"
         android:layout_height="52dp"
+        android:layout_marginBottom="48dp"
         android:backgroundTint="#FFFFFF"
         android:text="@string/lekce"
         android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/btn_stats"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/endPicture" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/imb_toolbar_logout"

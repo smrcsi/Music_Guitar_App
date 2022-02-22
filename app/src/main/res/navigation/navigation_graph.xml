@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_homepageView_to_statisticsView"
             app:destination="@id/statisticsView" />
+        <action
+            android:id="@+id/action_homepageView_to_informationView"
+            app:destination="@id/informationView" />
 
     </fragment>
     <fragment
@@ -101,7 +104,7 @@
 
     <fragment
         android:id="@+id/rulesView"
-        android:name="com.example.guitar_music_app.rules.RulesView"
+        android:name="com.example.guitar_music_app.helpers.RulesView"
         android:label="rules_fragment"
         tools:layout="@layout/rules_fragment" >
         <action
@@ -119,4 +122,14 @@
             app:destination="@id/homepageView" />
     </fragment>
 
+    <fragment
+        android:id="@+id/informationView"
+        android:name="com.example.guitar_music_app.helpers.InformationView"
+        android:label="information_fragment"
+        tools:layout="@layout/information_fragment" >
+
+        <action
+            android:id="@+id/action_informationView_to_homepageView"
+            app:destination="@id/homepageView" />
+    </fragment>
 </navigation>

@@ -34,12 +34,13 @@ class RhythmViewModel(
     val updated: LiveData<Boolean> get() = updatedState
 
 
-    private val _uiState = MutableLiveData(UiState(RhythmType.FREE_RHYTHM, RhythmType.FREE_RHYTHM.directions.map {
-        UiState.Fling(
-            it,
-            UiState.FlingState.START
-        )
-    }))
+    private val _uiState =
+        MutableLiveData(UiState(RhythmType.FREE_RHYTHM, RhythmType.FREE_RHYTHM.directions.map {
+            UiState.Fling(
+                it,
+                UiState.FlingState.START
+            )
+        }))
     val uiState: LiveData<UiState> get() = _uiState
 
 
@@ -76,7 +77,6 @@ class RhythmViewModel(
         resultState.value =
             Result(getCalendarTime(), intResult.toString(), "rhythm", null)
     }
-
 
 
     private fun newResult() {
@@ -116,7 +116,12 @@ class RhythmViewModel(
             }
             isValidFling -> {
                 Log.d("vojta", "Kopiruju updatly flingy")
-                _uiState.value = currentState.copy(flings = mappedFlings, successMessage = null, errorMessage = null, tryAgain = false)
+                _uiState.value = currentState.copy(
+                    flings = mappedFlings,
+                    successMessage = null,
+                    errorMessage = null,
+                    tryAgain = false
+                )
             }
             else -> {
                 // TODO zobraz neco
@@ -133,12 +138,18 @@ class RhythmViewModel(
         _uiState.value = _uiState.value?.copy(tryAgain = true)
     }
 
-    data class UiState(val rhythmType: RhythmType, val flings: List<Fling> = rhythmType.directions.map {
-        Fling(
-            it,
-            FlingState.START
-        )
-    }, val errorMessage: String? = null, val successMessage: String? = null, val tryAgain: Boolean = false) {
+    data class UiState(
+        val rhythmType: RhythmType,
+        val flings: List<Fling> = rhythmType.directions.map {
+            Fling(
+                it,
+                FlingState.START
+            )
+        },
+        val errorMessage: String? = null,
+        val successMessage: String? = null,
+        val tryAgain: Boolean = false
+    ) {
         data class Fling(val direction: Direction, val state: FlingState)
         enum class Direction {
             UP, DOWN

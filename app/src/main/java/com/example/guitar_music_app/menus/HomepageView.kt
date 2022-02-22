@@ -74,6 +74,9 @@ class HomepageView : Fragment() {
         btn_stats.setOnClickListener {
             findNavController().navigate(R.id.statisticsView)
         }
+        btn_info.setOnClickListener {
+            findNavController().navigate(R.id.informationView)
+        }
     }
 
     private fun startLoginActivity() = requireActivity().startActivity(

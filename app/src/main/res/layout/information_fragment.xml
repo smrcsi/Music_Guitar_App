@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rules_fragment"
+    android:id="@+id/information_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/guitar_background2"
@@ -24,51 +24,38 @@
         android:id="@+id/lbl_information"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/rules"
+        android:text="MUSEAPP"
         android:textColor="#FFFFFF"
         android:textSize="32sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/rules_spinner"
-        app:layout_constraintEnd_toEndOf="@+id/rules_spinner"
-        app:layout_constraintStart_toStartOf="@+id/rules_spinner"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/text_rules"
-        android:layout_width="346dp"
-        android:layout_height="525dp"
-        android:textSize="20sp"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/view4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rules_spinner" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.505" />
 
-    <Spinner
-        android:id="@+id/rules_spinner"
-        android:layout_width="236dp"
-        android:layout_height="75dp"
-        android:spinnerMode="dropdown"
-        android:textSize="30sp"
-        android:contentDescription="@string/rules"
-        app:layout_constraintBottom_toTopOf="@+id/text_rules"
-        app:layout_constraintEnd_toEndOf="@+id/text_rules"
-        app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toStartOf="@+id/text_rules"
-        app:layout_constraintTop_toBottomOf="@+id/lbl_information" />
+    <TextView
+        android:id="@+id/text_information"
+        android:layout_width="346dp"
+        android:layout_height="525dp"
+        android:layout_marginBottom="64dp"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <View
         android:id="@+id/view4"
         android:layout_width="372dp"
         android:layout_height="545dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginBottom="56dp"
         android:background="#4DB3AFAF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rules_spinner"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

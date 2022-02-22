@@ -1,4 +1,4 @@
-package com.example.guitar_music_app.rules
+package com.example.guitar_music_app.helpers
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,6 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.guitar_music_app.R
 import kotlinx.android.synthetic.main.rules_fragment.*

@@ -37,6 +37,9 @@
     <string name="rules">Pravidla</string>
     <string name="yes">Ano</string>
     <string name="no">Ne</string>
+    <string name="information">MUSEAPP je aplikace, která slouží k výuce hry na kytaru a obsahuje všechny prvky nutné
+        k ovládnutí základů hry. Skládá se ze tří cvičení, jejichž popis je k nalezení v sekci "lekce" -> "pravidla". Těmi jsou noty, akordy a rytmus.
+    Každá odehraná lekce je bodově ohodnocena a výsledné skóre lze vidět v sekci "statistika". </string>
     <string name = "exit_confirmation"> Opuštěním cvičení příjdete o výsledek. Doopravdy chcete cvičení opustit?</string>
     <string name="notes_text">Lekce noty je jednoduchým cvičením na vybrnkávání při hře na kytaru.
         Jedná se o cvičení, které lze cvičit jak levou tak pravou rukou. Správně držení zařízení by mělo být obrazovkou směrem od uživatele.
