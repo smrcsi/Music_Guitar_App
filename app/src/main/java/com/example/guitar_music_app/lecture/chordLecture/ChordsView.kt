@@ -151,14 +151,8 @@ class ChordsView : Fragment() {
         toast.show()
     }
 
-    private suspend fun playSound(tone: Note) {
-//        withContext(Dispatchers.IO) {
-//            val mediaPlayer = MediaPlayer.create(activity, tone)
-//            mediaPlayer.start()
-//            mediaPlayer.setOnCompletionListener {
-//                mediaPlayer.release()
-//            }
-//        }
+    private fun playSound(tone: Note) {
+
         soundPool.play(
             sounds[tone]!!, 1F, 1F, 0, 0, 1F);
     }
@@ -177,7 +171,6 @@ class ChordsView : Fragment() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(
@@ -236,11 +229,11 @@ class ChordsView : Fragment() {
     private fun setUpClickListeners() {
         btn_back_chords.setOnClickListener {
             val builder = AlertDialog.Builder(this.activity)
-            builder.setMessage("Opuštěním cvičení příjdete o výsledek. Doopravdy chcete cvičení opustit?")
+            builder.setMessage(R.string.exit_confirmation)
                 .setCancelable(false)
-                .setPositiveButton("Ano") { dialog, id ->
+                .setPositiveButton(R.string.yes) { dialog, id ->
                     findNavController().navigate(R.id.lecturesView)
-                }.setNegativeButton("Ne") { dialog, id ->
+                }.setNegativeButton(R.string.no) { dialog, id ->
                     // Dismiss the dialog
                     dialog.dismiss()
                 }

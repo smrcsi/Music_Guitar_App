@@ -35,6 +35,9 @@
     <string name="btn_back">btn_back</string>
     <string name="noty">Noty</string>
     <string name="rules">Pravidla</string>
+    <string name="yes">Ano</string>
+    <string name="no">Ne</string>
+    <string name = "exit_confirmation"> Opuštěním cvičení příjdete o výsledek. Doopravdy chcete cvičení opustit?</string>
     <string name="notes_text">Lekce noty je jednoduchým cvičením na vybrnkávání při hře na kytaru.
         Jedná se o cvičení, které lze cvičit jak levou tak pravou rukou. Správně držení zařízení by mělo být obrazovkou směrem od uživatele.
         Jestliže bude užívána pravá ruka, lze použít všechny prsty a k přidržení zařízení by měla sloužit levá ruka.

@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.media.AudioAttributes
-import android.media.MediaPlayer
 import android.media.SoundPool
 import android.os.Build
 import android.os.Bundle
@@ -14,7 +13,6 @@ import android.os.Vibrator
 import android.text.Html
 import android.view.*
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -75,12 +73,10 @@ class NotesView : Fragment() {
                     lifecycleScope.launch { playSound(note) }
                     if (!noteState.isNoteValid && !noteState.notePlayed) {
                         view?.findViewById<View>(viewId)?.setBackgroundColor(Color.YELLOW)
-                        println("dala se zluta")
 
                     }
                     else {
                         view?.findViewById<View>(viewId)?.setBackgroundColor(Color.GREEN)
-                        println("Dala se zelena")
                     }
                 } else {
                     view?.findViewById<View>(viewId)?.setBackgroundColor(Color.TRANSPARENT)
@@ -227,11 +223,11 @@ class NotesView : Fragment() {
     private fun setUpClickListeners() {
         btn_back.setOnClickListener {
             val builder = AlertDialog.Builder(this.activity)
-            builder.setMessage("Opuštěním cvičení příjdete o výsledek. Doopravdy chcete cvičení opustit?")
+            builder.setMessage((R.string.exit_confirmation))
                 .setCancelable(false)
-                .setPositiveButton("Ano") { dialog, id ->
+                .setPositiveButton(R.string.yes) { dialog, id ->
                     findNavController().navigate(R.id.lecturesView)
-                }.setNegativeButton("Ne") { dialog, id ->
+                }.setNegativeButton(R.string.no) { dialog, id ->
                     // Dismiss the dialog
                     dialog.dismiss()
                 }
