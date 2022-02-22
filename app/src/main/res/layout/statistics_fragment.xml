@@ -205,30 +205,30 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/view3"
         app:layout_constraintEnd_toStartOf="@+id/notes_complete_result_value"
-        app:layout_constraintHorizontal_bias="0.527"
+        app:layout_constraintHorizontal_bias="0.657"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/note_best_lbl"
-        app:layout_constraintVertical_bias="0.535" />
+        app:layout_constraintVertical_bias="0.578" />
 
     <TextView
         android:id="@+id/notes_best_result_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="156dp"
+        android:layout_marginEnd="168dp"
         android:text="value"
         app:layout_constraintBottom_toTopOf="@+id/notes_complete_result_value"
         app:layout_constraintEnd_toEndOf="@+id/view3"
         app:layout_constraintTop_toBottomOf="@+id/notes_last_result_value"
-        app:layout_constraintVertical_bias="0.666" />
+        app:layout_constraintVertical_bias="0.468" />
 
     <TextView
         android:id="@+id/notes_last_result_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:text="value"
         app:layout_constraintEnd_toEndOf="@+id/view3"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="@+id/view3"
         app:layout_constraintTop_toTopOf="@+id/view3" />
 
@@ -240,7 +240,7 @@
         android:text="Poslední výsledek"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/notes_last_result_value"
-        app:layout_constraintHorizontal_bias="0.068"
+        app:layout_constraintHorizontal_bias="0.275"
         app:layout_constraintStart_toStartOf="@+id/view3"
         app:layout_constraintTop_toTopOf="@+id/view3" />
 
@@ -248,11 +248,11 @@
         android:id="@+id/note_best_lbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:text="Nejlepší výsledek"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/notes_best_result_value"
-        app:layout_constraintHorizontal_bias="0.205"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="@+id/view3"
         app:layout_constraintTop_toBottomOf="@+id/note_last_lbl" />
 
