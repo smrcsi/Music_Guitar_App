@@ -3,29 +3,26 @@ package com.example.guitar_music_app.lecture.rhythmLecture
 import android.app.AlertDialog
 import android.content.pm.ActivityInfo
 import android.graphics.Color
-
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import androidx.core.content.ContextCompat
+import androidx.core.view.GestureDetectorCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.guitar_music_app.R
-import kotlinx.android.synthetic.main.rhythm_fragment.*
-import kotlinx.coroutines.launch
-import androidx.core.view.GestureDetectorCompat
-import java.lang.Exception
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import androidx.core.content.ContextCompat
-
 import com.example.guitar_music_app.general.toEditable
 import com.example.guitar_music_app.lecture.LectureEvent
 import kotlinx.android.synthetic.main.chords_fragment.endPicture
-import kotlinx.android.synthetic.main.rhythm_fragment.btn_back
+import kotlinx.android.synthetic.main.rhythm_fragment.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
@@ -252,19 +249,16 @@ class RhythmView : Fragment() {
         when (fling?.state) {
             null,
             RhythmViewModel.UiState.FlingState.START -> {
-                Log.d("vojta", "Setting background to transparent")
                 val transparent =
                     ContextCompat.getColor(requireContext(), android.R.color.transparent)
                 upView.setBackgroundColor(transparent)
                 downView.setBackgroundColor(transparent)
             }
             RhythmViewModel.UiState.FlingState.VALID -> {
-                Log.d("vojta", "Setting background to green")
                 upView.setBackgroundColor(green)
                 downView.setBackgroundColor(green)
             }
             RhythmViewModel.UiState.FlingState.INVALID -> {
-                Log.d("vojta", "Setting background to red")
                 upView.setBackgroundColor(red)
                 downView.setBackgroundColor(red)
                 if (viewModel.uiState.value?.tryAgain == true) {

@@ -1,13 +1,13 @@
 package com.example.guitar_music_app.lecture.rhythmLecture
 
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.guitar_music_app.general.BaseViewModel
 import com.example.guitar_music_app.general.GeneralResult
 import com.example.guitar_music_app.lecture.LectureEvent
-import com.example.guitar_music_app.lecture.rhythmLecture.RhythmViewModel.UiState.Direction.*
+import com.example.guitar_music_app.lecture.rhythmLecture.RhythmViewModel.UiState.Direction.DOWN
+import com.example.guitar_music_app.lecture.rhythmLecture.RhythmViewModel.UiState.Direction.UP
 import com.example.guitar_music_app.results.Result
 import com.example.guitar_music_app.results.ResultRepository
 import kotlinx.coroutines.launch
@@ -104,14 +104,11 @@ class RhythmViewModel(
                 }
             }
         }
-        Log.d("vojta", "Updating view model on fling")
         when {
             currentState.flings.all { it.state == UiState.FlingState.VALID } -> {
-                Log.d("vojta", "State je validni")
                 _uiState.value = UiState(currentState.rhythmType, successMessage = "jupii!")
             }
             isValidFling -> {
-                Log.d("vojta", "Kopiruju updatly flingy")
                 _uiState.value = currentState.copy(
                     flings = mappedFlings,
                     successMessage = null,
