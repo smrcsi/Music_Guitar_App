@@ -3,13 +3,18 @@ package com.example.guitar_music_app.lecture.rhythmLecture
 import android.app.AlertDialog
 import android.content.pm.ActivityInfo
 import android.graphics.Color
+import android.media.AudioAttributes
 import android.media.MediaPlayer
+import android.media.SoundPool
 import android.os.Bundle
+import android.text.Html
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.GestureDetectorCompat
 import androidx.fragment.app.Fragment
@@ -18,18 +23,23 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.guitar_music_app.R
 import com.example.guitar_music_app.general.toEditable
+import com.example.guitar_music_app.lecture.Chord
 import com.example.guitar_music_app.lecture.LectureEvent
+import com.example.guitar_music_app.lecture.Note
 import kotlinx.android.synthetic.main.chords_fragment.endPicture
 import kotlinx.android.synthetic.main.rhythm_fragment.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.*
 
 
 class RhythmView : Fragment() {
 
     private lateinit var mDetector: GestureDetectorCompat
     private lateinit var viewModel: RhythmViewModel
+    private lateinit var soundPool: SoundPool
+    private val sounds = mutableListOf(R.raw.f, R.raw.g, R.raw.a, R.raw.c, R.raw.d, R.raw.e)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,6 +65,8 @@ class RhythmView : Fragment() {
         }
 
     }
+
+
 
     private suspend fun playSecond() {
         withContext(Dispatchers.IO) {
@@ -116,7 +128,45 @@ class RhythmView : Fragment() {
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         setUpClickListeners()
         observeViewModel()
+
+        val audioAttributes: AudioAttributes = AudioAttributes.Builder()
+            .setUsage(
+                AudioAttributes.USAGE_MEDIA
+            )
+            .setContentType(
+                AudioAttributes.CONTENT_TYPE_MUSIC
+            )
+            .build()
+        soundPool = SoundPool.Builder()
+            .setMaxStreams(5)
+            .setAudioAttributes(
+                audioAttributes
+            )
+            .build()
+
+        // This load function takes
+        // three parameter context,
+        // file_name and priority.
+
+        // This load function takes
+        // three parameter context,
+        // file_name and priority.
+//        for (note in Note.values()) {
+//            sounds[] = soundPool
+//                .load(
+//                    requireContext(),
+//                    note.tone,
+//                    1
+//                )
+//        }
+
     }
+
+//    private fun randomSound() {
+//        val pick = sounds.nextInt(Chord.values().size)
+//        val chord = Chord.values()[pick]
+//        println("what" + state.value?.chord)
+//    }
 
     private fun observeViewModel() {
         viewModel.handleEvent(LectureEvent.OnStart)
@@ -184,6 +234,14 @@ class RhythmView : Fragment() {
                 )
             }
         }
+        viewModel.uiState.observe(viewLifecycleOwner) {
+            if (viewModel.uiState.value?.errorMessage != null) {
+                displayErrorToast()
+            }
+            if (viewModel.uiState.value?.successMessage != null) {
+                displaySuccessToast()
+            }
+        }
     }
 
 
@@ -195,13 +253,13 @@ class RhythmView : Fragment() {
                 .setPositiveButton("Ano") { dialog, id ->
                     findNavController().navigate(R.id.lecturesView)
                 }.setNegativeButton("Ne") { dialog, id ->
-                    // Dismiss the dialog
                     dialog.dismiss()
                 }
 
             val alert = builder.create()
             alert.show()
         }
+
         endPicture.setOnClickListener {
             findNavController().navigate(R.id.lectureResultView)
         }
@@ -219,9 +277,6 @@ class RhythmView : Fragment() {
                 3 -> updateVisibility(arrow4_up, arrow4_down, fling)
                 4 -> updateVisibility(arrow5_up, arrow5_down, fling)
             }
-        }
-        flings.forEachIndexed { index, fling ->
-
         }
     }
 
@@ -261,15 +316,34 @@ class RhythmView : Fragment() {
             RhythmViewModel.UiState.FlingState.INVALID -> {
                 upView.setBackgroundColor(red)
                 downView.setBackgroundColor(red)
-                if (viewModel.uiState.value?.tryAgain == true) {
-                    stringField.setBackgroundColor(
-                        ContextCompat.getColor(
-                            requireContext(),
-                            R.color.RED
-                        )
-                    )
-                }
+                println("This happened which should")
             }
         }
+    }
+
+    private fun displayErrorToast() {
+//Toast nejde v backgroundu
+        val toast = Toast.makeText(
+            context,
+            Html.fromHtml("<font color='#FFFFFF' ><b>" + viewModel.uiState.value?.errorMessage + "</b></font>"),
+            Toast.LENGTH_SHORT
+        )
+        toast.setGravity(Gravity.TOP, 0, 0)
+
+        // TODO Koukni na snackbar
+        toast.show()
+    }
+
+    private fun displaySuccessToast() {
+//Toast nejde v backgroundu
+        val toast = Toast.makeText(
+            context,
+            Html.fromHtml("<font color='#FFFFFF' ><b>" + viewModel.uiState.value?.successMessage + "</b></font>"),
+            Toast.LENGTH_SHORT
+        )
+        toast.setGravity(Gravity.TOP, 0, 0)
+
+        // TODO Koukni na snackbar
+        toast.show()
     }
 }

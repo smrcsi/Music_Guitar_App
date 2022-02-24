@@ -11,6 +11,7 @@ class MyGestureListener(private val viewModel: RhythmViewModel) : GestureDetecto
     private val swipeMinDistance = 120
     private val swipeMaxOffPath = 250
     private val swipeThresholdVelocity = 200
+    var slides = 0
 
     override fun onFling(
         e1: MotionEvent?,
@@ -32,6 +33,7 @@ class MyGestureListener(private val viewModel: RhythmViewModel) : GestureDetecto
                     && abs(velocityX) > swipeThresholdVelocity
                 ) {
                     println("nahoru")
+                    slides += 1
                     direction = RhythmViewModel.UiState.Direction.UP
                     result = true
 
@@ -40,6 +42,7 @@ class MyGestureListener(private val viewModel: RhythmViewModel) : GestureDetecto
                     && abs(velocityX) > swipeThresholdVelocity
                 ) {
                     println("dolu")
+                    slides += 1
                     direction = RhythmViewModel.UiState.Direction.DOWN
                     result = false
                 }
@@ -51,6 +54,7 @@ class MyGestureListener(private val viewModel: RhythmViewModel) : GestureDetecto
         direction?.let {
             viewModel.onFling(it)
         } ?: viewModel.onIncorrect()
+        viewModel.slidesNumber.value = slides
         return result
     }
 }

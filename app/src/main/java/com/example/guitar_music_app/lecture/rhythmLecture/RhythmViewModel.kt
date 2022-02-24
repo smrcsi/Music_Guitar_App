@@ -106,7 +106,8 @@ class RhythmViewModel(
         }
         when {
             currentState.flings.all { it.state == UiState.FlingState.VALID } -> {
-                _uiState.value = UiState(currentState.rhythmType, successMessage = "jupii!")
+                _uiState.value = UiState(currentState.rhythmType, successMessage = "Správný rytmus")
+                addToResult()
             }
             isValidFling -> {
                 _uiState.value = currentState.copy(
@@ -117,14 +118,8 @@ class RhythmViewModel(
                 )
             }
             else -> {
-                // TODO zobraz neco
-                _uiState.value = UiState(currentState.rhythmType, errorMessage = "posralo  se to")
-//                _uiState.value = currentState.copy(
-//                    flings = emptyList(),
-//                    successMessage = null,
-//                    errorMessage = "posralo se to",
-//                    tryAgain = true
-//                )
+                _uiState.value = UiState(currentState.rhythmType, errorMessage = "Byl zahrán špatný rytmus")
+
             }
         }
     }
@@ -160,7 +155,7 @@ class RhythmViewModel(
     }
 
     enum class RhythmType(val directions: List<UiState.Direction>) {
-        FREE_RHYTHM(listOf(DOWN)),
+        FREE_RHYTHM(listOf(DOWN, DOWN, DOWN, DOWN, DOWN)),
         RHYTHM_1(listOf(DOWN, DOWN, DOWN, UP, DOWN)),
         RHYTHM_2(listOf(DOWN, DOWN, UP, DOWN, UP)),
         RHYTHM_3(listOf(DOWN, UP, DOWN, UP, DOWN)),
