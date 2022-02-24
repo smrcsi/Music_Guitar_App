@@ -149,23 +149,21 @@ class RhythmView : Fragment() {
         ) { result ->
             rhythm_result_text_view.text = result.toString()
         }
-        viewModel.uiState.observe(viewLifecycleOwner) {
-            updateRhythmArrows(it.flings)
+        viewModel.uiState.observe(viewLifecycleOwner) { uiState ->
+            updateRhythmArrows(uiState.flings)
+            val lastOrNull =
+                uiState.flings.lastOrNull { it.state != RhythmViewModel.UiState.FlingState.START }
             val stateOfLast =
-                it.flings.lastOrNull { it.state != RhythmViewModel.UiState.FlingState.START }?.state
+                lastOrNull?.state
             if (stateOfLast == RhythmViewModel.UiState.FlingState.VALID) {
-                val stateOfDirection =
-                    it.flings.lastOrNull { it.direction == RhythmViewModel.UiState.Direction.UP }?.direction
-                if (stateOfDirection == RhythmViewModel.UiState.Direction.UP) {
-
+                if (lastOrNull.direction == RhythmViewModel.UiState.Direction.UP) {
                     stringField.setBackgroundColor(
                         ContextCompat.getColor(
                             requireContext(),
                             R.color.GREEN
                         )
                     )
-            }
-                else {
+                } else {
                     stringField.setBackgroundColor(
                         ContextCompat.getColor(
                             requireContext(),
@@ -173,7 +171,7 @@ class RhythmView : Fragment() {
                         )
                     )
                 }
-            } else if (stateOfLast == RhythmViewModel.UiState.FlingState.INVALID) {
+            } else if (uiState.errorMessage != null) {
                 stringField.setBackgroundColor(
                     ContextCompat.getColor(
                         requireContext(),
@@ -189,8 +187,6 @@ class RhythmView : Fragment() {
                 )
             }
         }
-
-
     }
 
 
