@@ -151,15 +151,46 @@ class RhythmView : Fragment() {
         }
         viewModel.uiState.observe(viewLifecycleOwner) {
             updateRhythmArrows(it.flings)
-            val stateOfLast = it.flings.lastOrNull { it.state != RhythmViewModel.UiState.FlingState.START }?.state
+            val stateOfLast =
+                it.flings.lastOrNull { it.state != RhythmViewModel.UiState.FlingState.START }?.state
             if (stateOfLast == RhythmViewModel.UiState.FlingState.VALID) {
-                stringField.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.GREEN))
+                val stateOfDirection =
+                    it.flings.lastOrNull { it.direction == RhythmViewModel.UiState.Direction.UP }?.direction
+                if (stateOfDirection == RhythmViewModel.UiState.Direction.UP) {
+
+                    stringField.setBackgroundColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.GREEN
+                        )
+                    )
+            }
+                else {
+                    stringField.setBackgroundColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.BLUE
+                        )
+                    )
+                }
             } else if (stateOfLast == RhythmViewModel.UiState.FlingState.INVALID) {
-                stringField.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.RED))
+                stringField.setBackgroundColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.RED
+                    )
+                )
             } else {
-                stringField.setBackgroundColor(ContextCompat.getColor(requireContext(), android.R.color.transparent))
+                stringField.setBackgroundColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        android.R.color.transparent
+                    )
+                )
             }
         }
+
+
     }
 
 
@@ -201,7 +232,11 @@ class RhythmView : Fragment() {
         }
     }
 
-    private fun updateVisibility(upView: View, downView: View, fling: RhythmViewModel.UiState.Fling?) {
+    private fun updateVisibility(
+        upView: View,
+        downView: View,
+        fling: RhythmViewModel.UiState.Fling?
+    ) {
         when (fling?.direction) {
             RhythmViewModel.UiState.Direction.UP -> {
                 downView.visibility = View.INVISIBLE
@@ -222,7 +257,8 @@ class RhythmView : Fragment() {
             null,
             RhythmViewModel.UiState.FlingState.START -> {
                 Log.d("vojta", "Setting background to transparent")
-                val transparent = ContextCompat.getColor(requireContext(), android.R.color.transparent)
+                val transparent =
+                    ContextCompat.getColor(requireContext(), android.R.color.transparent)
                 upView.setBackgroundColor(transparent)
                 downView.setBackgroundColor(transparent)
             }
@@ -235,6 +271,14 @@ class RhythmView : Fragment() {
                 Log.d("vojta", "Setting background to red")
                 upView.setBackgroundColor(red)
                 downView.setBackgroundColor(red)
+                if (viewModel.uiState.value?.tryAgain == true) {
+                    stringField.setBackgroundColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.RED
+                        )
+                    )
+                }
             }
         }
     }

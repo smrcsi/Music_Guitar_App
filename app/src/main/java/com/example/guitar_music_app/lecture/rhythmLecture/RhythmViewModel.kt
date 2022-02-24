@@ -1,9 +1,7 @@
 package com.example.guitar_music_app.lecture.rhythmLecture
 
 
-import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.guitar_music_app.general.BaseViewModel
@@ -54,7 +52,6 @@ class RhythmViewModel(
             }
             is LectureEvent.OnDoneClick -> {
                 updateResult(event.contents)
-                println("Uspech" + event.contents)
             }
         }
     }
@@ -87,7 +84,6 @@ class RhythmViewModel(
     private fun getCalendarTime(): String {
         val cal = Calendar.getInstance(TimeZone.getDefault())
         val format = SimpleDateFormat("d MMM yyyy HH:mm:ss Z", Locale.getDefault())
-//       format.timeZone = cal.timeZone
         return format.format(cal.time)
     }
 
@@ -126,6 +122,12 @@ class RhythmViewModel(
             else -> {
                 // TODO zobraz neco
                 _uiState.value = UiState(currentState.rhythmType, errorMessage = "posralo  se to")
+//                _uiState.value = currentState.copy(
+//                    flings = emptyList(),
+//                    successMessage = null,
+//                    errorMessage = "posralo se to",
+//                    tryAgain = true
+//                )
             }
         }
     }
