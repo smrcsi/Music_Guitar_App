@@ -35,10 +35,9 @@ class RhythmView : Fragment() {
     private lateinit var mDetector: GestureDetectorCompat
     private lateinit var viewModel: RhythmViewModel
     private lateinit var soundPool: SoundPool
+    private lateinit var initialTone: Note
 
-    //    private val sounds  = mutableListOf(R.raw.f, R.raw.g, R.raw.a, R.raw.c, R.raw.d, R.raw.e)
     private val sounds = mutableMapOf<Note, Int>()
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -47,6 +46,7 @@ class RhythmView : Fragment() {
         return inflater.inflate(R.layout.rhythm_fragment, container, false)
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -54,6 +54,7 @@ class RhythmView : Fragment() {
             this,
             RhythmInjector(requireActivity().application).provideRhythmViewModelFactory()
         )[RhythmViewModel::class.java]
+
 
         view.setOnTouchListener { v, event ->
             lifecycleScope.launch {
@@ -107,15 +108,6 @@ class RhythmView : Fragment() {
             )
             .build()
 
-        // This load function takes
-        // three parameter context,
-        // file_name and priority.
-
-        // This load function takes
-        // three parameter context,
-        // file_name and priority.
-        // >0 >1 >2 >3 >4 >5
-
         for (note in Note.values()) {
             sounds[note] = soundPool
                 .load(
@@ -125,7 +117,7 @@ class RhythmView : Fragment() {
                 )
         }
 
-
+        initialTone = randomSound()
     }
 
     private fun playSound(tone: Note) {
@@ -141,6 +133,7 @@ class RhythmView : Fragment() {
     }
 
     private fun observeViewModel() {
+
         viewModel.handleEvent(LectureEvent.OnStart)
 
         endPicture.setOnClickListener {
@@ -182,7 +175,7 @@ class RhythmView : Fragment() {
                             R.color.GREEN
                         )
                     )
-                    playSound(randomSound())
+                    playSound(initialTone)
                 } else {
                     stringField.setBackgroundColor(
                         ContextCompat.getColor(
@@ -190,7 +183,7 @@ class RhythmView : Fragment() {
                             R.color.BLUE
                         )
                     )
-                    playSound(randomSound())
+                    playSound(initialTone)
                 }
             } else if (uiState.errorMessage != null) {
                 stringField.setBackgroundColor(
@@ -214,6 +207,7 @@ class RhythmView : Fragment() {
             }
             if (viewModel.uiState.value?.successMessage != null) {
                 displaySuccessToast()
+                initialTone = randomSound()
             }
         }
     }
@@ -222,11 +216,11 @@ class RhythmView : Fragment() {
     private fun setUpClickListeners() {
         btn_back.setOnClickListener {
             val builder = AlertDialog.Builder(this.activity)
-            builder.setMessage("Opuštěním cvičení příjdete o výsledek. Doopravdy chcete cvičení opustit?")
+            builder.setMessage(R.string.exit_confirmation)
                 .setCancelable(false)
-                .setPositiveButton("Ano") { dialog, id ->
+                .setPositiveButton(R.string.yes) { dialog, id ->
                     findNavController().navigate(R.id.lecturesView)
-                }.setNegativeButton("Ne") { dialog, id ->
+                }.setNegativeButton(R.string.no) { dialog, id ->
                     dialog.dismiss()
                 }
 
@@ -290,7 +284,6 @@ class RhythmView : Fragment() {
             RhythmViewModel.UiState.FlingState.INVALID -> {
                 upView.setBackgroundColor(red)
                 downView.setBackgroundColor(red)
-                println("This happened which should")
             }
         }
     }
@@ -304,7 +297,6 @@ class RhythmView : Fragment() {
         )
         toast.setGravity(Gravity.TOP, 0, 0)
 
-        // TODO Koukni na snackbar
         toast.show()
     }
 
@@ -317,7 +309,6 @@ class RhythmView : Fragment() {
         )
         toast.setGravity(Gravity.TOP, 0, 0)
 
-        // TODO Koukni na snackbar
         toast.show()
     }
 }

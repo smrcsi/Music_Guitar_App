@@ -141,7 +141,7 @@ class ChordsView : Fragment() {
 //Toast nejde v backgroundu
         val toast = Toast.makeText(
             context,
-            Html.fromHtml("<font color='#FFFFFF' ><b>" + "Správně" + "</b></font>"),
+            Html.fromHtml("<font color='#FFFFFF' ><b>" + R.string.correct+ "</b></font>"),
             Toast.LENGTH_SHORT
         )
         toast.setGravity(Gravity.TOP, 0, 0)
@@ -192,6 +192,10 @@ class ChordsView : Fragment() {
             }
         }
 
+       soundPoolInitialize()
+    }
+
+    private fun soundPoolInitialize() {
         val audioAttributes: AudioAttributes = AudioAttributes.Builder()
             .setUsage(
                 AudioAttributes.USAGE_MEDIA
@@ -207,13 +211,6 @@ class ChordsView : Fragment() {
             )
             .build()
 
-        // This load function takes
-        // three parameter context,
-        // file_name and priority.
-
-        // This load function takes
-        // three parameter context,
-        // file_name and priority.
         for (note in Note.values()) {
             sounds[note] = soundPool
                 .load(

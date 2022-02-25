@@ -97,7 +97,6 @@ class NotesView : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//TODO-jakmile odslidujeme, tak by se melo tlacitko prestat drzet
 
         views.forEach { (viewId, note) ->
             view.findViewById<View>(viewId)?.setOnTouchListener { view, event ->
@@ -133,13 +132,6 @@ class NotesView : Fragment() {
                     1
                 )
         }
-        // This load function takes
-        // three parameter context,
-        // file_name and priority.
-
-        // This load function takes
-        // three parameter context,
-        // file_name and priority.
         for (note in Note.values()) {
             sounds[note] = soundPool
                 .load(
@@ -181,7 +173,6 @@ class NotesView : Fragment() {
                 vibrate(millisecond = 5)
             } else {
                 noteText.setTextColor(Color.RED)
-                // TODO - prepis notu na nejakej citelnej zapis
                 noteText.text = noteState.targetNote.toString()
             }
         }
