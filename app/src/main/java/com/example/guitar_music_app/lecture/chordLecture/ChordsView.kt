@@ -69,7 +69,6 @@ class ChordsView : Fragment() {
         return inflater.inflate(R.layout.chords_fragment, container, false)
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
     override fun onStart() {
         super.onStart()
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;

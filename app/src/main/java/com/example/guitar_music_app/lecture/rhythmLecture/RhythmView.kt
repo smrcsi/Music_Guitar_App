@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.media.AudioAttributes
-import android.media.MediaPlayer
 import android.media.SoundPool
 import android.os.Bundle
 import android.text.Html
@@ -23,14 +22,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.guitar_music_app.R
 import com.example.guitar_music_app.general.toEditable
-import com.example.guitar_music_app.lecture.Chord
 import com.example.guitar_music_app.lecture.LectureEvent
 import com.example.guitar_music_app.lecture.Note
 import kotlinx.android.synthetic.main.chords_fragment.endPicture
 import kotlinx.android.synthetic.main.rhythm_fragment.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.util.*
 
 
@@ -39,7 +35,9 @@ class RhythmView : Fragment() {
     private lateinit var mDetector: GestureDetectorCompat
     private lateinit var viewModel: RhythmViewModel
     private lateinit var soundPool: SoundPool
-    private val sounds = mutableListOf(R.raw.f, R.raw.g, R.raw.a, R.raw.c, R.raw.d, R.raw.e)
+
+    //    private val sounds  = mutableListOf(R.raw.f, R.raw.g, R.raw.a, R.raw.c, R.raw.d, R.raw.e)
+    private val sounds = mutableMapOf<Note, Int>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,41 +45,6 @@ class RhythmView : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.rhythm_fragment, container, false)
-    }
-
-    //TODO - Pridat random akordy meneny po konci
-    private suspend fun playSound() {
-        withContext(Dispatchers.IO) {
-            val mediaPlayer = MediaPlayer.create(activity, R.raw.a_sharp)
-            try {
-                if (mediaPlayer.isPlaying) {
-                    mediaPlayer.stop()
-                    mediaPlayer.release()
-                } else {
-                    mediaPlayer.start()
-                }
-            } catch (e: Exception) {
-                e.printStackTrace(); }
-        }
-
-    }
-
-
-
-    private suspend fun playSecond() {
-        withContext(Dispatchers.IO) {
-            val mediaPlayer = MediaPlayer.create(activity, R.raw.c)
-            try {
-                if (mediaPlayer.isPlaying) {
-                    mediaPlayer.stop()
-                    mediaPlayer.release()
-                } else {
-                    mediaPlayer.start()
-                }
-            } catch (e: Exception) {
-                e.printStackTrace(); }
-        }
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -151,22 +114,31 @@ class RhythmView : Fragment() {
         // This load function takes
         // three parameter context,
         // file_name and priority.
-//        for (note in Note.values()) {
-//            sounds[] = soundPool
-//                .load(
-//                    requireContext(),
-//                    note.tone,
-//                    1
-//                )
-//        }
+        // >0 >1 >2 >3 >4 >5
+
+        for (note in Note.values()) {
+            sounds[note] = soundPool
+                .load(
+                    requireContext(),
+                    note.tone,
+                    1
+                )
+        }
+
 
     }
 
-//    private fun randomSound() {
-//        val pick = sounds.nextInt(Chord.values().size)
-//        val chord = Chord.values()[pick]
-//        println("what" + state.value?.chord)
-//    }
+    private fun playSound(tone: Note) {
+
+        soundPool.play(
+            sounds[tone]!!, 1F, 1F, 0, 0, 1F
+        )
+    }
+
+    private fun randomSound(): Note {
+        val pick = Random().nextInt(sounds.values.size)
+        return Note.values()[pick]
+    }
 
     private fun observeViewModel() {
         viewModel.handleEvent(LectureEvent.OnStart)
@@ -210,6 +182,7 @@ class RhythmView : Fragment() {
                             R.color.GREEN
                         )
                     )
+                    playSound(randomSound())
                 } else {
                     stringField.setBackgroundColor(
                         ContextCompat.getColor(
@@ -217,6 +190,7 @@ class RhythmView : Fragment() {
                             R.color.BLUE
                         )
                     )
+                    playSound(randomSound())
                 }
             } else if (uiState.errorMessage != null) {
                 stringField.setBackgroundColor(
@@ -347,3 +321,4 @@ class RhythmView : Fragment() {
         toast.show()
     }
 }
+
